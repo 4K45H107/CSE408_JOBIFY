@@ -19,7 +19,6 @@ export const POST= async (request) => {
             },
             contact:{
                 phone:"01835286271",
-                email: "test3@gmail.com",
             },
             privacySettings:{
                 notification: true,
