@@ -8,10 +8,28 @@ export const POST= async (request) => {
         console.log("inside register route");
         connetToDb();
         const data={
-            username:"test3",
-            name:"test3",
-            email:"test3@gmail.com",
+            username:"tested",
+            email:"tested@gmail.com",
             password:"1",
+            fullname:"test4",
+            profile:{
+                location:"dhaka",
+                skills:["java","python","react"],
+                education: "bachelor",
+            },
+            contact:{
+                phone:"01835286271",
+                email: "test3@gmail.com",
+            },
+            privacySettings:{
+                notification: true,
+                publicProfile: true, 
+            },
+            job_preferences:{
+                locations: "dhaka",
+                salary_range:"20k-100k",
+                job_type:["developer"],
+            }
         }
         const user = await User.create(data);
 
