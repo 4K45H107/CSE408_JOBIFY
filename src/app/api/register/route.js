@@ -5,6 +5,7 @@ import { connetToDb } from "../../../../lib/utils"
 
 export const POST= async (request) => {
     try {
+        
         console.log("inside register route");
         connetToDb();
         const data={
