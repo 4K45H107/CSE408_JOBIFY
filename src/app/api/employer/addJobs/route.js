@@ -13,7 +13,7 @@ export const POST= async (request) => {
         const jobsData =  await Jobs.find({provider:employer._id});
         
         console.log(jobsData);
-        if(jobsData.length==0 ){
+        if(jobsData.length===0 ){
             return NextResponse.json({message:"There is no jobs that you added"},{status:404});
         }else{
             
