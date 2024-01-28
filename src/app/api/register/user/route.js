@@ -20,16 +20,42 @@ export const POST= async (request) => {
 
 }
 
-export const GET= async (request) => {
+// export const GET= async (request) => {
+//     // const id = "65b538ecd0e12007bfa7fe73"
+//     try {
+//         connetToDb();
+        
+//         const users = await User.find({});
+
+//         return NextResponse.json(users,{status:200});
+//     } catch (error) {
+//         console.log(error);
+//         return NextResponse.error(error,{status:500});   
+//     }
+
+// }
+
+export const GET = async (request) => {
     try {
         connetToDb();
         
-        // const users = await User.find({});
+        // Extract the ID from the request parameters
+        //const { id } = request.params;
 
-        // return NextResponse.json(users,{status:200});
+        // Find the user by ID
+        const id = "65b538ecd0e12007bfa7fe73";
+        const user = await User.findById(id);
+
+        // Check if the user exists
+        if (!user) {
+            return NextResponse.json({ message: 'User not found' }, { status: 404 });
+        }
+
+        console.log(user.fullname);
+        // Return the user data as JSON response
+        return NextResponse.json(user, { status: 200 });
     } catch (error) {
         console.log(error);
-        return NextResponse.error(error,{status:500});   
+        return NextResponse.error(error, { status: 500 });   
     }
-
 }
