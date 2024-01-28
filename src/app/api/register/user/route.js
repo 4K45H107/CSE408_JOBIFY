@@ -24,9 +24,9 @@ export const GET= async (request) => {
     try {
         connetToDb();
         
-        // const users = await User.find({});
-
-        // return NextResponse.json(users,{status:200});
+        const users = await User.find({});
+        console.log(users);
+        return NextResponse.json(users,{status:200});
     } catch (error) {
         console.log(error);
         return NextResponse.error(error,{status:500});   
