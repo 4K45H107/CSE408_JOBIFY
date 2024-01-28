@@ -39,21 +39,9 @@ export const GET = async (request) => {
     try {
         connetToDb();
         
-        // Extract the ID from the request parameters
-        //const { id } = request.params;
+        // const users = await User.find({});
 
-        // Find the user by ID
-        const id = "65b538ecd0e12007bfa7fe73";
-        const user = await User.findById(id);
-
-        // Check if the user exists
-        if (!user) {
-            return NextResponse.json({ message: 'User not found' }, { status: 404 });
-        }
-
-        console.log(user.fullname);
-        // Return the user data as JSON response
-        return NextResponse.json(user, { status: 200 });
+        // return NextResponse.json(users,{status:200});
     } catch (error) {
         console.log(error);
         return NextResponse.error(error, { status: 500 });   
