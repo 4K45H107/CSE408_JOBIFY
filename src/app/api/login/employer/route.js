@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
-import {Employer} from "../../../../../lib/models";
+import {Employers} from "../../../../../lib/models";
 
 export const POST= async (request) => {
     try {
@@ -9,13 +9,13 @@ export const POST= async (request) => {
         const data = await request.json();
         console.log(data);
         
-        const employer = await Employer.findOne({username:data.username});
+        const employer = await Employers.findOne({username:data.username});
         if(!employer){
             return NextResponse.json({message:"User not found"},{status:404});
         }else if(employer.password !== data.password){
             return NextResponse.json({message:"Incorrect password"},{status:401});
         }else{
-            return NextResponse.json(user,{status:200});
+            return NextResponse.json(employer,{status:200});
             
         }
         
