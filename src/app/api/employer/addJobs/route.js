@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
-import { connetToDb } from "@/app/lib/utils";
-import {Jobs} from "@/app/lib/models";
+import { connetToDb } from "../../../../../lib/utils";
+import {Jobs} from "../../../../../lib/models";
 import { Employers } from "../../../../../lib/models";
 
 export const POST= async (request) => {
     try {
         connetToDb();
-        console.log("inside  route");
-        console.log(userdata);
+        console.log("inside employee add jobs route");
         const data = await request.json();
-        const employerData= data.employer;
-        const jobData =  data.job;
+    
+        const employer = await Employers.findOne({username:data.username});
+        const jobsData =  await Jobs.find({provider:employer._id});
         
-        const employer = await Employers.findOne({username:employerData.username});
-        if(!employer){
-            return NextResponse.json({message:"employer not found"},{status:404});
+        console.log(jobsData);
+        if(jobsData.length==0 ){
+            return NextResponse.json({message:"There is no jobs that you added"},{status:404});
         }else{
-            jobData.provider=employer._id;
-            jobData.company=employer.company.name;
-            const job= await Jobs.create(jobData);
-            return NextResponse.json(job,{status:200});
+            
+            return NextResponse.json(jobsData,{status:200});
         }
         
     } catch (error) {
