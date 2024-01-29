@@ -1,7 +1,7 @@
-const interviewSchedule = () => {
+const addCodingProblem = () => {
     return (
-        <div>interviewSchedule</div>
+        <div>addCodingProblem</div>
     )
 }
 
-export default interviewSchedule
+export default addCodingProblem

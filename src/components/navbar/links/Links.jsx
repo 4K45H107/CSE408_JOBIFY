@@ -9,37 +9,37 @@ const Links = () => {
     const links = [
         {
             title: "Home",
-            path: "/employee/home",
+            path: "/user/home",
             icon: () => <IoHomeOutline />        
         },
 
         {
             title: "Explore",
-            path: "/employee/explore",
+            path: "/user/explore",
             icon: () => <CiSearch/>
         },
 
         {
             title: "Activities",
-            path: "/employee/activities",
+            path: "/user/activities",
             icon: () => <CiBookmark/>
         },
 
         {
             title: "Interviews",
-            path: "/employee/interviews",
+            path: "/user/interviews",
             icon: () => <CiVideoOn/>
         },
 
         {
             title: "Settings",
-            path: "/employee/settings",
+            path: "/user/settings",
             icon: () => <CiSettings/>
         },
     ];``
 
     return (
-    <div className="bg-slate-300 px-2.5 flex flex-col h-full justify-center">
+    <div className="bg-slate-300 px-10 flex flex-col h-full justify-center">
         {links.map((link => (
             <div className="flex items-center gap-x-2 py-2">
                 {link.icon()}

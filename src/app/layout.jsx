@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbarEmployee/Navbar";
+import Navbar from "@/components/navbar/Navbar";
+import NavbarEmployer from "@/components/navbar/NavbarEmployer";
 import Header from "@/components/header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -11,6 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  let type = "user"
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -20,7 +22,8 @@ export default function RootLayout({ children }) {
           </div>
           <div className="flex flex-1 overflow-hidden">
             <div className="h-full">
-              <Navbar />
+              {type === "user" && <Navbar />}
+              {type === "employer" && <NavbarEmployer />}
             </div>
             <div className="bg-white w-full overflow-auto">{children}</div>
           </div>
