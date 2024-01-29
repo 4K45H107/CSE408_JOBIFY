@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
@@ -22,7 +22,7 @@ const LoginPage = () => {
       const res = await axios.post("/api/login/user", user);
       const data = res.data;
       console.log(data);
-      router.push("/employee/explore")
+      router.push("/user/explore");
     } catch (error) {
       console.log(error);
     }
