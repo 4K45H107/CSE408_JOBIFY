@@ -1,10 +1,12 @@
-import Link from "next/link";
 import React from "react";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-const JobDetails = () => {
+const JobDetails = (props) => {
+
+  console.log(props.activeId)
+  // fetch data by props.activeId
+
   return (
     <div className="border h-full rounded px-4 py-4 mr-4">
       <div className="flex items-center gap-x-2 justify-between">

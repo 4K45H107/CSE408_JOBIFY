@@ -15,8 +15,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className="h-screen flex flex-col">
           <div className="flex flex-1 overflow-hidden">
-            <div className="h-full">
-            </div>
+            <div className="h-full"></div>
             <div className="bg-white w-full overflow-auto">{children}</div>
           </div>
         </div>

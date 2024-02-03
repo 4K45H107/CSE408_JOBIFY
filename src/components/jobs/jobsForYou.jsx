@@ -4,6 +4,7 @@ import Card from "./card";
 import JobDetails from "./jobDetails";
 import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
+import { useState } from "react";
 
 const JobsForYou = () => {
   const { data: jobs, isLoading } = useSWR(
@@ -11,8 +12,11 @@ const JobsForYou = () => {
     fetcher
   );
 
-  console.log(jobs);
+  const [activeId, setActiveId] = useState()
 
+  console.log(jobs);
+  console.log(activeId)
+  
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
@@ -20,16 +24,19 @@ const JobsForYou = () => {
           <>
             {jobs?.map((job) => (
               <Card
+                key={job._id}
                 company={job.company}
                 title={job.title}
                 salaryMin={job.salary.minimum}
                 salaryMax={job.salary.maximum}
+                id={job._id}
+                setActiveId={setActiveId}
               />
             ))}
           </>
         </div>
         <div className="flex-1 h-[500px] overflow-auto">
-          <JobDetails />
+          <JobDetails activeId={activeId} />
         </div>
       </div>
     );
