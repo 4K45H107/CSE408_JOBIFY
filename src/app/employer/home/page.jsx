@@ -6,6 +6,8 @@ import JobsForYou from "@/components/jobs/jobsForYou";
 const Home = () => {
   const [type, setType] = useState("my-company-jobs"); // jobs-for-you, jobs-search, companies
 
+  
+
   return (
     <div className="w-full">
       <div className="flex w-full justify-center mt-4">
