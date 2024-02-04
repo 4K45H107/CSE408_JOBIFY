@@ -48,7 +48,7 @@ export const GET = async (request) => {
         
         // const locations = "India";
         // const city = "dhaka";
-        const jobs = await Jobs.find({'location.city': location} || {title: title})
+        const jobs = await Jobs.find({'location.city': location} || {title: title} || {})
         .sort({'salary.maximum': -1})
         .exec();
         if(jobs.length===0){

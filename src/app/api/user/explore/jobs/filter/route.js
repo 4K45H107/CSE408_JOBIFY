@@ -41,7 +41,8 @@ export const POST = async (request) => {
                 {'salary.maximum': {$gte: salary}}
             ]
         }|| {'company': company})
-        .sort({'salary.maximum': -1});
+        .sort({'salary.maximum': -1})
+        .exec();
         if(jobs.length===0){
             console.log("no jobs");
             return NextResponse.json({message: "no jobs for you"},{status:404});
