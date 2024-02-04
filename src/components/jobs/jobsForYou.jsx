@@ -4,16 +4,19 @@ import Card from "./card";
 import JobDetails from "./jobDetails";
 import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const JobsForYou = () => {
   const { data: jobs, isLoading } = useSWR(
     "/api/user/explore/jobs/for_you",
     fetcher
   );
-  
 
-  const [activeId, setActiveId] = useState(jobs?.at(0)._id)
+  const [activeId, setActiveId] = useState(jobs?.at(0)._id);
+
+  useEffect(() => {
+    setActiveId(jobs?.at(0)._id);
+  }, [jobs]);
 
   if (!isLoading) {
     return (

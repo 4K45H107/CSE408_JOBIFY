@@ -6,6 +6,9 @@ import useSWR from "swr";
 
 const JobDetails = (props) => {
   const tempLink = "/api/user/explore/jobs/" + props.activeId;
+
+  if (!props.activeId) return <></>;
+
   const { data: job, isLoading } = useSWR(tempLink, fetcher);
 
   // fetch data by props.activeId

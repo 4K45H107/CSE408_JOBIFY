@@ -32,7 +32,9 @@ const LoginPage = () => {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <form className="flex flex-col border px-6 py-10">
-        <h2>Login or Sign Up to JOBIFY</h2>
+        <h3 className="flex text-xl pb-4 justify-center">
+          User Login to JOBIFY
+        </h3>
         <lebel>Enter your User Name:</lebel>
         <input
           className="border rounded py-3 px-2 mb-3"

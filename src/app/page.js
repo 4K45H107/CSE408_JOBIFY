@@ -9,18 +9,18 @@ export default function Home() {
       <div className="flex h-full w-full items-center justify-center">
         <form className="flex flex-col border px-6 py-10 gap-3 justify-center">
           <h3 className="pb-8">Login/SignUp to JOBIFY</h3>
-          <button
-            type="submit"
-            className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+          <Link
+            href="/login"
+            className="flex bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto justify-center"
           >
-            <Link href="/login">Login</Link>
-          </button>
-          <button
-            type="submit"
-            className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+            <p>Login</p>
+          </Link>
+          <Link
+            href="/register"
+            className="flex bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto justify-center"
           >
-            <Link href="/register">Sign Up</Link>
-          </button>
+            <p>Sign Up</p>
+          </Link>
         </form>
       </div>
     </div>
