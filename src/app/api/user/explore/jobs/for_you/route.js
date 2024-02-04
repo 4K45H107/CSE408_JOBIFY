@@ -40,9 +40,9 @@ export const GET = async (request) => {
             console.log('User not found');
             return NextResponse.json({ message: 'User not found' }, { status: 404 });
         }
-        console.log(user);
+        //console.log(user);
         // Log the user data to the console
-        console.log('User Data:', user.job_preferences.locations);
+        //console.log('User Data:', user.job_preferences.locations);
         const location = user.job_preferences.locations;
         const title = user.job_preferences.job_type;
         
@@ -54,7 +54,7 @@ export const GET = async (request) => {
             return NextResponse.json({message: "no jobs for you"},{status:404});
         }
         else{
-            console.log("jobs:",jobs);
+            //console.log("jobs:",jobs);
             return NextResponse.json(jobs,{status: 200});
         }
         // console.log(job_preferences);

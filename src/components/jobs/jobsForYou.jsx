@@ -14,9 +14,6 @@ const JobsForYou = () => {
 
   const [activeId, setActiveId] = useState()
 
-  console.log(jobs);
-  console.log(activeId)
-  
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
