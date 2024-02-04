@@ -7,6 +7,7 @@ import { useState } from "react";
 const register = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   //const router = useRouter();
 
@@ -16,6 +17,7 @@ const register = () => {
     const user = {
       username,
       email,
+      password,
     };
 
     try {
@@ -42,11 +44,19 @@ const register = () => {
         ></input>
         <lebel>Enter your Email:</lebel>
         <input
-          className="border rounded py-2 px-2 mb-3"
+          className="border rounded py-3 px-2 mb-3"
           type="test"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <lebel>Enter your Password:</lebel>
+        <input
+          className="border rounded py-3 px-2 mb-5"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
         <div className="flex justify-center">
           <button

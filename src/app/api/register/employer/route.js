@@ -16,7 +16,6 @@ export const POST= async (request) => {
             return NextResponse.json({mesage:"email or username error"},{satus:401});
         }
         else {
-
             const employer = await Employers.create(data);
             return NextResponse.json(employer,{status:200});
         }
