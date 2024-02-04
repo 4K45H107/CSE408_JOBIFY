@@ -8,7 +8,7 @@ const employerLoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const employerLoginPage = () => {
       const res = await axios.post("/api/login/employer", user);
       const data = res.data;
       console.log(data);
-      router.push("/employer/addJobs");
+      //router.push("/employer/addJobs");
     } catch (error) {
       console.log(error);
     }

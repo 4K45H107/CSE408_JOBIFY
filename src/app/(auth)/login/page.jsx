@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ const LoginPage = () => {
       const res = await axios.post("/api/login/user", user);
       const data = res.data;
       console.log(data);
-      router.push("/user/explore");
+      //router.push("/user/explore");
     } catch (error) {
       console.log(error);
     }

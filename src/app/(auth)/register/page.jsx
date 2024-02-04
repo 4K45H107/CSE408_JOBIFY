@@ -23,7 +23,7 @@ const register = () => {
       const res = await axios.post("/api/register/user", user);
       const data = res.data;
       console.log(data);
-      //router.push("/user/explore");
+      //router.push("/login");
     } catch (error) {
       console.log(error);
     }

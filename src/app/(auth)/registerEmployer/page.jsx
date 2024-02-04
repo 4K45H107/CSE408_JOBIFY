@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const registerEmployer = () => {
@@ -22,7 +23,7 @@ const registerEmployer = () => {
       const res = await axios.post("/api/register/employer", user);
       const data = res.data;
       console.log(data);
-      //router.push("/user/explore");
+      //router.push("/employerLogin");
     } catch (error) {
       console.log(error);
     }
