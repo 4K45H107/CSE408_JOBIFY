@@ -11,8 +11,9 @@ const JobsForYou = () => {
     "/api/user/explore/jobs/for_you",
     fetcher
   );
+  
 
-  const [activeId, setActiveId] = useState()
+  const [activeId, setActiveId] = useState(jobs?.at(0)._id)
 
   if (!isLoading) {
     return (

@@ -8,8 +8,6 @@ const JobDetails = (props) => {
   const tempLink = "/api/user/explore/jobs/" + props.activeId;
   const { data: job, isLoading } = useSWR(tempLink, fetcher);
 
-  console.log(job);
-
   // fetch data by props.activeId
   if (!isLoading) {
     return (
@@ -32,12 +30,11 @@ const JobDetails = (props) => {
         <p className="text-xs color-gray-500">Remote</p>
         <div className="mt-6">
           <h2 className="text-xl font-bold">{job?.title}</h2>
-          {job.description}
+          {job?.description}
         </div>
         <div>
-          <h2 className="text-xl font-bold mt-6">{job.title}</h2>
-          {job.description}is autem quae cumque
-          voluptas veritatis.
+          <h2 className="text-xl font-bold mt-6">{job?.title}</h2>
+          {job?.description}
         </div>
         {/* <div className="flex items-center">
         <MdOutlineKeyboardArrowDown />
