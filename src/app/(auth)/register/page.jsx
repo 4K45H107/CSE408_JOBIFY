@@ -1,7 +1,6 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 
 const register = () => {
@@ -21,7 +20,7 @@ const register = () => {
     };
 
     try {
-      const res = await axios.post("/api/register/employer", user);
+      const res = await axios.post("/api/register/user", user);
       const data = res.data;
       console.log(data);
       //router.push("/user/explore");

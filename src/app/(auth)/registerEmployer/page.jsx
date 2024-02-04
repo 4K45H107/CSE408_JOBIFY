@@ -19,7 +19,7 @@ const registerEmployer = () => {
     };
 
     try {
-      const res = await axios.post("/api/register/user", user);
+      const res = await axios.post("/api/register/employer", user);
       const data = res.data;
       console.log(data);
       //router.push("/user/explore");
