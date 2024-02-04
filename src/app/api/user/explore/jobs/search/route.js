@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
+import { Jobs, User } from "../../../../../../../lib/models";
 import { connetToDb } from "../../../../../../../lib/utils";
-import { User } from "../../../../../../../lib/models";
-import { Jobs } from "../../../../../../../lib/models";
-import { headers } from "next/headers";
 
 // export const GET = async(request) => {
 //     try{
@@ -32,9 +30,9 @@ export const GET = async (request) => {
   try {
     const url = new URL(request.url);
 
-    console.log("Id-------------",url.searchParams.get("userId"));
+    console.log("here is the id..........................",url.searchParams.get("userId"));
 
-    console.log(request);
+    //console.log(request);
     connetToDb();
 
     // Extract the ID from the request parameters

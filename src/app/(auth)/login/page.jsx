@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
+  const { login } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -18,15 +20,16 @@ const LoginPage = () => {
       username,
       password,
     };
-
-    try {
-      const res = await axios.post("/api/login/user", user);
-      const data = res.data;
-      //console.log(data);
-      router.push("/user/explore");
-    } catch (error) {
-      console.log(error);
-    }
+    const role = "user";
+    await login(role, user);
+    // try {
+    //   const res = await axios.post("/api/login/user", user);
+    //   const data = res.data;
+    //   //console.log(data);
+    router.push("/user/explore");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

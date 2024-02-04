@@ -11,7 +11,7 @@ const employerLoginPage = () => {
 
   const { login } = useContext(AuthContext);
 
-  //const router = useRouter();
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,8 +22,9 @@ const employerLoginPage = () => {
     };
 
     const role = "employer";
-
+    console.log("inside employer login function call");
     await login(role, user);
+    router.push("/employer/addJobs");
   };
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
@@ -26,7 +27,13 @@ const AuthContextProvider = ({ children }) => {
 
   const login = async (role, user) => {
     try {
-      const res = await axios.post("/api/login/employer", user);
+      console.log("inside context login");
+
+      if (role === "employer") {
+        const res = await axios.post("/api/login/employer", user);
+      } else {
+        const res = await axios.post("/api/login/user", user);
+      }
       const data = res.data;
 
       setIsLoggedIn(true);
@@ -34,7 +41,6 @@ const AuthContextProvider = ({ children }) => {
       setRole(role);
 
       console.log(data);
-      //router.push("/employer/addJobs");
     } catch (error) {
       console.log(error);
     }
