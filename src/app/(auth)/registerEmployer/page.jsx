@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const register = () => {
+const registerEmployer = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -67,4 +67,5 @@ const register = () => {
   );
 };
 
-export default register;
+export default registerEmployer;
+
