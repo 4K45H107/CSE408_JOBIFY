@@ -1,15 +1,14 @@
 "use client";
 
-import { useContext, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
 const employerLoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const { login } = useContext(AuthContext);
+  const { login, isLoggedIn } = useContext(AuthContext);
 
   const router = useRouter();
 
@@ -24,9 +23,12 @@ const employerLoginPage = () => {
     const role = "employer";
     console.log("inside employer login function call");
     await login(role, user);
-    router.push("/employer/addJobs");
   };
-
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/employer/addJobs");
+    }
+  }, [isLoggedIn, router]);
   return (
     <div className="flex h-full w-full items-center justify-center">
       <form className="flex flex-col border px-6 py-10">

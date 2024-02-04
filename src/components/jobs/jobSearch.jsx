@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { CiGlass } from "react-icons/ci";
 
 const JobSearch = () => {
   const [type, setType] = useState("");

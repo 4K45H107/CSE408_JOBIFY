@@ -1,8 +1,8 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
@@ -29,10 +29,12 @@ const AuthContextProvider = ({ children }) => {
     try {
       console.log("inside context login");
 
+      let res;
+
       if (role === "employer") {
-        const res = await axios.post("/api/login/employer", user);
+        res = await axios.post("/api/login/employer", user);
       } else {
-        const res = await axios.post("/api/login/user", user);
+        res = await axios.post("/api/login/user", user);
       }
       const data = res.data;
 
@@ -42,17 +44,25 @@ const AuthContextProvider = ({ children }) => {
 
       console.log(data);
     } catch (error) {
+      toast.error("Invalid Credentials");
       console.log(error);
     }
   };
 
-  const signup = (role) => {};
+  const signup = (role, user) => {};
 
-  const logout = () => {};
+  const logout = () => {
+    setIsLoggedIn(false);
+    setUserId(null);
+    setRole(null);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("role");
+  };
 
   useEffect(() => {
     if (userId) localStorage.setItem("userId", userId);
     if (role) localStorage.setItem("role", role);
+    if (userId && role) setIsLoggedIn(true);
   }, [userId, role]);
 
   return (

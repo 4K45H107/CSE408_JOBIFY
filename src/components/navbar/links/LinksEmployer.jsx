@@ -1,11 +1,14 @@
 "use client";
-
+import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
-import { IoHomeOutline } from "react-icons/io5";
-import { CiSearch, CiCirclePlus, CiSettings, CiVideoOn} from "react-icons/ci";
+import { useContext } from "react";
+import { CiCirclePlus, CiSearch, CiSettings, CiVideoOn } from "react-icons/ci";
 import { HiBuildingLibrary } from "react-icons/hi2";
+import { IoHomeOutline } from "react-icons/io5";
 
 const LinksEmployer = () => {
+  const { logout } = useContext(AuthContext);
+
   const links = [
     {
       title: "Home",
@@ -22,7 +25,7 @@ const LinksEmployer = () => {
     {
       title: "Explore",
       path: "/employer/explore",
-      icon: () => <CiSearch/>
+      icon: () => <CiSearch />,
     },
 
     {
@@ -55,6 +58,9 @@ const LinksEmployer = () => {
           </Link>
         </div>
       ))}
+      <button className="" onClick={logout}>
+        Logout
+      </button>
     </div>
   );
 };

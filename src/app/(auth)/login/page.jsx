@@ -1,16 +1,15 @@
 "use client";
 
-import { useContext, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { AuthContext } from "@/contexts/AuthContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
 const LoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const { login } = useContext(AuthContext);
+  const { login, isLoggedIn } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -26,11 +25,17 @@ const LoginPage = () => {
     //   const res = await axios.post("/api/login/user", user);
     //   const data = res.data;
     //   //console.log(data);
-    router.push("/user/explore");
+
     // } catch (error) {
     //   console.log(error);
     // }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/user/explore");
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <div className="flex h-full w-full items-center justify-center">

@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/header/Header";
-import AuthProvider from "@/providers/AuthProvider";
 import AuthContextProvider from "@/contexts/AuthContext";
+import AuthProvider from "@/providers/AuthProvider";
+import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <Toaster />
         <AuthProvider>
           <AuthContextProvider>
             <div className="h-screen flex flex-col">

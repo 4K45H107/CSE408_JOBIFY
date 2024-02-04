@@ -30,7 +30,7 @@ export const GET = async (request) => {
   try {
     const url = new URL(request.url);
 
-    console.log("here is the id..........................",url.searchParams.get("userId"));
+    //console.log("here is the id..........................",url.searchParams.get("userId"));
 
     //console.log(request);
     connetToDb();
