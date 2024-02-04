@@ -9,17 +9,36 @@ export const POST= async (request) => {
         console.log("inside  route");
         const data = await request.json();
         const employerData= data.employer;
-        console.log(employerData);
-        const jobData =  data.job;
-        console.log(jobData);
+        //console.log(employerData);
+        const jobData =  data;
+        //console.log(jobData);
         
-        
+    caseInsensitivity = function(obj) {
+
+            Object.keys(obj).forEach(k => {
+
+            if(typeof obj[k] == 'string') {
+
+                obj[k] = obj[k].toLowerCase();
+            }
+        else if(typeof obj[k] == 'object') {
+
+            caseInsensitivity(obj[k]);
+        }
+        else {
+
+        }
+    });
+    return obj;
+}
+        const jobD=caseInsensitivity(jobData);        
+        console.log(jobD);
         const employer = await Employers.findOne({username:employerData.username});
         if(!employer){
             return NextResponse.json({message:"employer not found"},{status:404});
         }else{
-            jobData.provider=employer._id;
-            jobData.company=employer.company.name;
+            jobD.provider=employer._id;
+            jobD.company=employer.company.name.toLowerCase();
             const job= await Jobs.create(jobData);
             return NextResponse.json(job,{status:200});
         }
