@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  //const router = useRouter();
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,8 +22,8 @@ const LoginPage = () => {
     try {
       const res = await axios.post("/api/login/user", user);
       const data = res.data;
-      console.log(data);
-      //router.push("/user/explore");
+      //console.log(data);
+      router.push("/user/explore");
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +35,7 @@ const LoginPage = () => {
         <h3 className="flex text-xl pb-4 justify-center">
           User Login to JOBIFY
         </h3>
-        <lebel>Enter your User Name:</lebel>
+        <label>Enter your User Name:</label>
         <input
           className="border rounded py-3 px-2 mb-3"
           type="text"
@@ -43,7 +43,7 @@ const LoginPage = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
-        <lebel>Enter your Password:</lebel>
+        <label>Enter your Password:</label>
         <input
           className="border rounded py-2 px-2 mb-3"
           type="password"

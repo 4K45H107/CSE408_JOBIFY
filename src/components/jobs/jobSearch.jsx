@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card from "./card";
 import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 import axios from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const JobSearch = () => {
   const [type, setType] = useState("");
@@ -11,8 +12,10 @@ const JobSearch = () => {
   const [company, setCompany] = useState("");
   const [activeId, setActiveId] = useState();
 
+  const { role, userId } = useContext(AuthContext);
+
   const { data: jobs, isLoading } = useSWR(
-    "/api/user/explore/jobs/search",
+    `/api/user/explore/jobs/search?userId=${userId}`,
     fetcher
   );
 
@@ -35,7 +38,7 @@ const JobSearch = () => {
     try {
       const res = await axios.post("/api/user/explore/jobs/filter", filterData);
       const data = res.data;
-      console.log(data)
+      console.log(data);
       setJobList(data);
     } catch (error) {
       console.log(error);
@@ -59,7 +62,7 @@ const JobSearch = () => {
             />
           ))}
         </div>
-        <div className="border w-1/4 h-[400px] overflow-auto mr-5 ml-5 mt-2 mb-6">
+        <div className="border w-1/4 h-[400px] mr-5 ml-5 mt-2 mb-6">
           <div className="flex flex-col items-center mt-5">
             <input
               className="border rounded py-3 px-2 mb-3"

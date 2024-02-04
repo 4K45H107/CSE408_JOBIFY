@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const employerLoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+
+  const { login } = useContext(AuthContext);
 
   //const router = useRouter();
 
@@ -18,20 +21,15 @@ const employerLoginPage = () => {
       password,
     };
 
-    try {
-      const res = await axios.post("/api/login/employer", user);
-      const data = res.data;
-      console.log(data);
-      //router.push("/employer/addJobs");
-    } catch (error) {
-      console.log(error);
-    }
+    const role = "employer";
+
+    await login(role, user);
   };
 
   return (
     <div className="flex h-full w-full items-center justify-center">
       <form className="flex flex-col border px-6 py-10">
-        <lebel>Enter your User Name:</lebel>
+        <label>Enter your User Name:</label>
         <input
           className="border rounded py-3 px-2 mb-3"
           type="text"
@@ -39,7 +37,7 @@ const employerLoginPage = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
-        <lebel>Enter your Password:</lebel>
+        <label>Enter your Password:</label>
         <input
           className="border rounded py-2 px-2 mb-3"
           type="password"
