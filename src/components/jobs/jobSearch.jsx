@@ -12,7 +12,7 @@ const JobSearch = () => {
   const [activeId, setActiveId] = useState();
 
   const { data: jobs, isLoading } = useSWR(
-    "/api/user/explore/jobs/for_you",
+    "/api/user/explore/jobs/search",
     fetcher
   );
 
@@ -63,7 +63,7 @@ const JobSearch = () => {
           />
           <input
             className="border rounded py-3 px-2 mb-3"
-            type="text"
+            type="number"
             placeholder="Salary"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
