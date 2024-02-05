@@ -1,5 +1,8 @@
 "use client";
-import { useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useContext, useReducer, useState } from "react";
 
 const addJobs = () => {
   // Destructure jobData into individual state variables
@@ -11,7 +14,11 @@ const addJobs = () => {
   const [city, setCity] = useState("");
   const [skillTest, setSkillTest] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { role, userId } = useContext(AuthContext);
+
+  const router = useRouter()
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if all required fields are filled
@@ -30,44 +37,27 @@ const addJobs = () => {
     const jobData = {
       title,
       description,
-      salarymin,
-      salarymax,
+      salary: {
+        minimum: salarymin,
+        maximum: salarymax
+      },
       location: { country, city },
       skillTest,
     };
     console.log("Job data submitted:", jobData);
     // Replace the console.log with actual backend integration.
+    try {
+      const res = await axios.post(
+        `/api/employer/addJobs/addJob?userId=${userId}`,
+        jobData
+      );
+      const data = res.data;
+      console.log(data);
+      router.push("/employer/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  //   return (
-  //       <form className="flex flex-col border px-6 py-10">
-  //         <label>Enter your User Name:</label>
-  //         <input
-  //           className="border rounded py-3 px-2 mb-3"
-  //           type="text"
-  //           placeholder="User Name"
-  //           value={username}
-  //           onChange={(e) => setUsername(e.target.value)}
-  //         ></input>
-  //         <label>Enter your Password:</label>
-  //         <input
-  //           className="border rounded py-2 px-2 mb-3"
-  //           type="password"
-  //           placeholder="Password"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //         ></input>
-  //         <button
-  //           type="submit"
-  //           onClick={handleLogin}
-  //           className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
-  //         >
-  //           Login
-  //         </button>
-  //       </form>
-  //     </div>
-  //   );
-  // };
 
   return (
     <div className="flex flex-col h-full w-full items-center justify-center">
