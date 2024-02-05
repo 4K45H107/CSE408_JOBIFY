@@ -90,16 +90,16 @@ const addJobs = () => {
           <input
             className="border rounded py-3 px-2 mb-3"
             type="number"
-            value={salarymin}
-            onChange={(e) => setSalaryMin(e.target.value)}
+            value={salarymax}
+            onChange={(e) => setSalaryMax(e.target.value)}
             required
           />
           <label className="px-4">Min:</label>
           <input
             className="border rounded py-3 px-2 mb-3"
             type="number"
-            value={salarymax}
-            onChange={(e) => setSalaryMax(e.target.value)}
+            value={salarymin}
+            onChange={(e) => setSalaryMin(e.target.value)}
             required
           />
         </div>
