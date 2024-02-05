@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="h-screen w-screen flex flex-col ">
       <div className="flex justify-between py-4 px-8 items-center bg-black">
-        <div className="h-12 w-12 bg-amber-300 rounded-full"></div>
+        <img src="logo.jpg" className="h-12 rounded" />
       </div>
       <div className="flex h-full w-full items-center justify-center">
         <form className="flex flex-col border px-6 py-10 gap-3 justify-center">
