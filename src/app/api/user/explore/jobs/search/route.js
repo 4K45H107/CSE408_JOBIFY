@@ -29,6 +29,7 @@ export const GET = async (request) => {
 
   try {
     const url = new URL(request.url);
+    const id = url.searchParams.get("userId");
 
     //console.log("here is the id..........................",url.searchParams.get("userId"));
 
@@ -37,7 +38,6 @@ export const GET = async (request) => {
 
     // Extract the ID from the request parameters
     // const id = "65b538ecd0e12007bfa7fe73";
-    const id = url.searchParams.get("userId");
 
     // Find the user by ID
     const user = await User.findById(id);
