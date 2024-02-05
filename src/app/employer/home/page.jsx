@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import JobsForYou from "@/components/jobs/jobsForYou";
+import MyOfferings from "@/components/employer/myOfferings";
 
 const Home = () => {
   const [type, setType] = useState("my-offerings"); // my-company-jobs, my-offerings
-
-  
 
   return (
     <div className="w-full">
@@ -25,15 +23,13 @@ const Home = () => {
         </button>
       </div>
 
-      {type === "jobs-for-you" && (
+      {type === "my-offerings" && (
         <div className="h-[700px]">
-          <JobsForYou />
+          <MyOfferings />
         </div>
       )}
 
       {type === "my-company-jobs" && <div className="">My company jobs</div>}
-
-      {type === "my-offerings" && <div className=""></div>}
     </div>
   );
 };
