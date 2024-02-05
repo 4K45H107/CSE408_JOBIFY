@@ -26,10 +26,10 @@ const employerLoginPage = () => {
   };
   useEffect(() => {
     if (isLoggedIn) {
-      router.push("/employer/addJobs");
+      router.push("/employer/home");
     }
   }, [isLoggedIn, router]);
-  
+
   return (
     <div className="flex h-full w-full items-center justify-center">
       <form className="flex flex-col border px-6 py-10">

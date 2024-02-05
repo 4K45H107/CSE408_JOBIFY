@@ -4,11 +4,14 @@ import Card from "./card";
 import JobDetails from "./jobDetails";
 import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const JobsForYou = () => {
+  const { role, userId } = useContext(AuthContext);
+
   const { data: jobs, isLoading } = useSWR(
-    "/api/user/explore/jobs/for_you",
+    `/api/user/explore/jobs/for_you?userId=${userId}`,
     fetcher
   );
 

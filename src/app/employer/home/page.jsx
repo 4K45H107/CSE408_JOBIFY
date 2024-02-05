@@ -4,7 +4,7 @@ import { useState } from "react";
 import JobsForYou from "@/components/jobs/jobsForYou";
 
 const Home = () => {
-  const [type, setType] = useState("my-company-jobs"); // jobs-for-you, jobs-search, companies
+  const [type, setType] = useState("my-offerings"); // my-company-jobs, my-offerings
 
   
 
@@ -12,31 +12,16 @@ const Home = () => {
     <div className="w-full">
       <div className="flex w-full justify-center mt-4">
         <button
-          className="bg-gray-200 w-32 py-2 border-r border-b border-gray-500"
+          className="bg-gray-200 w-60 py-2 border-r border-b border-gray-500"
           onClick={() => setType("my-company-jobs")}
         >
-          Jobs
+          My Company Jobs
         </button>
         <button
-          className="bg-gray-200 w-32 py-2 border-b border-gray-500"
-          onClick={() => setType("companies")}
+          className="bg-gray-200 w-60 py-2 border-b border-gray-500"
+          onClick={() => setType("my-offerings")}
         >
-          Companies
-        </button>
-      </div>
-
-      <div className="flex w-full justify-center mt-4">
-        <button
-          className="bg-indigo-200 rounded px-3 py-2 text-xs"
-          onClick={() => setType("jobs-for-you")}
-        >
-          For You
-        </button>
-        <button
-          className="px-3 py-2 text-xs"
-          onClick={() => setType("jobs-search")}
-        >
-          Search
+          My Offerings
         </button>
       </div>
 
@@ -46,9 +31,9 @@ const Home = () => {
         </div>
       )}
 
-      {type === "jobs-search" && <div className="">Jobs srch</div>}
+      {type === "my-company-jobs" && <div className="">My company jobs</div>}
 
-      {type === "companies" && <div className="">co</div>}
+      {type === "my-offerings" && <div className=""></div>}
     </div>
   );
 };
