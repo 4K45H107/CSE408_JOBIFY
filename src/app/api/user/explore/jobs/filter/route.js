@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import { connetToDb } from "../../../../../../../lib/utils";
-import { User } from "../../../../../../../lib/models";
 import { Jobs } from "../../../../../../../lib/models";
-import company from "@/app/company/[companyID]/page";
+import { connetToDb } from "../../../../../../../lib/utils";
 
 
 export const POST = async (request) => {
@@ -26,22 +24,41 @@ export const POST = async (request) => {
       return NextResponse.json({ message: "no filters" }, { status: 404 });
     }
 
-    const jobs = await Jobs.find(
-      location?{ "location.city": location }:type?{ "title": type }: salary?{
-          $and: [
-            { "salary.minimum": { $lte: salary } },
-            { "salary.maximum": { $gte: salary } },
-          ],
-        }:company?{ company: company }:{}
-    ).sort({ "salary.maximum": -1 });
+    // location, type-title, salary-min,max, company
+
+    // const jobs = await Jobs.find(
+    //   location?{ "location.city": location }:type?{ "title": type }: salary?{
+    //       $and: [
+    //         { "salary.minimum": { $lte: salary } },
+    //         { "salary.maximum": { $gte: salary } },
+    //       ],
+    //     }:company?{ company: company }:{}
+    // ).sort({ "salary.maximum": -1 });
+
+    let jobs = await Jobs.find({}).sort({ "salary.maximum": -1 });;
     
-    
-    if (jobs.length === 0) {
-      console.log("no jobs");
-      return NextResponse.json({ message: "no jobs for you" }, { status: 404 });
-    } else {
-      return NextResponse.json(jobs, { status: 200 });
+    if(location) {
+      jobs = jobs.filter((job) => job.location.city === location)
     }
+
+    if (salary) {
+      jobs = jobs.filter(
+        (job) =>
+          job.salary.minimum <= salary && job.salary.maximum >= salary
+      );
+    }
+
+    if (type) {
+      jobs = jobs.filter((job) => job.title === type);
+    }
+
+    if (company) {
+      jobs = jobs.filter((job) => job.company === company)
+    }
+   
+    
+    return NextResponse.json(jobs, { status: 200 });
+    
     // console.log(job_preferences);
     // Return a response if needed
     // return NextResponse.json(user, { status: 200 });
