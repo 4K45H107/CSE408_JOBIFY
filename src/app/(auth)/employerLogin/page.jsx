@@ -29,6 +29,7 @@ const employerLoginPage = () => {
       router.push("/employer/addJobs");
     }
   }, [isLoggedIn, router]);
+  
   return (
     <div className="flex h-full w-full items-center justify-center">
       <form className="flex flex-col border px-6 py-10">
