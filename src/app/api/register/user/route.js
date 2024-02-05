@@ -6,7 +6,7 @@ import { connetToDb } from "../../../../../lib/utils";
 export const POST= async (request) => {
     try {
         const data = await request.json();
-        console.log(data);
+        //console.log(data);
         console.log("inside register route");
         connetToDb();
         const temp= await User.findOne({username:data.username});

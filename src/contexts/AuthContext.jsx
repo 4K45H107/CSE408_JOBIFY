@@ -49,7 +49,29 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const signup = async (role, user) => {};
+  const signup = async (role, user) => {
+    try {
+      console.log("inside context signup");
+
+      let res;
+
+      if (role === "employer") {
+        res = await axios.post("/api/register/employer", user);
+      } else {
+        res = await axios.post("/api/register/user", user);
+      }
+      const data = res.data;
+
+      setIsLoggedIn(true);
+      setUserId(data._id);
+      setRole(role);
+
+      console.log(data);
+    } catch (error) {
+      toast.error("Invalid Credentials");
+      console.log(error);
+    }
+  };
 
   const logout = () => {
     setIsLoggedIn(false);
