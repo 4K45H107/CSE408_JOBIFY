@@ -49,7 +49,7 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const signup = (role, user) => {};
+  const signup = async (role, user) => {};
 
   const logout = () => {
     setIsLoggedIn(false);

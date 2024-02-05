@@ -3,16 +3,16 @@ import { connetToDb } from "../../../../../lib/utils";
 import {Jobs} from "../../../../../lib/models";
 import { Employers } from "../../../../../lib/models";
 
-export const POST= async (request) => {
+export const GET= async (request) => {
     try {
+        const url = new URL(request.url);
+        const id = url.searchParams.get("userId");
         connetToDb();
         console.log("inside employee add jobs route");
-        const data = await request.json();
     
-        const employer = await Employers.findOne({username:data.username});
-        const jobsData =  await Jobs.find({provider:employer._id});
+        const jobsData =  await Jobs.find({provider:id});
         
-        console.log(jobsData);
+        //console.log(jobsData);
         if(jobsData.length===0 ){
             return NextResponse.json({message:"There is no jobs that you added"},{status:404});
         }else{

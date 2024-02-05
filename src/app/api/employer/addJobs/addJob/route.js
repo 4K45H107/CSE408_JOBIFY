@@ -1,45 +1,25 @@
 import { NextResponse } from "next/server";
+import { Employers, Jobs } from "../../../../../../lib/models";
 import { connetToDb } from "../../../../../../lib/utils";
-import {Jobs} from "../../../../../../lib/models";
-import { Employers } from "../../../../../../lib/models";
 
 export const POST= async (request) => {
     try {
+        const url = new URL(request.url);
         connetToDb();
-        console.log("inside  route");
+        console.log("inside add jobs route");
+        const id = url.searchParams.get("userId");
         const data = await request.json();
-        const employerData= data.employer;
         //console.log(employerData);
-        const jobData =  data;
+        const jobD =  data;
         //console.log(jobData);
         
-    caseInsensitivity = function(obj) {
-
-            Object.keys(obj).forEach(k => {
-
-            if(typeof obj[k] == 'string') {
-
-                obj[k] = obj[k].toLowerCase();
-            }
-        else if(typeof obj[k] == 'object') {
-
-            caseInsensitivity(obj[k]);
-        }
-        else {
-
-        }
-    });
-    return obj;
-}
-        const jobD=caseInsensitivity(jobData);        
-        console.log(jobD);
-        const employer = await Employers.findOne({username:employerData.username});
+        const employer = await Employers.findById(id);
         if(!employer){
             return NextResponse.json({message:"employer not found"},{status:404});
         }else{
             jobD.provider=employer._id;
             jobD.company=employer.company.name.toLowerCase();
-            const job= await Jobs.create(jobData);
+            const job= await Jobs.create(jobD);
             return NextResponse.json(job,{status:200});
         }
         
