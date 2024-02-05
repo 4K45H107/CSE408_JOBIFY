@@ -3,7 +3,6 @@ import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 
 const Card = (props) => {
-
   console.log(props.id);
   return (
     <div
@@ -13,7 +12,7 @@ const Card = (props) => {
       }}
     >
       <div className="flex items-center gap-x-2">
-        <div className="h-6 w-6 rounded-full bg-green-400"></div>
+        <img src="/company_logo.jpg" className="h-6 w-6 rounded-full" />
         <p className="">{props.company}</p>
         <p className="text-xs">4.8</p>
       </div>

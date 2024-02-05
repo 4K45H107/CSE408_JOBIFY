@@ -17,7 +17,7 @@ const JobDetails = (props) => {
       <div className="border h-full rounded px-4 py-4 mr-4">
         <div className="flex items-center gap-x-2 justify-between">
           <div className="flex items-center gap-x-2">
-            <div className="h-6 w-6 rounded-full bg-green-400"></div>
+            <img src="/company_logo.jpg" className="h-6 w-6 rounded-full" />
             <p className="">{job?.company}</p>
             <p className="text-xs">4.8</p>
           </div>
