@@ -3,6 +3,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useContext, useReducer, useState } from "react";
+import toast from "react-hot-toast";
 
 const addJobs = () => {
   // Destructure jobData into individual state variables
@@ -16,7 +17,7 @@ const addJobs = () => {
 
   const { role, userId } = useContext(AuthContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const addJobs = () => {
       description,
       salary: {
         minimum: salarymin,
-        maximum: salarymax
+        maximum: salarymax,
       },
       location: { country, city },
       skillTest,
@@ -53,6 +54,7 @@ const addJobs = () => {
       );
       const data = res.data;
       console.log(data);
+      toast.success("Job Created Successfully");
       router.push("/employer/home");
     } catch (error) {
       console.log(error);
