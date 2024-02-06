@@ -8,18 +8,24 @@ import { useContext, useEffect, useState } from "react";
 const LoginPage = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [type, setType] = useState("user");
 
   const { login, isLoggedIn } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const user = {
       username,
       password,
     };
-    const role = "user";
+
+    let role = "user";
+    if (type === "user") {
+      role = "user";
+    } else {
+      role = "employer";
+    }
     await login(role, user);
     // try {
     //   const res = await axios.post("/api/login/user", user);
@@ -33,7 +39,11 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      router.push("/user/explore");
+      if (type === "user") {
+        router.push("/user/explore");
+      } else {
+        router.push("/employer/home");
+      }
     }
   }, [isLoggedIn, router]);
 
@@ -59,19 +69,23 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
+        <label>Select User Type:</label>
+        <select
+          className="border rounded h-10 py-2 px-2 mb-3"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="user">Employee</option>
+          <option value="employer">Employer</option>
+        </select>
+
         <div className="flex justify-center">
           <button
             type="submit"
             onClick={handleLogin}
-            className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+            className="bg-gray-700 rounded text-white px-4 py-2 active:bg-slate-600 w-32 mx-auto"
           >
             Login
-          </button>
-          <button
-            type="submit"
-            className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
-          >
-            <Link href="/employerLogin">Login Employer</Link>
           </button>
         </div>
       </form>

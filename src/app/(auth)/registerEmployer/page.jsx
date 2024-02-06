@@ -23,7 +23,7 @@ const registerEmployer = () => {
       const res = await axios.post("/api/register/employer", user);
       const data = res.data;
       console.log(data);
-      //router.push("/employerLogin");
+      //router.push("/login");
     } catch (error) {
       console.log(error);
     }

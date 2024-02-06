@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!isLoggedIn) router.push("/employerLogin");
+    if (!isLoggedIn) router.push("/login");
   }, [isLoggedIn, router]);
 
   return (
