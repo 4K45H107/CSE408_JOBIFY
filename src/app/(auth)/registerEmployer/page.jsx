@@ -1,14 +1,18 @@
 "use client";
+import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const registerEmployer = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  //const router = useRouter();
+  const router = useRouter();
+  const { signup, isLoggedIn } = useContext(AuthContext);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -19,15 +23,24 @@ const registerEmployer = () => {
       password,
     };
 
-    try {
-      const res = await axios.post("/api/register/employer", user);
-      const data = res.data;
-      console.log(data);
-      //router.push("/login");
-    } catch (error) {
-      console.log(error);
-    }
+    const role = "employer";
+    await signup(role, user);
+    toast.success("Successfully created new account");
+    // try {
+    //   const res = await axios.post("/api/register/employer", user);
+    //   const data = res.data;
+    //   console.log(data);
+    //   //router.push("/login");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/employer/home");
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <div className="flex h-full w-full items-center justify-center">
