@@ -1,28 +1,41 @@
+// pages/index.js
+
 import Link from "next/link";
 
-export default function Home() {
+const home = () => {
   return (
-    <div className="h-screen w-screen flex flex-col ">
-      <div className="flex justify-between py-4 px-8 items-center bg-black">
-        <img src="logo.jpg" className="h-12 rounded" />
-      </div>
-      <div className="flex h-full w-full items-center justify-center">
-        <form className="flex flex-col border px-6 py-10 gap-3 justify-center">
-          <h3 className="pb-8">Login/SignUp to JOBIFY</h3>
+    <div className="flex h-screen justify-center items-center bg-gray-100">
+      <div>
+        {/* Logo Picture */}
+        <img
+          className="mb-6"
+          src="/home_logo.png"
+          alt="Jobify Logo"
+          style={{ maxWidth: "500px" }}
+        />
+        {/* Text */}
+        <h3 className="my-16 text-3xl font-semibold text-center">
+          Dive into the realm of jobs!
+        </h3>
+
+        {/* Login and Sign Up Buttons */}
+        <div className="flex justify-center">
           <Link
             href="/login"
-            className="flex bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto justify-center"
+            className=" bg-black text-white rounded py-4 px-10 mr-4 shadow-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-gray"
           >
-            <p>Login</p>
+            Login
           </Link>
           <Link
             href="/register"
-            className="flex bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto justify-center"
+            className="bg-white text-black rounded py-4 px-7 shadow-md hover:bg-gray-200 focus:outline-none focus:shadow-outline-gray"
           >
-            <p>Sign Up</p>
+            Sign Up
           </Link>
-        </form>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default home;
