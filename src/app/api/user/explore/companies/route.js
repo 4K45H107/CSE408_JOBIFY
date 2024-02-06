@@ -6,7 +6,7 @@ export const GET = async (request) =>{
     try{
         connetToDb();
         // const data = await request.json();
-        const name = "Google";
+        const name = "Microsoft";
         console.log(name);
 
         const company = await Companies.findOne({name: name});
