@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../../../lib/utils";
 import {Jobs} from "../../../../../../../lib/models";
-import { CiLight } from "react-icons/ci";
 
 export const GET= async (request, {params}) => {
     try {

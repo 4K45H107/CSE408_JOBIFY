@@ -7,6 +7,9 @@ export const GET= async (request) => {
     try {
         const url = new URL(request.url);
         const id = url.searchParams.get("userId");
+        if(id === null){
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
         connetToDb();
         console.log("inside employee add jobs route");
     

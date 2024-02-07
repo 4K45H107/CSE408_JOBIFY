@@ -8,6 +8,9 @@ export const POST= async (request) => {
         connetToDb();
         console.log("inside add jobs route");
         const id = url.searchParams.get("userId");
+        if(id === null){
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
         const data = await request.json();
         //console.log(employerData);
         const jobD =  data;
