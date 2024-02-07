@@ -13,10 +13,11 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   const router = useRouter();
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, role } = useContext(AuthContext);
 
   useEffect(() => {
     if (!isLoggedIn) router.push("/login");
+    if (role === "user") router.push("/user/home");
   }, [isLoggedIn, router]);
 
   return (
