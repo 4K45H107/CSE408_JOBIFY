@@ -37,7 +37,7 @@ export const GET = async (request) => {
 
         // const locations = "India";
         // const city = "dhaka";
-        const jobs = await Jobs.find( {$or:[{'location.city': location} , {title: { $in: title }}, {'salary.minimum': {$lte: salary}}]})
+        const jobs = await Jobs.find( {$or:[{'location.city': location} , {title: { $in: title }}]})
         .sort({'salary.maximum' : -1});
         if(jobs.length===0){
             console.log("no jobs");
