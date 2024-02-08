@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { CiBookmark, CiSearch, CiSettings, CiVideoOn } from "react-icons/ci";
 import { IoHomeOutline } from "react-icons/io5";
+import { IoIosLogOut } from "react-icons/io";
 
 const Links = () => {
   const { logout } = useContext(AuthContext);
@@ -35,8 +36,8 @@ const Links = () => {
     },
 
     {
-      title: "Settings",
-      path: "/user/settings",
+      title: "Profile",
+      path: "/user/profile",
       icon: () => <CiSettings />,
     },
   ];
@@ -52,7 +53,8 @@ const Links = () => {
           </Link>
         </div>
       ))}
-      <button className="" onClick={logout}>
+      <button className="flex items-center gap-x-2 py-2" onClick={logout}>
+        <IoIosLogOut />
         Logout
       </button>
     </div>

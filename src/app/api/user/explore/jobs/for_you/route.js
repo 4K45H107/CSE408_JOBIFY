@@ -19,10 +19,8 @@ export const GET = async (request) => {
         }else{
             user = await User.findById(id);
         }
-        
 
         // Find the user by ID
-
         // Check if the user exists
         if (!user) {
             console.log('User not found');

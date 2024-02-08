@@ -8,7 +8,7 @@ const Header = () => {
         <Link href={"#"}>
           <IoIosNotificationsOutline size={24} />
         </Link>
-        <Link href="#" className="">
+        <Link href="/user/profile" className="">
           <img src="/profile_logo.jpg" className="h-12 rounded-full" />
         </Link>
       </div>

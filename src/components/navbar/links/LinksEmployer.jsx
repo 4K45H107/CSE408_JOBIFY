@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { CiCirclePlus, CiSearch, CiSettings, CiVideoOn } from "react-icons/ci";
 import { HiBuildingLibrary } from "react-icons/hi2";
+import { IoIosLogOut } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 
 const LinksEmployer = () => {
@@ -49,7 +50,7 @@ const LinksEmployer = () => {
   ``;
 
   return (
-    <div className="bg-slate-300 px-2.5 flex flex-col h-full justify-center">
+    <div className="bg-slate-300 px-10 flex flex-col h-full justify-center">
       {links.map((link) => (
         <div className="flex items-center gap-x-2 py-2">
           {link.icon()}
@@ -58,7 +59,8 @@ const LinksEmployer = () => {
           </Link>
         </div>
       ))}
-      <button className="" onClick={logout}>
+      <button className="flex items-center gap-x-2 py-2" onClick={logout}>
+        <IoIosLogOut />
         Logout
       </button>
     </div>
