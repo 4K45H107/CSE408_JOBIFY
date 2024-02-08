@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     // Check if userType is selected
     if (!type) {
-      alert("Please select a user type.");
+      alert("Please select a Role.");
       return;
     }
 
