@@ -10,6 +10,9 @@
 //     "cover": "https://example.com/cover.jpg",
 // }
 
+// you need to send employer id in the url and company data in the body
+// above is the data that need to be sent, logo and cover is not mendatory
+
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
 import { Companies, Employers } from "../../../../../lib/models";
