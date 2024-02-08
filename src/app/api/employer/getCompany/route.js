@@ -1,7 +1,11 @@
-// you need to send employer id in the url to get their company data
+// 
+//   you need to send employer id in the url to get their company data
+//
+
+
 import { NextResponse } from "next/server";
-import { connetToDb } from "../../../../../lib/utils";
 import { Companies, Employers } from "../../../../../lib/models";
+import { connetToDb } from "../../../../../lib/utils";
 
 export const GET= async (request) => {
     try {
