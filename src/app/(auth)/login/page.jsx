@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [type, setType] = useState("");
 
   const { login, isLoggedIn } = useContext(AuthContext);
