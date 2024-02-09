@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     if (!isLoggedIn) router.push("/login");
-    if (role === "user") router.push("/user/home");
+    if (role === "user") router.push("/user/explore");
   }, [isLoggedIn, router]);
 
   return (

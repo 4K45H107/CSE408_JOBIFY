@@ -12,12 +12,6 @@ const Links = () => {
 
   const links = [
     {
-      title: "Home",
-      path: "/user/home",
-      icon: () => <IoHomeOutline />,
-    },
-
-    {
       title: "Explore",
       path: "/user/explore",
       icon: () => <CiSearch />,
