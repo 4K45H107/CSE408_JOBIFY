@@ -16,6 +16,16 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!username) {
+      alert("Please select a username.");
+      return;
+    }
+
+    if (!password) {
+      alert("Please select a password.");
+      return;
+    }
+
     // Check if userType is selected
     if (!type) {
       alert("Please select a Role.");
@@ -47,7 +57,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (type === "user") {
-        router.push("/user/explore");
+        router.push("/user/home");
       } else {
         router.push("/employer/home");
       }
@@ -103,7 +113,7 @@ const LoginPage = () => {
             <button
               type="submit"
               onClick={handleLogin}
-              className=" text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
+              className="w-full text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
             >
               Login
             </button>
