@@ -16,6 +16,7 @@ const explore = () => {
         >
           Jobs
         </button>
+
         <button
           className="bg-gray-200 w-32 py-2 border-b border-gray-500"
           onClick={() => setType("companies")}
@@ -32,6 +33,7 @@ const explore = () => {
           >
             For You
           </button>
+
           <button
             className="px-3 py-2 text-xs"
             onClick={() => setType("jobs-search")}

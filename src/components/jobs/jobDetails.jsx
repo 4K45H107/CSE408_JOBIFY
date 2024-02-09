@@ -11,6 +11,8 @@ const JobDetails = (props) => {
 
   const { data: job, isLoading } = useSWR(tempLink, fetcher);
 
+  console.log(job);
+
   // fetch data by props.activeId
   if (!isLoading) {
     return (
@@ -18,7 +20,7 @@ const JobDetails = (props) => {
         <div className="flex items-center gap-x-2 justify-between">
           <div className="flex items-center gap-x-2">
             <img src="/company_logo.jpg" className="h-6 w-6 rounded-full" />
-            <p className="">{job?.company}</p>
+            <p className="text-xl">{job?.company}</p>
             <p className="text-xs">4.8</p>
           </div>
           <div className="flex items-center gap-x-1">
@@ -29,14 +31,39 @@ const JobDetails = (props) => {
             </div>
           </div>
         </div>
-        <h3 className="text-lg font-semibold">{job?.title}</h3>
+        <h3 className="text-3xl font-semibold">{job?.title}</h3>
         <p className="text-xs color-gray-500">Remote</p>
         <div className="mt-6">
-          <h2 className="text-xl font-bold">{job?.title}</h2>
-          {job?.description}
+          <p className="flex text-lg font-bold">
+            <p className="text-red-600 pr-2 text-xl">Title: </p> {job?.title}
+          </p>
+          <p className="font-bold text-red-600 pr-2 text-xl">Location: </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">Country: </p>{" "}
+            {job?.location?.country}
+          </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">City: </p>{" "}
+            {job?.location?.city}
+          </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-red-600 pr-2 text-xl">Company: </p>{" "}
+            {job?.company}
+          </p>
+          <p className="font-bold text-red-600 pr-2 text-xl">Salary: </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">Minimum: </p>{" "}
+            {job?.salary?.minimum}
+          </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
+            {job?.salary?.maximum}
+          </p>
         </div>
         <div>
-          <h2 className="text-xl font-bold mt-6">{job?.title}</h2>
+          <h2 className="text-3xl text-slate-500 font-bold mt-6">
+            Job Description -{" "}
+          </h2>
           {job?.description}
         </div>
         {/* <div className="flex items-center">

@@ -34,13 +34,10 @@ const Profile = () => {
         `/api/user/profile/picture?userId=${userId}`,
         data
       );
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(profile);
 
   if (!isLoading) {
     return (
@@ -49,7 +46,7 @@ const Profile = () => {
         <div className="h-full flex flex-col items-center w-1/5 p-6 bg-gray-200">
           {/* Logo */}
           <img
-            className="mb-8 rounded-full"
+            className="aspect-square mb-8 rounded-full"
             src={picture || "/profile_logo.jpg"}
             alt="Jobify Logo"
             style={{ maxWidth: "200px" }}

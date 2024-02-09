@@ -17,7 +17,6 @@ const UploadFile = ({ imageUrl, setImageURL }) => {
     const storage = getStorage(app);
 
     const upload = () => {
-      // console.log("first");
       const name = new Date().getTime() + image.name;
       const storageRef = ref(storage, name);
 
@@ -66,7 +65,7 @@ const UploadFile = ({ imageUrl, setImageURL }) => {
   }, [image]);
 
   return (
-    <div className="mb-6 w-full">
+    <div className=" mb-6 w-full">
       <input
         type="file"
         id="photo"
