@@ -1,16 +1,44 @@
 "use client";
+import UploadFile from "@/components/common/UploadFile";
 import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 
 const Profile = () => {
   const [type, setType] = useState("profile"); //CV - Job Preferences - Notifications
+  const [picture, setPicture] = useState();
+
   const { role, userId } = useContext(AuthContext);
   const { data: profile, isLoading } = useSWR(
     `/api/user/profile?userId=${userId}`,
     fetcher
   );
+
+  useEffect(() => {
+    if (profile) setPicture(profile.photo);
+  }, [isLoading]);
+
+  useEffect(() => {
+    handleupload();
+  }, [picture]);
+
+  const handleupload = async () => {
+    const data = {
+      photo: picture,
+    };
+
+    try {
+      const res = await axios.patch(
+        `/api/user/profile/picture?userId=${userId}`,
+        data
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   console.log(profile);
 
@@ -22,13 +50,13 @@ const Profile = () => {
           {/* Logo */}
           <img
             className="mb-8 rounded-full"
-            src="/home_logo.png"
+            src={picture || "/profile_logo.jpg"}
             alt="Jobify Logo"
             style={{ maxWidth: "200px" }}
           />
 
           {/* Upload photo */}
-          <div className="mb-6 w-full">
+          {/* <div className="mb-6 w-full">
             <input
               type="file"
               id="photo"
@@ -39,8 +67,13 @@ const Profile = () => {
                           hover:file:cursor-pointer hover:file:bg-gray-200
                         hover:file:text-gray-600"
             />
-          </div>
+          </div> */}
 
+          <UploadFile imageUrl={picture} setImageURL={setPicture} />
+          <button className=" bg-black text-sm text-white rounded py-2 px-10 mr-4 shadow-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-gray">
+            {" "}
+            Upload File{" "}
+          </button>
           {/* Profile info */}
           <div className="flex flex-col w-full space-y-4">
             <div className="flex flex-col w-full items-center mb-12">
