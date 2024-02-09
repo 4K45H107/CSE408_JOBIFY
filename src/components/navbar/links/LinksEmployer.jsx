@@ -52,7 +52,7 @@ const LinksEmployer = () => {
   return (
     <div className="bg-slate-300 px-10 flex flex-col h-full justify-center">
       {links.map((link) => (
-        <div className="flex items-center gap-x-2 py-2">
+        <div key={link.title} className="flex items-center gap-x-2 py-2">
           {link.icon()}
           <Link href={link.path} key={link.title}>
             {link.title}
