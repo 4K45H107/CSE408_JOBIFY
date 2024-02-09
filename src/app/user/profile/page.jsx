@@ -32,15 +32,20 @@ const Profile = () => {
             <input
               type="file"
               id="photo"
-              className="w-full py-2 px-4 border rounded"
+              className="text-sm text-stone-500
+                          file:mr-5 file:py-1 file:px-3 file:border-[0.5px]
+                          file:text-xs file:font-medium
+                          file:bg-stone-50 file:text-stone-700
+                          hover:file:cursor-pointer hover:file:bg-gray-200
+                        hover:file:text-gray-600"
             />
           </div>
 
           {/* Profile info */}
           <div className="flex flex-col w-full space-y-4">
             <div className="flex flex-col w-full items-center mb-12">
-              <p className="text-3xl font-semibold">{profile.fullname}</p>
-              <p className="text-l text-gray-600">@{profile.username}</p>
+              <p className="text-3xl font-semibold">{profile?.fullname}</p>
+              <p className="text-l text-gray-600">@{profile?.username}</p>
             </div>
             <div className="flex flex-col items-end">
               <button
@@ -66,28 +71,30 @@ const Profile = () => {
         </div>
 
         {/* Right section */}
-        <div className="h-full w-4/5 p-6 border-gray-300 ml-12 mt-">
-          <h3 className="text-2xl font-semibold mb-6">My Information</h3>
+        <div className="h-full w-4/5 p-6 border-gray-300 ml-12 mt-12">
+          <h3 className="w-full text-center text-4xl font-semibold mb-6">
+            My Information
+          </h3>
           <div className="space-y-4 text-gray-800">
             <div>
-              <p className="font-semibold">Full Name</p>
-              <p>{profile.fullname}</p>
+              <p className="text-2xl font-semibold">Full Name</p>
+              <p>{profile?.fullname}</p>
             </div>
             <div>
-              <p className="font-semibold">Email</p>
-              <p>{profile.email}</p>
+              <p className="text-2xl font-semibold">Email</p>
+              <p>{profile?.email}</p>
             </div>
             <div>
-              <p className="font-semibold">Location</p>
-              <p>{profile.profile.location}</p>
+              <p className="text-2xl font-semibold">Location</p>
+              <p>{profile?.profile.location}</p>
             </div>
             <div>
-              <p className="font-semibold">Phone</p>
-              <p>{profile.phone}</p>
+              <p className="text-2xl font-semibold">Phone</p>
+              <p>{profile?.phone}</p>
             </div>
             <div>
-              <p className="font-semibold">Education</p>
-              <p>{profile.profile.education}</p>
+              <p className="text-2xl font-semibold">Education</p>
+              <p>{profile?.profile.education}</p>
             </div>
           </div>
         </div>
