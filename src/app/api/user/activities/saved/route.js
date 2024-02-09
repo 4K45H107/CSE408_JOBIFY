@@ -52,3 +52,33 @@ export const DELETE = async (request) => {
         return NextResponse.error(error, { status: 500});
     }
 }
+
+export const GET = async (request) =>{
+    try{
+        connetToDb();
+        const url = new URL(request.url);
+        const id = url.searchParams.get("userId");
+
+        if(id == null){
+            return NextResponse.json({message: "user not found"}, {status: 404});
+        }
+        let jobIds;
+        await Bookmarks.find({"user_id": id})
+        .then((bookmarks) => {
+            jobIds = bookmarks.map((bookmark) => bookmark.job_id);
+            // Array containing only "name" values
+          }
+
+        );
+
+        console.log(jobIds);
+        
+        const job = await Jobs.find({_id:{$in:jobIds}});
+        console.log(job);
+
+        return NextResponse.json(job, {status: 200});
+    }catch(error){
+        console.log('Error', error);
+        return NextResponse.error(error, {status: 500});
+    }
+}
