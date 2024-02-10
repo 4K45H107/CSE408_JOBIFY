@@ -6,6 +6,8 @@ import { fetcher } from "@/utils/conn";
 import axior from "axios";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { checkCustomRoutes } from "next/dist/lib/load-custom-routes";
 
 const SelectCompany = () => {
   const { role, userId } = useContext(AuthContext);
@@ -20,11 +22,16 @@ const SelectCompany = () => {
   }, [companies, isLoading]);
 
   const [selectedCompany, setSelectedCompany] = useState("");
+  const [change, setChange] = useState("");
+  const router = useRouter();
 
+  const handleSubmit = (event) => {
+    setSelectedCompany(event.target.value); // Update selectedCompany with the selected company value
+  };
   // Patch the selected company data
   const handleCompanyChange = async () => {
     const data = {
-      photo: picture,
+      name: selectedCompany,
     };
 
     try {
@@ -35,19 +42,14 @@ const SelectCompany = () => {
     } catch (error) {
       console.log(error);
     }
+    setChange("done");
   };
 
-  const patchCompany = async (companyData) => {
-    try {
-      const response = await axios.patch(
-        `/api/company/${selectedCompany}`,
-        companyData
-      );
-      console.log("Company data patched successfully:", response.data);
-    } catch (error) {
-      console.error("Error patching company data:", error);
+  useEffect(() => {
+    if (change === "done") {
+      router.push("/employer/home");
     }
-  };
+  }, [change, router]);
 
   if (!isLoading) {
     return (
@@ -69,7 +71,7 @@ const SelectCompany = () => {
                 id="company"
                 className="block w-full bg-white border border-gray-300 rounded px-4 py-2"
                 value={selectedCompany}
-                onChange={handleCompanyChange}
+                onChange={handleSubmit}
               >
                 <option value="">Select a company...</option>
                 {companies?.map((company) => (
@@ -83,6 +85,7 @@ const SelectCompany = () => {
           <button
             type="submit"
             className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+            onClick={handleCompanyChange}
           >
             Next
           </button>
