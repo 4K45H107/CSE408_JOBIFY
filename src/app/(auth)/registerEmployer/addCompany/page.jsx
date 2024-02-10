@@ -16,9 +16,8 @@ const addCompany = () => {
   const [branch, setBranch] = useState("");
   const [description, setDescription] = useState("");
 
-  const [selectedCompany, setSelectedCompany] = useState("");
-
   const { role, userId } = useContext(AuthContext);
+  console.log(userId);
   const router = useRouter();
 
   const handleCompanyCreate = async (e) => {
@@ -58,7 +57,7 @@ const addCompany = () => {
       const data = res.data;
       console.log(data);
       toast.success("Company Created Successfully");
-      setSelectedCompany(fullName);
+      console.log(fullName);
       handleCompanyChange();
       router.push("/employer/home");
     } catch (error) {
@@ -70,7 +69,7 @@ const addCompany = () => {
 
   const handleCompanyChange = async () => {
     const data = {
-      name: selectedCompany,
+      name: fullName,
     };
 
     try {
@@ -78,10 +77,10 @@ const addCompany = () => {
         `/api/employer/updateCompany?userId=${userId}`,
         data
       );
+      toast.success("Successfully updated");
     } catch (error) {
       console.log(error);
     }
-    setChange("done");
   };
 
   return (

@@ -34,6 +34,7 @@ const registerEmployer = () => {
     }
 
     const employer = {
+      company: { name: "", branch: "" },
       fullName,
       username,
       email,
