@@ -18,7 +18,7 @@ export const GET= async (request) => {
         return NextResponse.json(companyBranches, { status: 200 });
     } catch (error) {
         console.log(error);
-        return NextResponse.json({message:"Same company name"},{status:500});   
+        return NextResponse.json(error,{status:500});   
     }
 
 }

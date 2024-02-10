@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
-import { Companies } from "../../../../../lib/models";
+import { Jobs } from "../../../../../lib/models";
 
 export const GET = async (request) => {
     try {
@@ -8,20 +8,20 @@ export const GET = async (request) => {
         connetToDb();
         // Extract the ID from the request parameters
         const url = new URL(request.url);
-        const name = url.searchParams.get("company");
-        let company;
-        if(name==null){ 
-            console.log("No company name............");  
-            return NextResponse.json({ message: "No company name was given" }, { status: 404 });
+        const id = url.searchParams.get("jobId");
+        let job;
+        if(id==null){ 
+            console.log("Job Id not found............");  
+            return NextResponse.json({ message: "Job not found" }, { status: 404 });
         }else{
-            company = await Companies.findOne({name:name});
+            job = await Jobs.findById(id);
         }
         
 
         // Find the user by ID
 
         // Check if the user exists
-        return NextResponse.json(company, { status: 200 });
+        return NextResponse.json(job, { status: 200 });
 
         
     } catch (error) {
