@@ -1,8 +1,8 @@
 //This route is used to get all the company names from the database
 
 import { NextResponse } from "next/server";
-import { connetToDb } from "../../../../../lib/utils";
 import { Companies } from "../../../../../lib/models";
+import { connetToDb } from "../../../../../lib/utils";
 
 export const GET= async (request) => {
     try {

@@ -1,17 +1,3 @@
-// {
-//     "name": "Street Chicken",
-//     "email": "info@acmecorporation.com",
-//     "numOfEmployees": 50,
-//     "designation": "Technology",
-//     "phone": "+1 234 567 8900",
-//     "branch": "BUET",
-//     "description": "We provide innovative software solutions for businesses.",
-//     "logo": "https://example.com/logo.png",
-//     "cover": "https://example.com/cover.jpg",
-// }
-
-// you need to send employer id in the url and company data in the body
-// above is the data that need to be sent, logo and cover is not mendatory
 
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
@@ -21,7 +7,7 @@ export const POST= async (request) => {
     try {
         const url = new URL(request.url);
         connetToDb();
-        console.log("inside add Company route");
+        console.log("inside add Branch route");
         const id = url.searchParams.get("userId");
         const companyData = await request.json();
         if(id === null){
