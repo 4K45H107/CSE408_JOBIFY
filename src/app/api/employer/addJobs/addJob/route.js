@@ -21,7 +21,7 @@ export const POST= async (request) => {
             return NextResponse.json({message:"employer not found"},{status:404});
         }else{
             jobD.provider=employer._id;
-            jobD.company=employer.company.name.toLowerCase();
+            jobD.company=employer.company.name;
             const job= await Jobs.create(jobD);
             return NextResponse.json(job,{status:200});
         }
