@@ -1,17 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { set } from "mongoose";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const CardSearch = (props) => {
+  const { role, userId } = useContext(AuthContext);
   const [activeId, setActiveId] = useState("");
   const router = useRouter();
 
+  const handleRecent = async (e) => {
+    e.preventDefault();
+
+    console.log(props.id);
+    const recentData = {
+      id: props.id,
+    };
+
+    try {
+      const res = await axios.post(
+        `/api/user/activities/recent?userId=${userId}`,
+        recentData
+      );
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setActiveId(props.id);
+  };
+
+  const handleSaved = async (e) => {
+    e.preventDefault();
+
+    const savedData = {
+      id: props.id,
+    };
+    console.log(props.id);
+
+    try {
+      const res = await axios.post(
+        `/api/user/activities/saved?userId=${userId}`,
+        savedData
+      );
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (activeId !== "") {
-      router.push(`/job/${activeId}`);
+      router.push(`/job/${props.id}`);
     }
   }, [activeId]);
 
@@ -40,9 +85,7 @@ const CardSearch = (props) => {
         <div className="flex justify-center my-4 w-auto bg-gray-800 rounded">
           <button
             type="submit"
-            onClick={() => {
-              setActiveId(props.id);
-            }}
+            onClick={handleRecent}
             className="w-full text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
           >
             View
@@ -51,7 +94,7 @@ const CardSearch = (props) => {
       </div>
 
       <div className="absolute top-2 right-4">
-        <CiBookmark />
+        <CiBookmark onClick={handleSaved} />
       </div>
     </div>
   );

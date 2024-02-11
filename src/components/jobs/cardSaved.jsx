@@ -4,13 +4,14 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { TiDeleteOutline } from "react-icons/ti";
 
-const Card = (props) => {
+const CardSaved = (props) => {
   console.log(props.id);
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
 
-  const handleSaved = async (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
 
     const savedData = {
@@ -19,8 +20,8 @@ const Card = (props) => {
     console.log(props.id);
 
     try {
-      const res = await axios.post(
-        `/api/user/activities/saved?userId=${userId}`,
+      const res = await axios.delete(
+        `/api/user/activities/saved?userId=${userId}&jobId=${props.id}`,
         savedData
       );
       const data = res.data;
@@ -61,10 +62,10 @@ const Card = (props) => {
       </div>
 
       <div className="absolute top-2 right-4">
-        <CiBookmark onClick={handleSaved} />
+        <TiDeleteOutline onClick={handleDelete} />
       </div>
     </div>
   );
 };
 
-export default Card;
+export default CardSaved;

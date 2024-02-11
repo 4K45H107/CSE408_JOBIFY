@@ -43,6 +43,26 @@ const JobDetails = (props) => {
     setActiveId(props.activeId);
   };
 
+  console.log(props.id);
+
+  const handleSaved = async () => {
+    const savedData = {
+      id: props.activeId,
+    };
+    console.log(props.activeId);
+
+    try {
+      const res = await axios.post(
+        `/api/user/activities/saved?userId=${userId}`,
+        savedData
+      );
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log(job);
 
   // fetch data by props.activeId
@@ -56,7 +76,7 @@ const JobDetails = (props) => {
             <p className="text-xs">4.8</p>
           </div>
           <div className="flex items-center gap-x-1">
-            <CiBookmark />
+            <CiBookmark className="cursor-pointer" onClick={handleSaved} />
             <div className="flex items-center text-lime-600">
               <AiFillThunderbolt />
               <p>Easy Apply</p>

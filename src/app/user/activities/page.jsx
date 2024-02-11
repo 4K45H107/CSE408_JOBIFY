@@ -4,9 +4,11 @@ import { useState } from "react";
 import JobsForYou from "@/components/jobs/jobsForYou";
 import JobSearch from "@/components/jobs/jobSearch";
 import RecentSearches from "@/components/activities/RecentSearches";
+import Saved from "@/components/activities/Saved";
+import Application from "@/components/activities/Application";
 
 const activities = () => {
-  const [type, setType] = useState("recent-searches"); // Recent searches, Saved, Activities
+  const [type, setType] = useState("recent-searches"); // Recent searches, Saved, Applications
 
   return (
     <div className="w-full">
@@ -36,9 +38,13 @@ const activities = () => {
         <div className="h-[700px]">{<RecentSearches />}</div>
       )}
 
-      {type === "jobs-search" && <div className="">{<JobSearch />}</div>}
+      {type === "saved" && <div className="">{<Saved />}</div>}
 
-      {type === "companies" && <div className="">co</div>}
+      {type === "applications" && (
+        <div className="">
+          <Application />
+        </div>
+      )}
     </div>
   );
 };
