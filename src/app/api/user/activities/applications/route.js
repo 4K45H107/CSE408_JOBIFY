@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Applications, Jobs } from "../../../../../../lib/models";
 import { connetToDb } from "../../../../../../lib/utils";
 
-export const POST = async (request) => {
+export const PATCH = async (request) => {
     try{
         connetToDb();
         const url = new URL(request.url);
