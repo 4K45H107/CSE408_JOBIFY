@@ -21,7 +21,7 @@ const Header = () => {
             <IoIosNotificationsOutline size={24} />
           </Link>
           <Link href="/user/profile" className="">
-            <img 
+            <img
               src={profile?.photo || "/profile_logo.jpg"}
               className="h-12 w-12 rounded-full"
             />
