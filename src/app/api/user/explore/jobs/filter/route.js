@@ -17,8 +17,6 @@ export const POST = async (request) => {
     const salary = data.salary;
     const company = data.company;
 
-    // const locations = "India";
-    // const city = "dhaka";
     if (location === "" && type === "" && salary === "" && company === "") {
       console.log("no filters");
       return NextResponse.json({ message: "no filters" }, { status: 404 });

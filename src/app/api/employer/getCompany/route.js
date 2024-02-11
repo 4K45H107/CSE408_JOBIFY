@@ -38,12 +38,13 @@ export const PATCH = async (request) => {
         // Extract the ID from the request parameters
         const url = new URL(request.url);
         const name = url.searchParams.get("company");
+        const data = await request.json();
         let company;
         if(name===null){ 
             console.log("No company name............");  
             return NextResponse.json({ message: "No company name was given" }, { status: 404 });
         }else{
-            company = await Companies.findOne({name:name});
+            company = await Companies.findOneAndUpdate({name:name},data,{new:true});
             console.log(company)
         }
         
