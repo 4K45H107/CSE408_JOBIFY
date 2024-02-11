@@ -7,11 +7,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import CardEmployer from "../jobs/cardEmployer";
 
-const MyOfferings = () => {
+const MyCompanyJobs = () => {
   const { role, userId } = useContext(AuthContext);
 
   const { data: jobs, isLoading } = useSWR(
-    `/api/employer/addJobs?userId=${userId}`,
+    `/api/employer/myCompanyJobs?userId=${userId}`,
     fetcher
   );
 
@@ -47,4 +47,4 @@ const MyOfferings = () => {
   }
 };
 
-export default MyOfferings;
+export default MyCompanyJobs;

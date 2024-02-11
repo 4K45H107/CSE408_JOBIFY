@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import MyOfferings from "@/components/employer/myOfferings";
+import MyCompanyJobs from "@/components/employer/myCompanyJobs";
 
 const Home = () => {
-  const [type, setType] = useState("my-offerings"); // my-company-jobs, my-offerings
+  const [type, setType] = useState("my-company-jobs"); // my-company-jobs, my-offerings
 
   return (
     <div className="w-full">
@@ -29,7 +30,11 @@ const Home = () => {
         </div>
       )}
 
-      {type === "my-company-jobs" && <div className="">My company jobs</div>}
+      {type === "my-company-jobs" && (
+        <div className="">
+          <MyCompanyJobs />
+        </div>
+      )}
     </div>
   );
 };
