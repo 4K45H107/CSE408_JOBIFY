@@ -3,11 +3,12 @@ import UploadFile from "@/components/common/UploadFile";
 import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
 import axios from "axios";
+import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 
 const Profile = () => {
-  const [type, setType] = useState("profile"); //CV - Job Preferences - Notifications
+  const [type, setType] = useState("profile"); //CV - Notifications
   const [picture, setPicture] = useState();
 
   const { role, userId } = useContext(AuthContext);
@@ -16,8 +17,54 @@ const Profile = () => {
     fetcher
   );
 
+  const [editable, setEditable] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [profileInfo, setProfileInfo] = useState({
+    location: "",
+    skills: "",
+    education: "",
+  });
+  const [job_preferences, setjob_preferences] = useState({
+    locations: "",
+    salary_range: "",
+    job_type: "",
+  });
+
   useEffect(() => {
-    if (profile) setPicture(profile.photo);
+    if (profile) {
+      setPicture(profile.photo);
+      setFullName(profile.fullname);
+      setEmail(profile.email);
+      setPassword(profile.password);
+      setPhoneNumber(profile.phone);
+
+      let result = "";
+      console.log(profile.job_preferences?.job_type);
+      for (let i = 0; i < profile.job_preferences?.job_type?.length; i++) {
+        result += profile.job_preferences?.job_type?.at(i);
+        if (i < profile.job_preferences?.job_type?.length - 1) {
+          result += ", ";
+        }
+      }
+      console.log(result);
+      setjob_preferences(profile.job_preferences);
+      setjob_preferences((prev) => ({ ...prev, job_type: result }));
+
+      let result2 = "";
+      console.log(profile.profile?.skills);
+      for (let i = 0; i < profile.profile?.skills?.length; i++) {
+        result2 += profile.profile?.skills?.at(i);
+        if (i < profile.profile?.skills?.length - 1) {
+          result2 += ", ";
+        }
+      }
+      console.log(result2);
+      setProfileInfo(profile.profile);
+      setProfileInfo((prev) => ({ ...prev, skills: result2 }));
+    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -36,6 +83,37 @@ const Profile = () => {
       );
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const user = {
+      fullname: fullName,
+      username: profile.username,
+      email,
+      password,
+      phone: phoneNumber,
+      profile: {
+        ...profileInfo,
+        skills: profileInfo.skills?.split(","),
+      },
+      job_preferences: {
+        ...job_preferences,
+        job_type: job_preferences.job_type?.split(","),
+      },
+      //job_preferences,
+    };
+
+    console.log(user);
+
+    try {
+      const res = await axios.patch(`/api/user/profile?userId=${userId}`, user);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEditable(false);
     }
   };
 
@@ -86,12 +164,6 @@ const Profile = () => {
               </button>
               <button
                 className="px-3 py-2"
-                onClick={() => setType("job-preferences")}
-              >
-                Job preferences
-              </button>
-              <button
-                className="px-3 py-2"
                 onClick={() => setType("notifications")}
               >
                 Notifications
@@ -101,33 +173,203 @@ const Profile = () => {
         </div>
 
         {/* Right section */}
-        <div className="h-full w-4/5 p-6 border-gray-300 ml-12 mt-12">
-          <h3 className="w-full text-center text-4xl font-semibold mb-6">
-            My Information
-          </h3>
-          <div className="space-y-4 text-gray-800">
-            <div>
-              <p className="text-2xl font-semibold">Full Name</p>
-              <p>{profile?.fullname}</p>
+        {!editable && (
+          <div className=" h-full w-4/5 p-6 border-gray-300 ml-12 mt-12">
+            <h3 className="w-full text-center text-4xl font-semibold mb-6">
+              My Information
+            </h3>
+            <div className="flex">
+              <div className="w-1/2 space-y-4 text-gray-800">
+                <div>
+                  <p className="text-2xl font-semibold">Full Name</p>
+                  <p>{profile?.fullname}</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Email</p>
+                  <p>{profile?.email}</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Phone</p>
+                  <p>{profile?.phone}</p>
+                </div>
+                <div>
+                  <p className="text-4xl font-semibold">About</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Location</p>
+                  <p>{profile?.profile.location}</p>
+                </div>
+
+                <div>
+                  <p className="text-2xl font-semibold">Education</p>
+                  <p>{profile?.profile.education}</p>
+                </div>
+              </div>
+              <div className="w-1/2">
+                <div>
+                  <p className="text-4xl font-semibold mb-4">Job Preference</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Location</p>
+                  <p>{profile?.job_preferences?.locations}</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Job Type</p>
+                  {profile?.job_preferences?.job_type?.map((jobType) => (
+                    <span className="mr-2 border-r pr-2">{jobType}</span>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Salary</p>
+                  <p>{profile?.job_preferences?.salary_range}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-2xl font-semibold">Email</p>
-              <p>{profile?.email}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-semibold">Location</p>
-              <p>{profile?.profile.location}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-semibold">Phone</p>
-              <p>{profile?.phone}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-semibold">Education</p>
-              <p>{profile?.profile.education}</p>
+            <div className="flex justify-center my-4 w-auto bg-gray-800 rounded">
+              <button
+                type="submit"
+                onClick={() => setEditable(true)}
+                className="w-full text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
+              >
+                Edit
+              </button>
             </div>
           </div>
-        </div>
+        )}
+
+        {editable && (
+          <div className="w-full">
+            <div className="mt-16 flex h-full w-full items-center justify-center">
+              <form className="flex flex-col border px-6 py-10">
+                <h3 className="flex text-xl pb-6 justify-center">
+                  Edit Your Info
+                </h3>
+                <div className="flex gap-6">
+                  <div className="flex flex-col">
+                    <label>Update your Email:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="test"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    ></input>
+                    <label>Update your Password:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-5"
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    ></input>
+                    <label>Update your Full Name:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    ></input>
+                    {/* ... Other existing fields ... */}
+                    <label>Update your Phone Number:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="tel"
+                      placeholder="Phone Number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    ></input>
+                  </div>
+                  <div className="flex flex-col">
+                    <label>Profile Information:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Location"
+                      value={profileInfo.location}
+                      onChange={(e) =>
+                        setProfileInfo({
+                          ...profileInfo,
+                          location: e.target.value,
+                        })
+                      }
+                    ></input>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Skills"
+                      value={profileInfo.skills}
+                      onChange={(e) =>
+                        setProfileInfo({
+                          ...profileInfo,
+                          skills: e.target.value,
+                        })
+                      }
+                    ></input>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Education"
+                      value={profileInfo.education}
+                      onChange={(e) =>
+                        setProfileInfo({
+                          ...profileInfo,
+                          education: e.target.value,
+                        })
+                      }
+                    ></input>
+                    <label>Job Preference:</label>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Location"
+                      value={job_preferences.locations}
+                      onChange={(e) =>
+                        setjob_preferences({
+                          ...job_preferences,
+                          locations: e.target.value,
+                        })
+                      }
+                    ></input>
+                    <input
+                      className="border rounded py-3 px-2 mb-3"
+                      type="text"
+                      placeholder="Salary Range"
+                      value={job_preferences.salary_range}
+                      onChange={(e) =>
+                        setjob_preferences({
+                          ...job_preferences,
+                          salary_range: e.target.value,
+                        })
+                      }
+                    ></input>
+                    <input
+                      className="border rounded py-3 px-2 mb-5"
+                      type="text"
+                      placeholder="Job Type"
+                      value={job_preferences.job_type}
+                      onChange={(e) =>
+                        setjob_preferences({
+                          ...job_preferences,
+                          job_type: e.target.value,
+                        })
+                      }
+                    ></input>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <button
+                    type="submit"
+                    onClick={handleSave}
+                    className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+                  >
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
