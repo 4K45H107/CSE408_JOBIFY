@@ -10,11 +10,12 @@ export const GET = async (request) => {
         const url = new URL(request.url);
         const name = url.searchParams.get("company");
         let company;
-        if(name==null){ 
+        if(name===null){ 
             console.log("No company name............");  
             return NextResponse.json({ message: "No company name was given" }, { status: 404 });
         }else{
             company = await Companies.findOne({name:name});
+            console.log(company)
         }
         
 

@@ -6,12 +6,12 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import useSWR from "swr";
 
-const job = (props) => {
+const company = (props) => {
   const router = useRouter();
   // const [jobID, setJobID] = useState(null);
 
-  const { jobID } = useParams();
-  console.log(jobID);
+  const { companyID } = useParams();
+  console.log(companyID);
 
   // useEffect(() => {
   //   if (router.isReady) {
@@ -21,75 +21,65 @@ const job = (props) => {
   // }, [router.isReady, router.query]);
   // console.log(jobID);
 
-  const { data: job, isLoading } = useSWR(
-    `/api/employer/getJob?jobId=${jobID}`,
+  const { data: company, isLoading } = useSWR(
+    `/api/employer/getCompany?company=${companyID}`,
     fetcher
   );
+  if (!company) return <div>Loading...</div>;
 
-  console.log(job);
+  console.log(company);
 
   // fetch data by props.activeId
   if (!isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-full  px-4 py-4 mr-4">
-        <div className="border rounded flex flex-col items-center justify-center h-2/3 w-1/2 pt-10 border-grey-400">
-          <div className="flex items-center gap-x-2 justify-between">
-            <div className="flex items-center gap-x-2">
-              <img src="/company_logo.jpg" className="h-6 w-6 rounded-full" />
-              <p className="text-xl">{job?.company}</p>
-              <p className="text-xs">4.8</p>
+      <div className="flex flex-col w-full h-full items-center mx-auto px-4 py-8 justify-center">
+        <div className="flex flex-col items-center justify-center mx-72 border rounded">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 md:pr-8">
+              <img
+                src={company?.logo}
+                alt="Cover Photo"
+                className="rounded-lg mb-4 md:mb-0"
+              />
             </div>
-            <div className="flex items-center gap-x-1">
-              <CiBookmark />
-              <div className="flex items-center text-lime-600">
-                <AiFillThunderbolt />
-                <p>Easy Apply</p>
-              </div>
+            <div className="md:w-1/2">
+              <img
+                src={company?.logo}
+                alt="Profile Photo"
+                className="rounded-full w-32 mb-4 md:mb-0 mx-auto"
+              />
             </div>
           </div>
-          <h3 className="text-3xl font-semibold">{job?.title}</h3>
-          <p className="text-xs color-gray-500">Remote</p>
-          <div className="mt-6">
-            <p className="flex text-lg font-bold">
-              <p className="text-red-600 pr-2 text-xl">Title: </p> {job?.title}
+          <div className="w-1/3 mt-8">
+            <h1 className="text-3xl font-bold mb-4">{company?.name}</h1>
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Email:</span> {company?.email}
             </p>
-            <p className="font-bold text-red-600 pr-2 text-xl">Location: </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">Country: </p>{" "}
-              {job?.location?.country}
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Phone Number:</span>{" "}
+              {company?.phone}
             </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">City: </p>{" "}
-              {job?.location?.city}
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Company Type:</span>{" "}
+              {company?.designation}
             </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-red-600 pr-2 text-xl">Company: </p>{" "}
-              {job?.company}
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Number of Employees:</span>{" "}
+              {company?.numOfEmployees}
             </p>
-            <p className="font-bold text-red-600 pr-2 text-xl">Salary: </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">Minimum: </p>{" "}
-              {job?.salary?.minimum}
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Description:</span>{" "}
+              {company?.description}
             </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
-              {job?.salary?.maximum}
+            <p className="text-lg mb-2">
+              <span className="font-semibold">Branch Name:</span>{" "}
+              {company?.branch}
             </p>
           </div>
-          <div>
-            <h2 className="text-3xl text-slate-500 font-bold mt-6">
-              Job Description -{" "}
-            </h2>
-            {job?.description}
-          </div>
-          {/* <div className="flex items-center">
-        <MdOutlineKeyboardArrowDown />
-        <Link href={"/"}>Show More</Link>
-      </div> */}
         </div>
       </div>
     );
   }
 };
 
-export default job;
+export default company;

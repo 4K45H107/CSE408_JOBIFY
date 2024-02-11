@@ -1,6 +1,7 @@
 import React from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
+import Link from "next/link";
 
 const Card = (props) => {
   console.log(props.id);
@@ -13,7 +14,10 @@ const Card = (props) => {
     >
       <div className="flex items-center gap-x-2">
         <img src="/company_logo.jpg" className="h-6 w-6 rounded-full" />
-        <p className="">{props.company}</p>
+        <Link href={`/company/${props.company}`} className="">
+          {" "}
+          {props.company}
+        </Link>
         <p className="text-xs">4.8</p>
       </div>
       <h3 className="text-lg font-semibold">{props.title}</h3>

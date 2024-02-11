@@ -15,10 +15,10 @@ const MyCompanyJobs = () => {
     fetcher
   );
 
-  const [activeId, setActiveId] = useState(jobs?.at(0)._id);
+  const [activeId, setActiveId] = useState(jobs?.at(0)?._id);
 
   useEffect(() => {
-    setActiveId(jobs?.at(0)._id);
+    setActiveId(jobs?.at(0)?._id);
   }, [jobs]);
 
   if (!isLoading) {
