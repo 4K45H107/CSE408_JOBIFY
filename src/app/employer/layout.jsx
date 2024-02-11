@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import "../globals.css";
+import HeaderEmployer from "@/components/header/HeaderEmployer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <div className="h-screen flex flex-col">
       <div className="header">
-        <Header />
+        <HeaderEmployer />
       </div>
       <div className="flex flex-1 overflow-hidden">
         <div className="h-full">

@@ -35,11 +35,11 @@ const registerEmployer = () => {
 
     const employer = {
       company: { name: "", branch: "" },
-      fullName,
+      fullname: fullName,
       username,
       email,
       password,
-      phoneNumber,
+      phone: phoneNumber,
       designation,
     };
 

@@ -42,8 +42,8 @@ const LinksEmployer = () => {
     },
 
     {
-      title: "Settings",
-      path: "/employer/settings",
+      title: "Profile",
+      path: "/employer/profile",
       icon: () => <CiSettings />,
     },
   ];

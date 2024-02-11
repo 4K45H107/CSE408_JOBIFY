@@ -48,11 +48,11 @@ const register = () => {
     }
 
     const user = {
-      fullName,
+      fullname: fullName,
       username,
       email,
       password,
-      phoneNumber,
+      phone: phoneNumber,
       profile,
       job_preferences,
     };
