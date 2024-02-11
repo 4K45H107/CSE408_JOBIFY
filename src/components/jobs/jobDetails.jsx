@@ -1,15 +1,47 @@
+import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
-import React from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import useSWR from "swr";
 
 const JobDetails = (props) => {
-  const tempLink = "/api/user/explore/jobs/" + props.activeId;
-
   if (!props.activeId) return <></>;
 
+  const { role, userId } = useContext(AuthContext);
+
+  const tempLink = "/api/user/explore/jobs/" + props.activeId;
   const { data: job, isLoading } = useSWR(tempLink, fetcher);
+  const [activeId, setActiveId] = useState("");
+  const router = useRouter();
+  useEffect(() => {
+    if (activeId !== "") {
+      router.push(`/job/${activeId}`);
+    }
+  }, [activeId]);
+
+  const handleRecent = async (e) => {
+    e.preventDefault();
+
+    const recentData = {
+      id: props.activeId,
+    };
+
+    try {
+      const res = await axios.post(
+        `/api/user/activities/recent?userId=${userId}`,
+        recentData
+      );
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setActiveId(props.activeId);
+  };
 
   console.log(job);
 
@@ -65,6 +97,15 @@ const JobDetails = (props) => {
             Job Description -{" "}
           </h2>
           {job?.description}
+        </div>
+        <div className="flex justify-center w-auto my-4 rounded">
+          <button
+            type="submit"
+            onClick={handleRecent}
+            className="w-auto bg-gray-800 rounded text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
+          >
+            View
+          </button>
         </div>
         {/* <div className="flex items-center">
         <MdOutlineKeyboardArrowDown />

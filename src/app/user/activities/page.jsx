@@ -3,6 +3,7 @@
 import { useState } from "react";
 import JobsForYou from "@/components/jobs/jobsForYou";
 import JobSearch from "@/components/jobs/jobSearch";
+import RecentSearches from "@/components/activities/RecentSearches";
 
 const activities = () => {
   const [type, setType] = useState("recent-searches"); // Recent searches, Saved, Activities
@@ -31,8 +32,8 @@ const activities = () => {
         </button>
       </div>
 
-      {type === "recent searches" && (
-        <div className="h-[700px]">{<JobsForYou />}</div>
+      {type === "recent-searches" && (
+        <div className="h-[700px]">{<RecentSearches />}</div>
       )}
 
       {type === "jobs-search" && <div className="">{<JobSearch />}</div>}

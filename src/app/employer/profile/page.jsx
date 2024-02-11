@@ -97,7 +97,7 @@ const EmployerProfile = () => {
             style={{ maxWidth: "200px" }}
           />
 
-          {/* Upload photo */}                                   
+          {/* Upload photo */}
           {/* <div className="mb-6 w-full">
             <input
               type="file"
@@ -112,10 +112,7 @@ const EmployerProfile = () => {
           </div> */}
 
           <UploadFile imageUrl={picture} setImageURL={setPicture} />
-          <button className=" bg-black text-sm text-white rounded py-2 px-10 mr-4 shadow-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-gray">
-            {" "}
-            Upload File{" "}
-          </button>
+
           {/* Profile info */}
           <div className="flex flex-col w-full space-y-4">
             <div className="flex flex-col w-full items-center mb-12">
