@@ -20,7 +20,7 @@
 //             {
 //                 "text": "Newton",
 //                 "correct": false
-//             },   
+//             }   
 //         ]
 //       },
 //       {
@@ -41,12 +41,11 @@
 //             {
 //                 "text": "Newton",
 //                 "correct": false
-//             },   
+//             }   
 //         ]
-//       },
+//       }
 //     ]
 // }
-
 
 // Path: api/employer/mcq
 // you need to send employer id in the url and company data in the body
@@ -54,22 +53,23 @@
 
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
+import { Questions } from "../../../../../lib/models";
 
 export const POST= async (request) => {
     try {
         connetToDb();
         console.log("making question route");
         const data = await request.json();
-        if(id === null){
-            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        const alreadyQuestion=await Questions.find({job_id:data.job_id});
+        if(alreadyQuestion.length>0){
+            return NextResponse.json({message:"Question already exist for this job"}, { status: 200 });
         }
-        
-        const employer = await User.findById(id);
+        const question = await Questions.create(data);
 
-        return NextResponse.json({message:"employer company added"}, { status: 200 });
+        return NextResponse.json(question, { status: 200 });
     } catch (error) {
         console.log(error);
-        return NextResponse.json({message:"Same company name"},{status:500});   
+        return NextResponse.json(error,{status:500});   
     }
 
 }
