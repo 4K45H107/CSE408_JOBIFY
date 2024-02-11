@@ -5,6 +5,7 @@ import { fetcher } from "@/utils/conn";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 import { CiGlass } from "react-icons/ci";
+import CardSearch from "./cardSearch";
 
 const JobSearch = () => {
   const [type, setType] = useState("");
@@ -52,7 +53,7 @@ const JobSearch = () => {
         <div className="w-3/4 h-[400px] overflow-auto px-4">
           <label className="text-red-500">TRENDING</label>
           {jobList?.map((job) => (
-            <Card
+            <CardSearch
               key={job._id}
               company={job.company}
               title={job.title}
