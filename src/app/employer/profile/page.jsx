@@ -45,12 +45,13 @@ const EmployerProfile = () => {
     const data = {
       photo: picture,
     };
-
+    console.log(data);
     try {
       const res = await axios.patch(
         `/api/employer/profile/picture?userId=${userId}`,
         data
       );
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +97,7 @@ const EmployerProfile = () => {
             style={{ maxWidth: "200px" }}
           />
 
-          {/* Upload photo */}
+          {/* Upload photo */}                                   
           {/* <div className="mb-6 w-full">
             <input
               type="file"
@@ -220,7 +221,7 @@ const EmployerProfile = () => {
                   onClick={handleSave}
                   className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
                 >
-                  Sign Up
+                  Save
                 </button>
               </div>
             </form>

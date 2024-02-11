@@ -23,7 +23,7 @@ const HeaderEmployer = () => {
           <Link href="/user/profile" className="">
             <img
               src={profile?.photo || "/profile_logo.jpg"}
-              className="h-12 rounded-full"
+              className="h-12 w-12 rounded-full"
             />
           </Link>
         </div>

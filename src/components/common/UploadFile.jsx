@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   getStorage,
   ref,
@@ -13,10 +13,12 @@ import toast from "react-hot-toast";
 const UploadFile = ({ imageUrl, setImageURL }) => {
   const [image, setImage] = useState();
 
-  useEffect(() => {
+  // const inputRef = useRef();
+
+  useEffect( () => {
     const storage = getStorage(app);
 
-    const upload = () => {
+    const upload =  () => {
       const name = new Date().getTime() + image.name;
       const storageRef = ref(storage, name);
 
@@ -28,6 +30,7 @@ const UploadFile = ({ imageUrl, setImageURL }) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           // setProgress(progress);
+          console.log(progress);
 
           switch (snapshot.state) {
             case "paused":
@@ -54,6 +57,7 @@ const UploadFile = ({ imageUrl, setImageURL }) => {
             //     })
             //     .catch((err) => console.log(err));
             // }
+
             setImageURL(downloadURL);
             console.log(downloadURL);
           });
@@ -61,15 +65,29 @@ const UploadFile = ({ imageUrl, setImageURL }) => {
       );
     };
 
+    console.log(image);
+
     image && upload();
   }, [image]);
+
+  // useEffect(() => {
+  //   if (inputRef) {
+  //     inputRef.current.value = ""
+  //     inputRef.current.type = "text"
+  //     inputRef.current.type = "file"
+  //   }
+  // }, [])
 
   return (
     <div className=" mb-6 w-full">
       <input
+        // ref={inputRef}
         type="file"
         id="photo"
-        onChange={(e) => setImage(e.target.files[0])}
+        onChange={(e) => {
+          console.log(e.target.files);
+          setImage(e.target.files[0]);
+        }}
         className="text-sm text-stone-500
                           file:mr-5 file:py-1 file:px-3 file:border-[0.5px]
                           file:text-xs file:font-medium
