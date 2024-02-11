@@ -50,3 +50,20 @@ export const POST = async(request) => {
         return NextResponse.error(error, {status: 500});
     }
 }
+
+export const GET = async(request) => {
+    try{
+        connetToDb();
+        const url = new URL(request.url);
+        const id = url.searchParams.get("userId");
+        // console.log()
+        if(id == null){
+            return NextResponse.json({message: "user not found"},{status: 404});
+        }
+        const recentSearches = await Recent.findOne({"user_id": id});
+        return NextResponse.json(recentSearches,{status: 200});
+    }catch(error){
+        console.log("Error", error);
+        return NextResponse.error(error, {status: 500});
+    }
+}

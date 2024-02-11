@@ -47,7 +47,8 @@ export const POST = async (request) => {
     }
 
     if (type) {
-      jobs = jobs.filter((job) => job.title === type);
+      // jobs = jobs.filter((job) => job.title === type);
+      jobs = jobs.filter((job)=> { return job.title.toLowerCase().includes(type.toLowerCase())});
     }
 
     if (company) {
