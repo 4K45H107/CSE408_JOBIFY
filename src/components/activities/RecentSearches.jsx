@@ -14,17 +14,25 @@ const RecentSearches = () => {
     fetcher
   );
 
-  console.log(jobs?.job_ids);
+  useEffect(() => {}, [jobs]);
+
+  console.log(jobs);
 
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
         <div className="flex-1 h-[500px] overflow-auto px-4">
+          <label className="text-red-500">Recent Searches</label>
           <div className="flex flex-col">
-            {jobs?.job_ids?.map((ids) => (
-              <>
-                {ids} <br />{" "}
-              </>
+            {jobs?.map((job) => (
+              <Card
+                key={job._id}
+                company={job.company}
+                title={job.title}
+                salaryMin={job.salary.minimum}
+                salaryMax={job.salary.maximum}
+                id={job._id}
+              />
             ))}
           </div>
         </div>

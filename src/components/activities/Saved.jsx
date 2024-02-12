@@ -21,7 +21,7 @@ const Saved = () => {
     fetcher
   );
 
-  const [jobList, setJobList] = useState(jobs);
+  const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
     setJobList(jobs);

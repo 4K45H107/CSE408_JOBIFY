@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
-import { Companies } from "../../../../../lib/models";
+import { Companies, Employers } from "../../../../../lib/models";
 
 export const GET = async (request) => {
     try {
@@ -8,7 +8,10 @@ export const GET = async (request) => {
         connetToDb();
         // Extract the ID from the request parameters
         const url = new URL(request.url);
-        const name = url.searchParams.get("company");
+        const id = url.searchParams.get("userId");
+        
+        const employer =await Employers.findById(id);
+        const name = employer.company.name;
         let company;
         if(name===null){ 
             console.log("No company name............");  
@@ -37,8 +40,11 @@ export const PATCH = async (request) => {
         connetToDb();
         // Extract the ID from the request parameters
         const url = new URL(request.url);
-        const name = url.searchParams.get("company");
+        const id = url.searchParams.get("userId");
         const data = await request.json();
+        const employer =await Employers.findById(id);
+        const name = employer.company.name;
+        
         let company;
         if(name===null){ 
             console.log("No company name............");  

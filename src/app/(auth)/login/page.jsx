@@ -57,7 +57,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (type === "user") {
-        router.push("/user/activities");
+        router.push("/user/explore");
       } else {
         router.push("/employer/home");
       }
