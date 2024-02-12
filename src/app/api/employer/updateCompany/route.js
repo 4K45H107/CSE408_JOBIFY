@@ -18,6 +18,7 @@ export const PATCH = async (request) => {
       { "company.name": companyData.name },
       { new: true }
     );
+           
     console.log(employer);
     return NextResponse.json(employer, { status: 200 });
   } catch (error) {
