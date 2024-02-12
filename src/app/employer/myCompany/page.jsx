@@ -28,6 +28,7 @@ const myCompany = () => {
   const [designation, setDesignation] = useState("");
   const [branch, setBranch] = useState("");
   const [description, setDescription] = useState("");
+  const [numOfEmployerInJOBIFY, setnumOfEmployerInJOBIFY] = useState("");
 
   useEffect(() => {
     if (profile) {
@@ -161,6 +162,10 @@ const myCompany = () => {
                 <div>
                   <p className="text-2xl font-semibold">Description</p>
                   <p>{profile?.description}</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Employers in JOBIFY</p>
+                  <p>{profile?.employerNumberInJobify}</p>
                 </div>
               </div>
             </div>

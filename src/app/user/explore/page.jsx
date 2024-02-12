@@ -3,6 +3,7 @@
 import { useState } from "react";
 import JobsForYou from "@/components/jobs/jobsForYou";
 import JobSearch from "@/components/jobs/jobSearch";
+import CompanySearch from "@/components/company/companySearch";
 
 const explore = () => {
   const [type, setType] = useState("jobs-for-you"); // jobs-for-you, jobs-search, companies
@@ -49,7 +50,13 @@ const explore = () => {
 
       {type === "jobs-search" && <div className="">{<JobSearch />}</div>}
 
-      {type === "companies" && <div className="">co</div>}
+      {type === "companies" && (
+        <div className="">
+          <div className="h-full flex justify-center mt-16">
+            <CompanySearch />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

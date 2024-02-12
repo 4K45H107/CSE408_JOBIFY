@@ -46,14 +46,6 @@ const registerEmployer = () => {
     const role = "employer";
     await signup(role, employer);
     toast.success("Successfully created new account");
-    // try {
-    //   const res = await axios.post("/api/login/user", user);
-    //   const data = res.data;
-    //   //console.log(data);
-
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   useEffect(() => {

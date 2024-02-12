@@ -1,7 +1,11 @@
-const explore = () => {
-    return (
-        <div>explore</div>
-    )
-}
+import CompanySearch from "@/components/company/companySearch";
 
-export default explore
+const explore = () => {
+  return (
+    <div className="h-full flex justify-center mt-16">
+      <CompanySearch />
+    </div>
+  );
+};
+
+export default explore;

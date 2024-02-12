@@ -43,6 +43,18 @@ const SelectCompany = () => {
       console.log(error);
     }
     setChange("done");
+
+    const dummy = {
+      name: "",
+    };
+
+    try {
+      const res = await axios.patch("/api/updateEmployerNumber", dummy);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

@@ -22,7 +22,7 @@ const company = (props) => {
   // console.log(jobID);
 
   const { data: company, isLoading } = useSWR(
-    `/api/employer/getCompany?company=${companyID}`,
+    `/api/employer/getEmployerCompany?company=${companyID}`,
     fetcher
   );
   if (!company) return <div>Loading...</div>;
