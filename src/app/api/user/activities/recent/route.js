@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../../lib/utils";
-import { Recent } from "../../../../../../lib/models";
+import { Jobs, Recent } from "../../../../../../lib/models";
 
 export const POST = async(request) => {
     try{
         connetToDb();
         const url = new URL(request.url);
         const id = url.searchParams.get("userId");
-        console.log(id);
-        console.log("ok so far");
 
         if(id === null){
             console.log("here");
@@ -61,7 +59,11 @@ export const GET = async(request) => {
             return NextResponse.json({message: "user not found"},{status: 404});
         }
         const recentSearches = await Recent.findOne({"user_id": id});
-        return NextResponse.json(recentSearches,{status: 200});
+        
+
+        const jobs =await Jobs.find({_id: {$in: recentSearches.job_ids}});
+
+        return NextResponse.json(jobs,{status: 200});
     }catch(error){
         console.log("Error", error);
         return NextResponse.error(error, {status: 500});

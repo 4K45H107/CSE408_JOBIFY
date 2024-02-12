@@ -6,6 +6,9 @@ export const GET= async (request, {params}) => {
     try {
         connetToDb();
         console.log("inside user jobs problem ase route");
+        if(params.job_id === null){
+            return NextResponse.json({message: "no Id Found"}, {status: 404});
+        }
         console.log(params.job_id);
         const jobData = await Jobs.findById({_id:params.job_id}); 
         //console.log(jobData);
