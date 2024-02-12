@@ -20,7 +20,7 @@
 //             {
 //                 "text": "Newton",
 //                 "correct": false
-//             }   
+//             }
 //         ]
 //       },
 //       {
@@ -41,7 +41,7 @@
 //             {
 //                 "text": "Newton",
 //                 "correct": false
-//             }   
+//             }
 //         ]
 //       }
 //     ]
@@ -55,21 +55,24 @@ import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
 import { Questions } from "../../../../../lib/models";
 
-export const POST= async (request) => {
-    try {
-        connetToDb();
-        console.log("making question route");
-        const data = await request.json();
-        const alreadyQuestion=await Questions.find({job_id:data.job_id});
-        if(alreadyQuestion.length>0){
-            return NextResponse.json({message:"Question already exist for this job"}, { status: 200 });
-        }
-        const question = await Questions.create(data);
-
-        return NextResponse.json(question, { status: 200 });
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json(error,{status:500});   
+export const POST = async (request) => {
+  try {
+    connetToDb();
+    console.log("making question route");
+    const data = await request.json();
+    const alreadyQuestion = await Questions.find({ job_id: data.job_id });
+    if (alreadyQuestion.length > 0) {
+      return NextResponse.json(
+        { message: "Question already exist for this job" },
+        { status: 200 }
+      );
     }
+    const question = await Questions.create(data);
+    console.log(question);
 
-}
+    return NextResponse.json(question, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, { status: 500 });
+  }
+};

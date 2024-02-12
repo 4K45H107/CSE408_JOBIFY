@@ -55,7 +55,11 @@ const addJobs = () => {
       const data = res.data;
       console.log(data);
       toast.success("Job Created Successfully");
-      router.push("/employer/home");
+      if (!skillTest) {
+        router.push("/employer/home");
+      } else {
+        router.push(`/employer/addJobs/addMCQ?jobId=${data._id}`);
+      }
     } catch (error) {
       console.log(error);
     }
