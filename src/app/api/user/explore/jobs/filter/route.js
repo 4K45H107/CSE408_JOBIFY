@@ -36,7 +36,7 @@ export const POST = async (request) => {
     let jobs = await Jobs.find({}).sort({ "salary.maximum": -1 });;
     
     if(location) {
-      jobs = jobs.filter((job) => job.location.city === location)
+      jobs = jobs.filter((job) => { return job.location.city.toLowerCase().includes(location.toLowerCase())})
     }
 
     if (salary) {
@@ -52,7 +52,7 @@ export const POST = async (request) => {
     }
 
     if (company) {
-      jobs = jobs.filter((job) => job.company === company)
+      jobs = jobs.filter((job) => { return job.company.toLowerCase().includes(company.toLowerCase())})
     }
    
     
