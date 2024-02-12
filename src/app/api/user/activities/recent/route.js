@@ -60,12 +60,11 @@ export const GET = async(request) => {
         }
         const recentSearches = await Recent.findOne({"user_id": id});
         
-        let jobs = [];
-        for (let i = 0; i< recentSearches.job_ids.length; i++){
-            const job = await Jobs.find({"_id":recentSearches.job_ids[i]});
-            jobs.push(job);
-        }
-        // const job =await Jobs.find({_id: {$in: recentSearches.job_ids}});
+        // for (let i = 0; i< recentSearches.job_ids.length; i++){
+        //     const job = await Jobs.find({"_id":recentSearches.job_ids[i]});
+        //     jobs.push(job);
+        // }
+        const jobs =await Jobs.find({_id: {$in: recentSearches.job_ids}});
         console.log(jobs);
         return NextResponse.json(jobs,{status: 200});
     }catch(error){

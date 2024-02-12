@@ -63,8 +63,8 @@ export const GET = async (request) => {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
     }
     let jobIds;
-356
-
+    const bookmarks=await Bookmarks.find({user_id:id});
+    jobIds=bookmarks.map((bookmark)=>bookmark.job_id);
     console.log(jobIds);
 
     const job = await Jobs.find({ _id: { $in: jobIds } });

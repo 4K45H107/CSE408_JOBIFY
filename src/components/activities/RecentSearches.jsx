@@ -26,12 +26,12 @@ const RecentSearches = () => {
           <div className="flex flex-col">
             {jobs?.map((job) => (
               <Card
-                key={job._id}
-                company={job.company}
-                title={job.title}
-                salaryMin={job.salary.minimum}
-                salaryMax={job.salary.maximum}
-                id={job._id}
+                key={job?._id}
+                company={job?.company}
+                title={job?.title}
+                salaryMin={job?.salary?.minimum}
+                salaryMax={job?.salary?.maximum}
+                id={job?._id}
               />
             ))}
           </div>
