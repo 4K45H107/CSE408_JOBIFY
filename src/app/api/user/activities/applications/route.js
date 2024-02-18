@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import { Applications, Jobs } from "../../../../../../lib/models";
 import { connetToDb } from "../../../../../../lib/utils";
 
-export const PATCH = async (request) => {
+export const POST = async (request) => {
     try{
         connetToDb();
         const url = new URL(request.url);
         const id = url.searchParams.get("userId");
         // const id = "65b538ecd0e12007bfa7fe73";
-        console.log("id",id);
+        //console.log("id",id);
 
         if(id == null){
             return NextResponse.json({message: "User not found"}, {status: 404});

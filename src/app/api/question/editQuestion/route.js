@@ -1,47 +1,24 @@
 // {
-//     "questions": [{
-//         "question": "What is the unit o power?",
-//         "options": [
-//             {
-//                 "text": "Watt",
-//                 "correct": true
-//             },
-//             {
-//                 "text": "Joule",
-//                 "correct": false
-//             },
-//             {
-//                 "text": "Ruble",
-//                 "correct": false
-//             },
-//             {
-//                 "text": "Newton",
-//                 "correct": false
-//             }
-//         ]
-//       },
-//       {
-//         "question": "What is the unit o Energy?",
-//         "options": [
-//             {
-//                 "text": "Watt",
-//                 "correct": false
-//             },
-//             {
-//                 "text": "Joule",
-//                 "correct": true
-//             },
-//             {
-//                 "text": "Ruble",
-//                 "correct": false
-//             },
-//             {
-//                 "text": "Newton",
-//                 "correct": false
-//             }
-//         ]
-//       }
-//     ]
+//  "qId":"65c878fb5cecc21eae57b6d7",   
+// "question": "What is the unit o Energy?",
+// "options": [
+//     {
+//         "text": "Watt",
+//         "correct": false
+//     },
+//     {
+//         "text": "Joule",
+//         "correct": true
+//     },
+//     {
+//         "text": "Ruble",
+//         "correct": false
+//     },
+//     {
+//         "text": "Newton",
+//         "correct": false
+//     }
+// ]
 // }
 
 // Path: api/question/addQuestion?questionId=65c878fb5cecc21eae57b6d6
@@ -59,7 +36,16 @@ export const PATCH = async (request) => {
     const id = url.searchParams.get("questionId");
     console.log("edit question route");
     const data = await request.json();
-    const question = await Questions.findByIdAndUpdate(id,{ $addToSet: { questions: data.questions } } , { new: true });
+
+    
+    const question = await Questions.findById(id);
+    question.questions.map((q) => {
+      if(q._id == data.qId){
+        q.question = data.question;
+        q.options = data.options;
+      }
+    });
+    await question.save();
     
 
     return NextResponse.json(question, { status: 200 });
