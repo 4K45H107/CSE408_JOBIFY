@@ -4,9 +4,9 @@ import { connetToDb } from "../../../../../../lib/utils";
 
 export const POST= async (request) => {
     try {
-        const url = new URL(request.url);
         connetToDb();
         console.log("inside add jobs route");
+        const url = new URL(request.url);
         const id = url.searchParams.get("userId");
         if(id === null){
             return NextResponse.json({ message: "User not found" }, { status: 404 });
