@@ -7,7 +7,145 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const register = () => {
+  const countries = [
+    "Bangladesh",
+    "India",
+    "Pakistan",
+    "United States",
+    "United Kingdom",
+    "Canada",
+    "Australia",
+    "Germany",
+    "France",
+    "Japan",
+  ];
+
+  const cities = {
+    Bangladesh: [
+      "Dhaka",
+      "Chittagong",
+      "Khulna",
+      "Rajshahi",
+      "Sylhet",
+      "Barisal",
+      "Rangpur",
+      "Comilla",
+      "Narayanganj",
+      "Gazipur",
+    ],
+    India: [
+      "Mumbai",
+      "Delhi",
+      "Bangalore",
+      "Kolkata",
+      "Chennai",
+      "Hyderabad",
+      "Pune",
+      "Ahmedabad",
+      "Surat",
+      "Jaipur",
+    ],
+    Pakistan: [
+      "Karachi",
+      "Lahore",
+      "Faisalabad",
+      "Rawalpindi",
+      "Multan",
+      "Gujranwala",
+      "Islamabad",
+      "Quetta",
+      "Peshawar",
+      "Sialkot",
+    ],
+    "United States": [
+      "New York",
+      "Los Angeles",
+      "Chicago",
+      "Houston",
+      "Phoenix",
+      "Philadelphia",
+      "San Antonio",
+      "San Diego",
+      "Dallas",
+      "San Jose",
+    ],
+    "United Kingdom": [
+      "London",
+      "Birmingham",
+      "Manchester",
+      "Glasgow",
+      "Liverpool",
+      "Leeds",
+      "Sheffield",
+      "Edinburgh",
+      "Bristol",
+      "Cardiff",
+    ],
+    Canada: [
+      "Toronto",
+      "Montreal",
+      "Vancouver",
+      "Calgary",
+      "Edmonton",
+      "Ottawa",
+      "Winnipeg",
+      "Quebec City",
+      "Hamilton",
+      "London",
+    ],
+    Australia: [
+      "Sydney",
+      "Melbourne",
+      "Brisbane",
+      "Perth",
+      "Adelaide",
+      "Gold Coast",
+      "Newcastle",
+      "Canberra",
+      "Sunshine Coast",
+      "Wollongong",
+    ],
+    Germany: [
+      "Berlin",
+      "Hamburg",
+      "Munich",
+      "Cologne",
+      "Frankfurt",
+      "Stuttgart",
+      "Düsseldorf",
+      "Dortmund",
+      "Essen",
+      "Leipzig",
+    ],
+    France: [
+      "Paris",
+      "Marseille",
+      "Lyon",
+      "Toulouse",
+      "Nice",
+      "Nantes",
+      "Strasbourg",
+      "Montpellier",
+      "Bordeaux",
+      "Lille",
+    ],
+    Japan: [
+      "Tokyo",
+      "Yokohama",
+      "Osaka",
+      "Nagoya",
+      "Sapporo",
+      "Fukuoka",
+      "Kobe",
+      "Kyoto",
+      "Kawasaki",
+      "Saitama",
+    ],
+  };
+
   const [fullName, setFullName] = useState("");
+  const [locationCountry, setLocationCountry] = useState("");
+  const [preferenceCountry, setPreferenceCountry] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -126,15 +264,35 @@ const register = () => {
           </div>
           <div className="flex flex-col">
             <label>Profile Information:</label>
-            <input
+            <select
               className="border rounded py-3 px-2 mb-3"
-              type="text"
-              placeholder="Location"
+              placeholder="Country"
+              value={locationCountry}
+              onChange={(e) => setLocationCountry(e.target.value)}
+            >
+              <option value="">Country</option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+            <select
+              className="border rounded py-3 px-2 mb-3"
+              placeholder="City"
               value={profile.location}
               onChange={(e) =>
                 setProfile({ ...profile, location: e.target.value })
               }
-            ></input>
+            >
+              <option value="">City</option>
+              {cities[locationCountry] &&
+                cities[locationCountry].map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+            </select>
             <input
               className="border rounded py-3 px-2 mb-3"
               type="text"
@@ -154,10 +312,22 @@ const register = () => {
               }
             ></input>
             <label>Job Preference:</label>
-            <input
+            <select
               className="border rounded py-3 px-2 mb-3"
-              type="text"
-              placeholder="Location"
+              placeholder="Country"
+              value={preferenceCountry}
+              onChange={(e) => setPreferenceCountry(e.target.value)}
+            >
+              <option value="">Country</option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+            <select
+              className="border rounded py-3 px-2 mb-3"
+              placeholder="City"
               value={job_preferences.locations}
               onChange={(e) =>
                 setjob_preferences({
@@ -165,7 +335,15 @@ const register = () => {
                   locations: e.target.value,
                 })
               }
-            ></input>
+            >
+              <option value="">City</option>
+              {cities[preferenceCountry] &&
+                cities[preferenceCountry].map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+            </select>
             <input
               className="border rounded py-3 px-2 mb-3"
               type="text"
