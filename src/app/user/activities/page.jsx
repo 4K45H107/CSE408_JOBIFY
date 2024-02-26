@@ -14,20 +14,26 @@ const activities = () => {
     <div className="w-full">
       <div className="flex w-full justify-center mt-14">
         <button
-          className="bg-gray-200 w-40 py-2 border-r border-b border-gray-500"
+          className={` ${
+            type === "recent-searches" && "bg-green-300 border-r border-b"
+          } bg-gray-200 w-40 py-2 border-b border-r border-gray-500 `}
           onClick={() => setType("recent-searches")}
         >
           Recent Searches
         </button>
 
         <button
-          className="bg-gray-200 w-32 py-2 border-r border-b border-gray-500"
+          className={` ${
+            type === "saved" && "bg-green-300 border-r border-b"
+          } bg-gray-200 w-32 py-2 border-b border-r border-gray-500 `}
           onClick={() => setType("saved")}
         >
           Saved
         </button>
         <button
-          className="bg-gray-200 w-32 py-2 border-b border-gray-500"
+          className={` ${
+            type === "applications" && "bg-green-300 border-b"
+          } bg-gray-200 w-32 py-2 border-b border-gray-500 `}
           onClick={() => setType("applications")}
         >
           Application

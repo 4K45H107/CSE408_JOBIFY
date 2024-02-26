@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
@@ -10,7 +10,10 @@ const Card = (props) => {
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
 
+  const [bookmark, setBookmark] = useState(false);
+
   const handleSaved = async (e) => {
+    setBookmark((prev) => !prev);
     e.preventDefault();
 
     const savedData = {
@@ -61,7 +64,7 @@ const Card = (props) => {
       </div>
 
       <div className="absolute top-2 right-4">
-        <CiBookmark onClick={handleSaved} />
+        <CiBookmark className={`${bookmark && ""}`} onClick={handleSaved} />
       </div>
     </div>
   );

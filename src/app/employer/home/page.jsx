@@ -11,13 +11,17 @@ const Home = () => {
     <div className="w-full">
       <div className="flex w-full justify-center mt-4">
         <button
-          className="bg-gray-200 w-60 py-2 border-r border-b border-gray-500"
+          className={` ${
+            type === "my-company-jobs" && "bg-green-300 border-r border-b"
+          } bg-gray-200 w-40 py-2 border-b border-r border-gray-500 `}
           onClick={() => setType("my-company-jobs")}
         >
           My Company Jobs
         </button>
         <button
-          className="bg-gray-200 w-60 py-2 border-b border-gray-500"
+          className={` ${
+            type === "my-offerings" && "bg-green-300 border-b"
+          } bg-gray-200 w-40 py-2 border-b border-gray-500 `}
           onClick={() => setType("my-offerings")}
         >
           My Offerings
