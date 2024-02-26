@@ -15,7 +15,7 @@ export const POST = async (request) => {
             const application = await Applications.create({'user_id': data.user_id, 'job_id': data.id, 'status': status});
             const job = await Jobs.findById(data.job_id);
             if(job.skill_test){
-                const notification = await Notification.create({'user_id': data.user_id, 'message': `You have a new skill test to take ${job.title}` , 'job_id': data.job_id});
+                const notification = await Notification.create({'user_id': data.user_id, 'message': `You have a new skill test to take for the job ${job.title}` , 'job_id': data.job_id, 'status': "unread"});
             }
             return NextResponse.json(application, {status: 200});
             
