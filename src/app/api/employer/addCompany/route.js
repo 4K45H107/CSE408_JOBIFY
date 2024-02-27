@@ -30,6 +30,8 @@ export const POST= async (request) => {
         let company;
         try {
             company = await Companies.create(companyData);
+            company.admin= id;
+            await company.save();
         }catch (error){
             console.log(error);
             return NextResponse.json({message:"Company already exists"},{status:500});
