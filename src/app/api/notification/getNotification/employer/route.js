@@ -11,7 +11,7 @@ export const GET = async (request) => {
         if(id == null){
             return NextResponse.json({message: "User not found"}, {status: 404});
         }
-        const notifications = await Notification.find({'user_id': id});        
+        const notifications = await Notification.find({'employer_id': id});        
         return NextResponse.json(notifications, {status: 200});
     }catch(error) {
         console.log('Error', error);

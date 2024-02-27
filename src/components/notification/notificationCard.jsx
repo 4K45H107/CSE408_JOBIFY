@@ -5,7 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
-const Card = (props) => {
+const NotificationCard = (props) => {
   console.log(props.id);
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
@@ -70,4 +70,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default NotificationCard;

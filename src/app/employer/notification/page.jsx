@@ -24,7 +24,7 @@ const Notification = () => {
     return (
       <div className="flex gap-x-4 mt-16">
         <div className="w-3/4 h-[400px] overflow-auto px-4">
-          <label className="text-red-500">Bookmarks</label>
+          <label className="text-red-500">Notifications</label>
           {jobList?.map((job) => (
             <div>abc</div>
             // <
