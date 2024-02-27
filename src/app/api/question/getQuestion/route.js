@@ -52,16 +52,18 @@ import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
 import { Questions } from "../../../../../lib/models";
 
-
 export const GET = async (request) => {
   try {
     connetToDb();
     const url = new URL(request.url);
     const id = url.searchParams.get("jobId");
+
+    console.log(id);
     console.log("get question route");
     //const data = await request.json();
-    const question = await Questions.findOne({'job_id':id});
-    
+    const question = await Questions.findOne({ job_id: id });
+
+    console.log(question);
 
     return NextResponse.json(question, { status: 200 });
   } catch (error) {

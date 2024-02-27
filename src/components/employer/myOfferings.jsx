@@ -6,6 +6,7 @@ import { fetcher } from "@/utils/conn";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import CardEmployer from "../jobs/cardEmployer";
+import job from "@/app/job/[jobID]/page";
 
 const MyOfferings = () => {
   const { role, userId } = useContext(AuthContext);
@@ -34,6 +35,7 @@ const MyOfferings = () => {
                 salaryMin={job.salary.minimum}
                 salaryMax={job.salary.maximum}
                 id={job._id}
+                skill_test={job.skill_test}
                 setActiveId={setActiveId}
               />
             ))}

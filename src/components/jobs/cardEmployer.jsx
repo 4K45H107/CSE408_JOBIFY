@@ -2,9 +2,17 @@ import React from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
+import job from "@/app/job/[jobID]/page";
+import { useRouter } from "next/navigation";
 
 const CardEmployer = (props) => {
   console.log(props.id);
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/employer/addJobs/editMCQ?jobId=${props.id}`);
+  };
+
   return (
     <div
       className="relative px-2 py-3 border-b-2 cursor-pointer"
@@ -33,6 +41,17 @@ const CardEmployer = (props) => {
           <span className="text-sm text-lime-700">Easy Appily</span>
         </div>
         <p className="text-xs">3d</p>
+      </div>
+      <div className="bg-black rounded w-20">
+        {props.skill_test && (
+          <button
+            type="submit"
+            onClick={handleClick}
+            className="text-white w-20 px-4 py-3 active:bg-slate-600 mx-auto"
+          >
+            View
+          </button>
+        )}
       </div>
 
       <div className="absolute top-2 right-4">
