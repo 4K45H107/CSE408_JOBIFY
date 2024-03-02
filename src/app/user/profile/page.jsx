@@ -290,6 +290,8 @@ const Profile = () => {
                       type="date"
                       id="birthdate"
                       name="birthdate"
+                      placeholder="Phone Number"
+                      value={birthdate}
                       onChange={(e) => setBirthDate(e.target.value)}
                     />
 

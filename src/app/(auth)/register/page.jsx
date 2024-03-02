@@ -150,6 +150,7 @@ const register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [birthdate, setBirthDate] = useState("");
   const [profile, setProfile] = useState({
     location: "",
     skills: "",
@@ -179,7 +180,8 @@ const register = () => {
       !profile.education ||
       !job_preferences.locations ||
       !job_preferences.salary_range ||
-      !job_preferences.job_type
+      !job_preferences.job_type ||
+      !birthdate
     ) {
       alert("Please fill in all required fields.");
       return;
@@ -193,6 +195,7 @@ const register = () => {
       phone: phoneNumber,
       profile,
       job_preferences,
+      birthdate,
     };
 
     const role = "user";
@@ -261,7 +264,15 @@ const register = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             ></input>
+            <label>Birth Date:</label>
+            <input
+              type="date"
+              id="birthdate"
+              name="birthdate"
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
           </div>
+
           <div className="flex flex-col">
             <label>Profile Information:</label>
             <select
