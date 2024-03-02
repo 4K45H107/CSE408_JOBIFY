@@ -44,6 +44,15 @@ const NotificationCard = (props) => {
     } catch (error) {
       console.log(error);
     }
+
+    // try {
+    //   const res = await axios.patch("/api/updateEmployerNumber", dummy);
+    //   const data = res.data;
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
   };
 
   return (
@@ -52,24 +61,28 @@ const NotificationCard = (props) => {
         <div className="">
           <h3 className="text-lg font-semibold">Company Notification</h3>
           <div className="flex items-center">{props.message}</div>
-          <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
-            <button
-              type="submit"
-              //onClick={handleRecent}
-              className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
-            >
-              Reject
-            </button>
-          </div>
-          <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
-            <button
-              type="submit"
-              onClick={handleApproval}
-              className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
-            >
-              Approve
-            </button>
-          </div>
+          {change !== "done" && (
+            <div className="">
+              <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+                <button
+                  type="submit"
+                  //onClick={handleRecent}
+                  className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+                >
+                  Reject
+                </button>
+              </div>
+              <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+                <button
+                  type="submit"
+                  onClick={handleApproval}
+                  className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+                >
+                  Approve
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
