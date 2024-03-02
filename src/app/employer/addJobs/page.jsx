@@ -147,6 +147,8 @@ const addJobs = () => {
   const [description, setDescription] = useState("");
   const [salarymin, setSalaryMin] = useState("");
   const [salarymax, setSalaryMax] = useState("");
+  const [agemin, setAgeMin] = useState(null);
+  const [agemax, setAgeMax] = useState(null);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [skillTest, setSkillTest] = useState(false);
@@ -164,6 +166,8 @@ const addJobs = () => {
       !description ||
       !salarymin ||
       !salarymax ||
+      !agemin ||
+      !agemax ||
       !country ||
       !city
     ) {
@@ -177,6 +181,10 @@ const addJobs = () => {
       salary: {
         minimum: salarymin,
         maximum: salarymax,
+      },
+      age: {
+        minimum: agemin,
+        maximum: agemax,
       },
       location: { country, city },
       skillTest,
@@ -240,6 +248,26 @@ const addJobs = () => {
             type="number"
             value={salarymin}
             onChange={(e) => setSalaryMin(e.target.value)}
+            required
+          />
+        </div>
+        <br />
+        <p className="pb-4">Age Information:</p>
+        <div>
+          <label className="px-4">Max:</label>
+          <input
+            className="border rounded py-3 px-2 mb-3"
+            type="number"
+            value={agemax}
+            onChange={(e) => setAgeMax(e.target.value)}
+            required
+          />
+          <label className="px-4">Min:</label>
+          <input
+            className="border rounded py-3 px-2 mb-3"
+            type="number"
+            value={agemin}
+            onChange={(e) => setAgeMin(e.target.value)}
             required
           />
         </div>

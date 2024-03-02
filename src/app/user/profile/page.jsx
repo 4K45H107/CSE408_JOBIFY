@@ -22,6 +22,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [birthdate, setBirthDate] = useState(new Date());
   const [profileInfo, setProfileInfo] = useState({
     location: "",
     skills: "",
@@ -40,6 +41,7 @@ const Profile = () => {
       setEmail(profile.email);
       setPassword(profile.password);
       setPhoneNumber(profile.phone);
+      setBirthDate(profile.birthdate);
 
       let result = "";
       console.log(profile.job_preferences?.job_type);
@@ -102,6 +104,7 @@ const Profile = () => {
         ...job_preferences,
         job_type: job_preferences.job_type?.split(","),
       },
+      birthdate,
       //job_preferences,
     };
 
@@ -196,6 +199,10 @@ const Profile = () => {
                   <p className="text-2xl font-semibold">Location</p>
                   <p>{profile?.profile.location}</p>
                 </div>
+                <div>
+                  <p className="text-2xl font-semibold">BirthDate</p>
+                  <p>{profile?.birthdate}</p>
+                </div>
 
                 <div>
                   <p className="text-2xl font-semibold">Education</p>
@@ -278,6 +285,14 @@ const Profile = () => {
                     ></input>
                   </div>
                   <div className="flex flex-col">
+                    <label>Birth Date:</label>
+                    <input
+                      type="date"
+                      id="birthdate"
+                      name="birthdate"
+                      onChange={(e) => setBirthDate(e.target.value)}
+                    />
+
                     <label>Profile Information:</label>
                     <input
                       className="border rounded py-3 px-2 mb-3"

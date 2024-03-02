@@ -111,6 +111,15 @@ const JobDetails = (props) => {
             <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
             {job?.salary?.maximum}
           </p>
+          <p className="font-bold text-red-600 pr-2 text-xl">Age: </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">Minimum: </p>{" "}
+            {job?.age?.minimum}
+          </p>
+          <p className="flex text-lg font-bold">
+            <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
+            {job?.age?.maximum}
+          </p>
         </div>
         <div>
           <h2 className="text-3xl text-slate-500 font-bold mt-6">
