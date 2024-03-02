@@ -14,9 +14,14 @@ export const POST = async (request) => {
     console.log(data);
     const company = await Companies.findOne({ name: data.name });
     const employer = await Employers.findById(data.employer);
+    const message={
+      name:employer.fullname,
+      designation:employer.designation,
+      description:"wants to join your company"
+    };
     const notifications = await Notification.create({
       employer_id: company.admin,
-      message: `Employer Named:${employer.fullname} and Designation : ${employer.designation} wants to join your company`,
+      message: message,
       type: "company",
       data: data,
     });
