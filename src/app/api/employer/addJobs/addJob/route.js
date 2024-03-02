@@ -17,6 +17,9 @@ export const POST= async (request) => {
         //console.log(jobData);
         
         const employer = await Employers.findById(id);
+        if(employer.company.name !== "N/A"){
+            return NextResponse.json({message:"employer has no company"},{status:404});
+        }
         if(!employer){
             return NextResponse.json({message:"employer not found"},{status:404});
         }else{
