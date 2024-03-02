@@ -64,7 +64,7 @@ export const GET = async (request) => {
     // const locations = "India";
     // const city = "dhaka";
     const jobs = await Jobs.find({
-      $and: [
+      $or: [
         { "location.city": location },
         { title: { $in: title } },
         { "salary.minimum": { $lte: salary } },
