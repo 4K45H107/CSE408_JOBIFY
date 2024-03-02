@@ -25,36 +25,52 @@ const SelectCompany = () => {
   const [change, setChange] = useState("");
   const router = useRouter();
 
+  const handleNotification = async () => {
+    const data = {
+      name: selectedCompany,
+      employer: userId,
+    };
+
+    try {
+      const res = await axios.post(`/api/notification/addCompany`, data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (event) => {
     setSelectedCompany(event.target.value); // Update selectedCompany with the selected company value
   };
   // Patch the selected company data
   const handleCompanyChange = async () => {
-    const data = {
-      name: selectedCompany,
-    };
+    handleNotification();
 
-    try {
-      const res = await axios.patch(
-        `/api/employer/updateCompany?userId=${userId}`,
-        data
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    // const data = {
+    //   name: selectedCompany,
+    // };
+
+    // try {
+    //   const res = await axios.patch(
+    //     `/api/employer/updateCompany?userId=${userId}`,
+    //     data
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
     setChange("done");
 
-    const dummy = {
-      name: "",
-    };
+    // const dummy = {
+    //   name: "",
+    // };
 
-    try {
-      const res = await axios.patch("/api/updateEmployerNumber", dummy);
-      const data = res.data;
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const res = await axios.patch("/api/updateEmployerNumber", dummy);
+    //   const data = res.data;
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {

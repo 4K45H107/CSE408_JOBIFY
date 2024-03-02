@@ -8,11 +8,8 @@ import CardSearch from "../jobs/cardSearch";
 import CardSaved from "../jobs/cardSaved";
 
 const Saved = () => {
-  const [type, setType] = useState("");
-  const [salary, setSalary] = useState("");
-  const [location, setLocation] = useState("");
-  const [company, setCompany] = useState("");
-  const [activeId, setActiveId] = useState();
+  
+  const [activeId, setActiveId] = useState("");
 
   const { role, userId } = useContext(AuthContext);
 

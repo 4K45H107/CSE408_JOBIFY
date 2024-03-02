@@ -381,17 +381,17 @@ const register = () => {
             ></input>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center px-4">
           <button
             type="submit"
             onClick={handleRegister}
-            className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mx-auto"
+            className="w-1/2 bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 mx-auto"
           >
             Sign Up
           </button>
           <Link
             href="/registerEmployer"
-            className="bg-gray-700 rounded text-white  pl-4 py-1 active:bg-slate-600 w-32 mx-auto"
+            className="w-1/2 bg-gray-700 rounded text-white  pl-4 py-1 active:bg-slate-600 mx-auto"
           >
             <p className="flex justify-center">SignUp Employer</p>
           </Link>

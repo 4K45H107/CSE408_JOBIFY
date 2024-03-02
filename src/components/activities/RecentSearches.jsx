@@ -4,15 +4,19 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
-import Card from "../jobs/card";
+import CardRecentSearch from "../jobs/cardRecentSearch";
+
 
 const RecentSearches = () => {
+  const [activeId, setActiveId] = useState("");
   const { role, userId } = useContext(AuthContext);
 
   const { data: jobs, isLoading } = useSWR(
     `/api/user/activities/recent?userId=${userId}`,
     fetcher
   );
+
+  
 
   useEffect(() => {}, [jobs]);
 
@@ -25,13 +29,14 @@ const RecentSearches = () => {
           <label className="text-red-500">Recent Searches</label>
           <div className="flex flex-col">
             {jobs?.map((job) => (
-              <Card
+              <CardRecentSearch
                 key={job?._id}
                 company={job?.company}
                 title={job?.title}
                 salaryMin={job?.salary?.minimum}
                 salaryMax={job?.salary?.maximum}
                 id={job?._id}
+                setActiveId={setActiveId}
               />
             ))}
           </div>

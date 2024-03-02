@@ -4,37 +4,36 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 import { AuthContext } from "@/contexts/AuthContext";
 import NotificationCard from "@/components/notification/notificationCard";
+import { data } from "autoprefixer";
 
 const Notification = () => {
   const [activeId, setActiveId] = useState();
 
   const { role, userId } = useContext(AuthContext);
 
-  const { data: noti, isLoading } = useSWR(
+  const { data: notifications, isLoading } = useSWR(
     `/api/notification/getNotification/employer?employerId=${userId}`,
     fetcher
   );
-  console.log(jobs);
-  const [jobList, setJobList] = useState([]);
+  console.log(notifications);
+  const [notList, setNotList] = useState([]);
 
   useEffect(() => {
-    setJobList(jobs);
-  }, [jobs]);
+    setNotList(notifications);
+  }, [notifications]);
 
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
         <div className="w-3/4 h-[400px] overflow-auto px-4">
           <label className="text-red-500">Notifications</label>
-          {jobList?.map((job) => (
+          {notList?.map((notification) => (
             <NotificationCard
-              key={job._id}
-              company={job.company}
-              title={job.title}
-              salaryMin={job.salary.minimum}
-              salaryMax={job.salary.maximum}
-              id={job._id}
-              setActiveId={setActiveId}
+              key={notification._id}
+              message={notification.message}
+              type={notification.type}
+              read={notification.read}
+              data={notification.data}
             />
           ))}
         </div>

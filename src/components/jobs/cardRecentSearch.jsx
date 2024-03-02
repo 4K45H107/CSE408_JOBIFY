@@ -4,21 +4,19 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
-import { TiDeleteOutline } from "react-icons/ti";
 import { useRouter } from "next/navigation";
 
-const CardSaved = (props) => {
-  if (!props) {
-    return <div className=""></div>;
-  }
-  const [activeId, setActiveId] = useState("");
-  const router = useRouter();
-
+const CardRecentSearch = (props) => {
   console.log(props.id);
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
+  const [activeId, setActiveId] = useState("");
 
-  const handleDelete = async (e) => {
+  const [bookmark, setBookmark] = useState(false);
+  const router = useRouter();
+
+  const handleSaved = async (e) => {
+    setBookmark((prev) => !prev);
     e.preventDefault();
 
     const savedData = {
@@ -27,8 +25,8 @@ const CardSaved = (props) => {
     console.log(props.id);
 
     try {
-      const res = await axios.delete(
-        `/api/user/activities/saved?userId=${userId}&jobId=${props.id}`,
+      const res = await axios.post(
+        `/api/user/activities/saved?userId=${userId}`,
         savedData
       );
       const data = res.data;
@@ -95,6 +93,10 @@ const CardSaved = (props) => {
         </div>
         <p className="text-xs">3d</p>
       </div>
+
+      <div className="absolute top-2 right-4">
+        <CiBookmark className={`${bookmark && ""}`} onClick={handleSaved} />
+      </div>
       <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
         <button
           type="submit"
@@ -104,12 +106,8 @@ const CardSaved = (props) => {
           View
         </button>
       </div>
-
-      <div className="absolute top-2 right-4">
-        <TiDeleteOutline onClick={handleDelete} />
-      </div>
     </div>
   );
 };
 
-export default CardSaved;
+export default CardRecentSearch;
