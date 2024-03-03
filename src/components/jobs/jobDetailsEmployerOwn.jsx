@@ -134,6 +134,10 @@ const JobDetailsEmployerOwn = (props) => {
               <UserCard
                 key={user._id}
                 name={user.fullname}
+                profile={user.profile}
+                birthday={user.birthday}
+                phone={user.phone}
+                email={user.email}
                 id={user._id}
                 setActiveId2={setActiveId2}
               />

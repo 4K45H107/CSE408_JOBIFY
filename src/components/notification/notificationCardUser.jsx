@@ -5,7 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
 
-const NotificationCard = (props) => {
+const NotificationCardUser = (props) => {
   if (!props) {
     return <div className=""></div>;
   }
@@ -130,4 +130,4 @@ const NotificationCard = (props) => {
   );
 };
 
-export default NotificationCard;
+export default NotificationCardUser;

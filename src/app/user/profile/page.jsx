@@ -222,7 +222,9 @@ const Profile = () => {
                 >
                   CV
                 </button>
-                <button className="px-3 py-2">Notifications</button>
+                <Link href={"/user/notification"} className="mr-3">
+                  Notification
+                </Link>
               </div>
             </div>
           </div>
@@ -509,7 +511,9 @@ const Profile = () => {
                 >
                   CV
                 </button>
-                <button className="px-3 py-2">Notifications</button>
+                <Link href={"/user/notification"} className="mr-3">
+                  Notification
+                </Link>
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ const Header = () => {
       <div className="flex justify-between py-4 px-8 items-center">
         <img src="/logo.jpg" className="h-12 rounded" />
         <div className="flex items-center gap-x-2">
-          <Link href={"#"}>
+          <Link href={"/user/notification"}>
             <IoIosNotificationsOutline size={24} />
           </Link>
           <Link href="/user/profile" className="">
