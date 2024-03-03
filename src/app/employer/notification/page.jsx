@@ -4,10 +4,11 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 import { AuthContext } from "@/contexts/AuthContext";
 import NotificationCard from "@/components/notification/notificationCard";
-import { data } from "autoprefixer";
+import axios from "axios";
 
 const Notification = () => {
-  const [activeId, setActiveId] = useState();
+  const [activeId, setActiveId] = useState("");
+  const [read, setRead] = useState(false);
 
   const { role, userId } = useContext(AuthContext);
 
@@ -22,6 +23,24 @@ const Notification = () => {
     setNotList(notifications);
   }, [notifications]);
 
+  useEffect(() => {
+    handleRead();
+  }, [read]);
+
+  const handleRead = async () => {
+    const abc = {
+      id: activeId,
+    };
+    
+    try {
+      const res = await axios.patch("/api/notification/markAsRead", abc);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
@@ -30,10 +49,13 @@ const Notification = () => {
           {notList?.map((notification) => (
             <NotificationCard
               key={notification._id}
+              id={notification._id}
               message={notification.message}
               type={notification.type}
               read={notification.read}
               data={notification.data}
+              setRead={setRead}
+              setActiveId={setActiveId}
             />
           ))}
         </div>

@@ -10,7 +10,7 @@ const NotificationCard = (props) => {
     return <div className=""></div>;
   }
 
-  const [type, setType] = useState("company"); // company, regular
+  const [type, setType] = useState(props.type); // company, regular
   const { role, userId } = useContext(AuthContext);
   const [change, setChange] = useState("");
 
@@ -36,6 +36,8 @@ const NotificationCard = (props) => {
     };
 
     setChange("done");
+    props.setRead(true);
+    props.setActiveId(props.id);
 
     try {
       const res = await axios.patch("/api/updateEmployerNumber", dummy);
@@ -44,15 +46,29 @@ const NotificationCard = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
 
-    // try {
-    //   const res = await axios.patch("/api/updateEmployerNumber", dummy);
-    //   const data = res.data;
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  const handleReject = async () => {
+    const abc = {
+      name: props.data.name,
+      employer: props.data.employer,
+    };
 
+    console.log(abc);
+
+    try {
+      const res = await axios.post(`/api/notification/rejectEmployer`, abc);
+    } catch (error) {
+      console.log(error);
+    }
+
+    const dummy = {
+      name: "",
+    };
+
+    setChange("done");
+    props.setRead(true);
+    props.setActiveId(props.id);
   };
 
   return (
@@ -60,13 +76,17 @@ const NotificationCard = (props) => {
       {type === "company" && (
         <div className="">
           <h3 className="text-lg font-semibold">Company Notification</h3>
-          <div className="flex items-center">{props.message}</div>
-          {change !== "done" && (
+          <div className="flex items-center">Name: {props.message.name}</div>
+          <div className="flex items-center">
+            Designation: {props.message.designation}
+          </div>
+          <div className="flex items-center">{props.message.description}</div>
+          {!props.read && (
             <div className="">
               <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
                 <button
                   type="submit"
-                  //onClick={handleRecent}
+                  onClick={handleReject}
                   className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
                 >
                   Reject
@@ -83,6 +103,17 @@ const NotificationCard = (props) => {
               </div>
             </div>
           )}
+
+          {props.read && <div className=""></div>}
+        </div>
+      )}
+
+      {type === "regular" && (
+        <div className="">
+          <h3 className="text-lg font-semibold">Regular Notification</h3>
+          <div className="flex items-center">
+            {props.message.description} {props.message.name}
+          </div>
         </div>
       )}
     </div>

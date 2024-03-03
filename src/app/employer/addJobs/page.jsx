@@ -1,9 +1,11 @@
 "use client";
 import { AuthContext } from "@/contexts/AuthContext";
+import { fetcher } from "@/utils/conn";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useContext, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import toast from "react-hot-toast";
+import useSWR from "swr";
 
 const addJobs = () => {
   const countries = [
@@ -142,6 +144,23 @@ const addJobs = () => {
     ],
   };
 
+  // handle company
+  const [pageType, setPageType] = useState("addJob"); //addJob, addCompany
+
+  const { role, userId } = useContext(AuthContext);
+  const { data: profile, isLoading } = useSWR(
+    `/api/employer/profile?userId=${userId}`,
+    fetcher
+  );
+
+  useEffect(() => {
+    if (profile) {
+      if (profile.company.name === "") {
+        setPageType("addCompany");
+      }
+    }
+  }, [isLoading]);
+
   // Destructure jobData into individual state variables
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -152,8 +171,6 @@ const addJobs = () => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [skillTest, setSkillTest] = useState(false);
-
-  const { role, userId } = useContext(AuthContext);
 
   const router = useRouter();
 
@@ -209,122 +226,148 @@ const addJobs = () => {
     }
   };
 
-  return (
-    <div className="flex flex-col h-full w-full items-center justify-center">
-      <h1 className="flex text-3xl font-bold mb-6 justify-center">
-        Create a New Job
-      </h1>
-      <form className="flex flex-col border px-6 py-10" onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input
-          className="border rounded py-3 px-2 mb-3"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <br />
-        <label>Description:</label>
-        <textarea
-          className="border rounded py-3 px-2 mb-3"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <br />
-        <p className="pb-4">Salary Information:</p>
-        <div>
-          <label className="px-4">Max:</label>
-          <input
-            className="border rounded py-3 px-2 mb-3"
-            type="number"
-            value={salarymax}
-            onChange={(e) => setSalaryMax(e.target.value)}
-            required
-          />
-          <label className="px-4">Min:</label>
-          <input
-            className="border rounded py-3 px-2 mb-3"
-            type="number"
-            value={salarymin}
-            onChange={(e) => setSalaryMin(e.target.value)}
-            required
-          />
-        </div>
-        <br />
-        <p className="pb-4">Age Information:</p>
-        <div>
-          <label className="px-4">Max:</label>
-          <input
-            className="border rounded py-3 px-2 mb-3"
-            type="number"
-            value={agemax}
-            onChange={(e) => setAgeMax(e.target.value)}
-            required
-          />
-          <label className="px-4">Min:</label>
-          <input
-            className="border rounded py-3 px-2 mb-3"
-            type="number"
-            value={agemin}
-            onChange={(e) => setAgeMin(e.target.value)}
-            required
-          />
-        </div>
-        <br />
-        <p className="pb-4">Location Information:</p>
-        <div>
-          <label className="m-auto px-4 ">Country:</label>
-          <select
-            className="border rounded py-3 px-2 mb-3"
-            placeholder="Country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          >
-            <option value="">Country</option>
-            {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-          <select
-            className="border rounded py-3 px-2 mb-3"
-            placeholder="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          >
-            <option value="">City</option>
-            {cities[country] &&
-              cities[country].map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-          </select>
-        </div>
-        <br />
-        <div>
-          <label className="pr-3">Skill Test:</label>
-          <input
-            className="border rounded py-3 px-2 mb-3"
-            type="checkbox"
-            checked={skillTest}
-            onChange={(e) => setSkillTest(e.target.checked)}
-          />
-        </div>
-        <br />
-        <div className="mb-4">
-          <button
-            type="submit"
-            className="flex justify-center bg-gray-700 rounded text-white px-4 py-4 active:bg-slate-600 w-32 mx-auto"
-          >
-            CreateJob
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+  const handleAddCompany = () => {
+    router.push("/registerEmployer/selectCompany");
+  };
+
+  if (!isLoading) {
+    return (
+      <div>
+        {pageType === "addCompany" && (
+          <div className="">
+            <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+              <button
+                type="submit"
+                onClick={handleAddCompany}
+                className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+              >
+                Select Company
+              </button>
+            </div>
+          </div>
+        )}
+        {pageType === "addJob" && (
+          <div className="flex flex-col h-full w-full items-center justify-center">
+            <h1 className="flex text-3xl font-bold mb-6 justify-center">
+              Create a New Job
+            </h1>
+            <form
+              className="flex flex-col border px-6 py-10"
+              onSubmit={handleSubmit}
+            >
+              <label>Title:</label>
+              <input
+                className="border rounded py-3 px-2 mb-3"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+              <br />
+              <label>Description:</label>
+              <textarea
+                className="border rounded py-3 px-2 mb-3"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+              <br />
+              <p className="pb-4">Salary Information:</p>
+              <div>
+                <label className="px-4">Max:</label>
+                <input
+                  className="border rounded py-3 px-2 mb-3"
+                  type="number"
+                  value={salarymax}
+                  onChange={(e) => setSalaryMax(e.target.value)}
+                  required
+                />
+                <label className="px-4">Min:</label>
+                <input
+                  className="border rounded py-3 px-2 mb-3"
+                  type="number"
+                  value={salarymin}
+                  onChange={(e) => setSalaryMin(e.target.value)}
+                  required
+                />
+              </div>
+              <br />
+              <p className="pb-4">Age Information:</p>
+              <div>
+                <label className="px-4">Max:</label>
+                <input
+                  className="border rounded py-3 px-2 mb-3"
+                  type="number"
+                  value={agemax}
+                  onChange={(e) => setAgeMax(e.target.value)}
+                  required
+                />
+                <label className="px-4">Min:</label>
+                <input
+                  className="border rounded py-3 px-2 mb-3"
+                  type="number"
+                  value={agemin}
+                  onChange={(e) => setAgeMin(e.target.value)}
+                  required
+                />
+              </div>
+              <br />
+              <p className="pb-4">Location Information:</p>
+              <div>
+                <label className="m-auto px-4 ">Country:</label>
+                <select
+                  className="border rounded py-3 px-2 mb-3"
+                  placeholder="Country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="">Country</option>
+                  {countries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className="border rounded py-3 px-2 mb-3"
+                  placeholder="City"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                >
+                  <option value="">City</option>
+                  {cities[country] &&
+                    cities[country].map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <br />
+              <div>
+                <label className="pr-3">Skill Test:</label>
+                <input
+                  className="border rounded py-3 px-2 mb-3"
+                  type="checkbox"
+                  checked={skillTest}
+                  onChange={(e) => setSkillTest(e.target.checked)}
+                />
+              </div>
+              <br />
+              <div className="mb-4">
+                <button
+                  type="submit"
+                  className="flex justify-center bg-gray-700 rounded text-white px-4 py-4 active:bg-slate-600 w-32 mx-auto"
+                >
+                  CreateJob
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 export default addJobs;
