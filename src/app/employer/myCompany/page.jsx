@@ -17,6 +17,8 @@ const myCompany = () => {
     fetcher
   );
 
+  const [uploadShow, setUploadShow] = useState(false);
+
   console.log(profile);
 
   const [editable, setEditable] = useState(false);
@@ -60,6 +62,8 @@ const myCompany = () => {
       console.log(res.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setUploadShow(false);
     }
   };
 
@@ -115,7 +119,19 @@ const myCompany = () => {
             />
           </div> */}
 
-          <UploadFile imageUrl={picture} setImageURL={setPicture} />
+          <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+            <button
+              type="submit"
+              onClick={() => setUploadShow(true)}
+              className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+            >
+              Upload
+            </button>
+          </div>
+
+          {uploadShow && (
+            <UploadFile imageUrl={picture} setImageURL={setPicture} />
+          )}
 
           {/* Profile info */}
           <div className="flex flex-col w-full space-y-4">

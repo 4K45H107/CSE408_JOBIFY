@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import CardEmployer from "../jobs/cardEmployer";
 import job from "@/app/job/[jobID]/page";
+import JobDetailsEmployer from "../jobs/jobDetailsEmployer";
 
 const MyOfferings = () => {
   const { role, userId } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const MyOfferings = () => {
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
-        <div className="flex-1 h-[500px] overflow-auto px-4">
+        <div className="flex-1 h-[600px] overflow-auto px-4">
           <>
             {jobs?.map((job) => (
               <CardEmployer
@@ -41,8 +42,8 @@ const MyOfferings = () => {
             ))}
           </>
         </div>
-        <div className="flex-1 h-[500px] overflow-auto">
-          <JobDetails activeId={activeId} />
+        <div className="flex-1 h-[600px] overflow-auto">
+          <JobDetailsEmployer activeId={activeId} />
         </div>
       </div>
     );

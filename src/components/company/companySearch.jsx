@@ -46,7 +46,7 @@ const CompanySearch = () => {
   if (!isLoading) {
     return (
       <div className="flex w-full gap-x-4 mt-16">
-        <div className="w-3/4 h-[400px] overflow-auto px-4">
+        <div className="w-3/4 h-[600px] overflow-auto px-4">
           <label className="text-red-500">TRENDING</label>
           {jobList?.map((job) => (
             <CardSearchCompany
@@ -61,7 +61,7 @@ const CompanySearch = () => {
             />
           ))}
         </div>
-        <div className="border w-1/4 h-[400px] mr-5 ml-5 mt-2 mb-6">
+        <div className="border w-1/4 h-[400px] mr-5 ml-5 mt-32 mb-6">
           <div className="flex flex-col items-center mt-5">
             <input
               className="border rounded py-3 px-2 mb-3"

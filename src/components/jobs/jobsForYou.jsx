@@ -24,7 +24,7 @@ const JobsForYou = () => {
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
-        <div className="flex-1 h-[500px] overflow-auto px-4">
+        <div className="flex-1 h-[600px] overflow-auto px-4">
           <>
             {jobs?.map((job) => (
               <Card
@@ -39,7 +39,7 @@ const JobsForYou = () => {
             ))}
           </>
         </div>
-        <div className="flex-1 h-[500px] overflow-auto">
+        <div className="flex-1 h-[600px] overflow-auto">
           <JobDetails activeId={activeId} />
         </div>
       </div>

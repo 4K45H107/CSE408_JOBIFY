@@ -94,6 +94,7 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      setUploadShow(false);
       setUploadShowCv(false);
     }
   };
@@ -112,6 +113,9 @@ const Profile = () => {
       console.log(res.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setUploadShow(false);
+      setUploadShowCv(false);
     }
   };
 
@@ -210,7 +214,11 @@ const Profile = () => {
                 </button>
                 <button
                   className="rounded px-3 py-2"
-                  onClick={() => setType("cv")}
+                  onClick={() => {
+                    setType("cv");
+                    setUploadShow(false);
+                    setUploadShowCv(false);
+                  }}
                 >
                   CV
                 </button>
@@ -461,8 +469,19 @@ const Profile = () => {
                         hover:file:text-gray-600"
             />
           </div> */}
+            <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+              <button
+                type="submit"
+                onClick={() => setUploadShow(true)}
+                className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+              >
+                Upload
+              </button>
+            </div>
 
-            <UploadFile imageUrl={picture} setImageURL={setPicture} />
+            {uploadShow && (
+              <UploadFile imageUrl={picture} setImageURL={setPicture} />
+            )}
 
             {/* Profile info */}
             <div className="flex flex-col w-full space-y-4">
@@ -473,25 +492,28 @@ const Profile = () => {
               <div className="flex flex-col items-end">
                 <button
                   className="px-3 py-2"
-                  onClick={() => setType("profile")}
+                  onClick={() => {
+                    setType("profile");
+                    setUploadShowCv(false);
+                  }}
                 >
                   Profile
                 </button>
                 <button
                   className="rounded px-3 py-2"
-                  onClick={() => setType("cv")}
+                  onClick={() => {
+                    setType("cv");
+                    setUploadShow(false);
+                    setUploadShowCv(false);
+                  }}
                 >
                   CV
                 </button>
-                <button
-                  className="px-3 py-2"
-                  onClick={() => setType("notifications")}
-                >
-                  Notifications
-                </button>
+                <button className="px-3 py-2">Notifications</button>
               </div>
             </div>
           </div>
+
           <div className=" h-full w-4/5 p-6 border-gray-300 ml-12 mt-12">
             <div className="flex flex-col">
               <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">

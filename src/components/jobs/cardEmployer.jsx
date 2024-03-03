@@ -33,13 +33,13 @@ const CardEmployer = (props) => {
       <p className="">
         {props.salaryMin}-{props.salaryMax}
       </p>
-      <div className="flex justify-between ">
-        <div className="flex items-center">
+      <div className="flex justify-end">
+        {/* <div className="flex items-center">
           <span className="text-lime-700 w-4">
             <AiFillThunderbolt />
           </span>
           <span className="text-sm text-lime-700">Easy Appily</span>
-        </div>
+        </div> */}
         <p className="text-xs">3d</p>
       </div>
       <div className="bg-black rounded w-20">
@@ -54,9 +54,9 @@ const CardEmployer = (props) => {
         )}
       </div>
 
-      <div className="absolute top-2 right-4">
+      {/* <div className="absolute top-2 right-4">
         <CiBookmark />
-      </div>
+      </div> */}
     </div>
   );
 };

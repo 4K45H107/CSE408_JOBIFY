@@ -14,7 +14,8 @@ const Notification = () => {
 
   const { data: notifications, isLoading } = useSWR(
     `/api/notification/getNotification/employer?employerId=${userId}`,
-    fetcher, {refreshInterval: 100}
+    fetcher,
+    { refreshInterval: 100 }
   );
   console.log(notifications);
   const [notList, setNotList] = useState([]);
@@ -31,7 +32,7 @@ const Notification = () => {
     const abc = {
       id: activeId,
     };
-    
+
     try {
       const res = await axios.patch("/api/notification/markAsRead", abc);
       const data = res.data;
@@ -43,9 +44,9 @@ const Notification = () => {
 
   if (!isLoading) {
     return (
-      <div className="flex gap-x-4 mt-16">
-        <div className="w-3/4 h-[400px] overflow-auto px-4">
-          <label className="text-red-500">Notifications</label>
+      <div className="flex flex-col gap-x-4 mt-16">
+        <label className="text-red-500 px-6 mt-8">Notifications</label>
+        <div className="w-full h-[600px] overflow-auto px-4 mt-2">
           {notList?.map((notification) => (
             <NotificationCard
               key={notification._id}

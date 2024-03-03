@@ -8,14 +8,14 @@ import CardSearch from "../jobs/cardSearch";
 import CardSaved from "../jobs/cardSaved";
 
 const Saved = () => {
-  
   const [activeId, setActiveId] = useState("");
 
   const { role, userId } = useContext(AuthContext);
 
   const { data: jobs, isLoading } = useSWR(
     `/api/user/activities/saved?userId=${userId}`,
-    fetcher, {refreshInterval: 100}
+    fetcher,
+    { refreshInterval: 100 }
   );
 
   const [jobList, setJobList] = useState([]);
@@ -27,7 +27,7 @@ const Saved = () => {
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
-        <div className="w-3/4 h-[400px] overflow-auto px-4">
+        <div className="w-full h-[600px] overflow-auto px-4 ">
           <label className="text-red-500">Bookmarks</label>
           {jobList?.map((job) => (
             <CardSaved

@@ -8,7 +8,7 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import useSWR from "swr";
 
-const JobDetails = (props) => {
+const JobDetailsEmployer = (props) => {
   if (!props.activeId) return <></>;
 
   const { role, userId } = useContext(AuthContext);
@@ -79,13 +79,13 @@ const JobDetails = (props) => {
             </Link>
             <p className="text-xs">4.8</p>
           </div>
-          <div className="flex items-center gap-x-1">
+          {/* <div className="flex items-center gap-x-1">
             <CiBookmark className="cursor-pointer" onClick={handleSaved} />
             <div className="flex items-center text-lime-600">
               <AiFillThunderbolt />
               <p>Easy Apply</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <h3 className="text-3xl font-semibold">{job?.title}</h3>
         <p className="text-xs color-gray-500">Remote</p>
@@ -149,4 +149,4 @@ const JobDetails = (props) => {
   }
 };
 
-export default JobDetails;
+export default JobDetailsEmployer;

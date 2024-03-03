@@ -20,7 +20,7 @@ const HeaderEmployer = () => {
           <Link href={"/employer/notification"}>
             <IoIosNotificationsOutline size={24} />
           </Link>
-          <Link href="/user/profile" className="">
+          <Link href="/employer/profile" className="">
             <img
               src={profile?.photo || "/profile_logo.jpg"}
               className="h-12 w-12 rounded-full"

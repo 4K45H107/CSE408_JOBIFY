@@ -25,7 +25,7 @@ const RecentSearches = () => {
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
-        <div className="flex-1 h-[500px] overflow-auto px-4">
+        <div className="flex-1 h-[600px] overflow-auto px-4">
           <label className="text-red-500">Recent Searches</label>
           <div className="flex flex-col">
             {jobs?.map((job) => (

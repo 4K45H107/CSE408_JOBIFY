@@ -50,7 +50,7 @@ const JobSearch = () => {
   if (!isLoading) {
     return (
       <div className="flex gap-x-4 mt-16">
-        <div className="w-3/4 h-[400px] overflow-auto px-4">
+        <div className="w-3/4 h-[600px] overflow-auto px-4">
           <label className="text-red-500">TRENDING</label>
           {jobList?.map((job) => (
             <CardSearch
@@ -64,7 +64,7 @@ const JobSearch = () => {
             />
           ))}
         </div>
-        <div className="border w-1/4 h-[400px] mr-5 ml-5 mt-2 mb-6">
+        <div className="border w-1/4 h-[600px] mr-5 ml-5 mt-2 mb-6">
           <div className="flex flex-col items-center mt-5">
             <input
               className="border rounded py-3 px-2 mb-3"
@@ -97,7 +97,7 @@ const JobSearch = () => {
             <button
               type="submit"
               onClick={handleFilter}
-              className="bg-gray-700 rounded text-white px-4 py-1 active:bg-slate-600 w-32 mt-5"
+              className="bg-gray-700 rounded text-white px-4 py-1 mt-60 active:bg-slate-600 w-32"
             >
               Filter
             </button>
