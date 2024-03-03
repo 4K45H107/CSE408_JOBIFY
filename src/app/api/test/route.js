@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { connetToDb } from "../../../../lib/utils";
 import { Tests } from "../../../../lib/models";
+import { connetToDb } from "../../../../lib/utils";
 
 export const POST = async (request) => {
   try {
