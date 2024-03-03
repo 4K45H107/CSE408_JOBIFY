@@ -32,8 +32,6 @@ const easyApply = () => {
       job_id: jobId,
     };
 
-    
-
     console.log(dataCheck);
 
     try {

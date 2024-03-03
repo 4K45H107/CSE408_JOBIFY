@@ -30,6 +30,10 @@ const CardApplication = (props) => {
 
     console.log(dataCheck);
 
+    if (!props.skillTest) {
+      return;
+    }
+
     try {
       const res = await axios.post(`/api/test`, dataCheck);
       const data = res.data;
@@ -41,11 +45,30 @@ const CardApplication = (props) => {
     }
   };
 
-  console.log(userId);
-
   const router = useRouter();
 
-  const handleExam = () => {
+  const handleExam = async () => {
+    const dataCheck = {
+      user_id: userId,
+      job_id: jobId,
+    };
+
+    console.log(dataCheck);
+
+    if (!props.skillTest) {
+      return;
+    }
+
+    try {
+      const res = await axios.patch(`/api/test`, dataCheck);
+      const data = res.data;
+      console.log(data.given);
+      console.log(data);
+      setType(data.given);
+    } catch (error) {
+      console.log(error);
+    }
+
     router.push(`exam?jobId=${props.id}`);
   };
 
@@ -70,7 +93,7 @@ const CardApplication = (props) => {
         {props.salaryMin}-{props.salaryMax}
       </p>
 
-      {props.skillTest && (
+      {props.skillTest && !type && (
         <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
           <button
             type="submit"
@@ -79,6 +102,11 @@ const CardApplication = (props) => {
           >
             Give Exam
           </button>
+        </div>
+      )}
+      {props.skillTest && type && (
+        <div className="flex justify-center my-4 w-auto rounded">
+          <h1> You Have Already given the exam!!! </h1>
         </div>
       )}
     </div>
