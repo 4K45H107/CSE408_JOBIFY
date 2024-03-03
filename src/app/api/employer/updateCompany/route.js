@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
-import { Employers } from "../../../../../lib/models";
+import { Employers, Notification } from "../../../../../lib/models";
+import company from "@/app/company/[companyID]/page";
 
 export const PATCH = async (request) => {
   try {
@@ -18,7 +19,12 @@ export const PATCH = async (request) => {
       { "company.name": companyData.name },
       { new: true }
     );
-           
+     
+    const message = {
+      name: companyData.name,
+      designation: employer.designation,
+      description: "You have been approved to join ",
+    };
     console.log(employer);
     return NextResponse.json(employer, { status: 200 });
   } catch (error) {
