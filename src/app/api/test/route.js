@@ -10,13 +10,11 @@ export const POST = async (request) => {
 
     const data = await request.json();
     
-    const tests = await Tests.find(data);
+    const tests = await Tests.find({"user_id": data.user_id, "job_id": data.job_id});
 
-    if(tests.length > 0){
+    
         return NextResponse.json({given:tests.given}, { status: 200 });
-    }else{
-        return NextResponse.json({message:"did not apply for the skill test"}, { status: 200 });
-    }
+    
 
     // console.log(job_preferences);
     // Return a response if needed
