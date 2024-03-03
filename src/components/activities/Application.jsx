@@ -44,6 +44,7 @@ const Application = () => {
               salaryMax={job.salary.maximum}
               id={job._id}
               skillTest={job.skill_test}
+              // status={job.status}
               setActiveId={setActiveId}
             />
           ))}

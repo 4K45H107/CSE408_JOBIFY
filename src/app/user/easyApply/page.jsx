@@ -22,22 +22,32 @@ const easyApply = () => {
 
   console.log(jobId);
 
-  const handleupload = async () => {
-    const data = {
+  useEffect(() => {
+    handleCheck();
+  }, [userId, jobId]);
+
+  const handleCheck = async () => {
+    const dataCheck = {
       user_id: userId,
-      job_id: jobId
+      job_id: jobId,
     };
 
+    
+
+    console.log(dataCheck);
+
     try {
-      const res = await axios.patch(
-        `/api/user/profile/picture?userId=${userId}`,
-        data
+      const res = await axios.post(
+        `/api/user/activities/applications/check`,
+        dataCheck
       );
+      const data = res.data;
+      console.log(data);
+      setType(data.applied);
     } catch (error) {
       console.log(error);
-    } 
+    }
   };
-
 
   const { data: profile, isLoading } = useSWR(
     `/api/user/profile?userId=${userId}`,

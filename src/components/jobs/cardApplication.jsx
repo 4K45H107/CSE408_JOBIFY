@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
@@ -13,8 +13,35 @@ const CardApplication = (props) => {
     return <></>;
   }
 
+  const [type, setType] = useState();
+
   const { role, userId } = useContext(AuthContext);
-  console.log(userId); 
+  const jobId = props.id;
+
+  useEffect(() => {
+    handleCheck();
+  }, [userId, jobId]);
+
+  const handleCheck = async () => {
+    const dataCheck = {
+      user_id: userId,
+      job_id: jobId,
+    };
+
+    console.log(dataCheck);
+
+    try {
+      const res = await axios.post(`/api/test`, dataCheck);
+      const data = res.data;
+      console.log(data.given);
+      console.log(data);
+      setType(data.given);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(userId);
 
   const router = useRouter();
 
