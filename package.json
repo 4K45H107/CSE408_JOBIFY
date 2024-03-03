@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "agora-react-uikit": "^1.2.0",
     "axios": "^1.6.7",
     "firebase": "^10.8.0",
     "mongoose": "^8.0.0",
