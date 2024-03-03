@@ -123,21 +123,24 @@ const easyApply = () => {
                     Upload
                   </button>
                 </div>
-                <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
-                  <button
-                    type="submit"
-                    onClick={handleNext}
-                    className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
-                  >
-                    Next
-                  </button>
-                </div>
+                {profile.cv !== "N/A" && (
+                  <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
+                    <button
+                      type="submit"
+                      onClick={handleNext}
+                      className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
               </div>
               {uploadShowCv && (
                 <UploadFile imageUrl={pdf} setImageURL={setPdf} />
               )}
-
-              {pdf && <iframe src={pdf} className="h-screen w-100"></iframe>}
+              {profile.cv !== "N/A" && pdf && (
+                <iframe src={pdf} className="h-screen w-100"></iframe>
+              )}
             </div>
           </div>
         </div>

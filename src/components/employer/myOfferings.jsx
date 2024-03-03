@@ -8,6 +8,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import CardEmployer from "../jobs/cardEmployer";
 import job from "@/app/job/[jobID]/page";
 import JobDetailsEmployer from "../jobs/jobDetailsEmployer";
+import JobDetailsEmployerOwn from "../jobs/jobDetailsEmployerOwn";
 
 const MyOfferings = () => {
   const { role, userId } = useContext(AuthContext);
@@ -43,7 +44,7 @@ const MyOfferings = () => {
           </>
         </div>
         <div className="flex-1 h-[600px] overflow-auto">
-          <JobDetailsEmployer activeId={activeId} />
+          <JobDetailsEmployerOwn activeId={activeId} />
         </div>
       </div>
     );
