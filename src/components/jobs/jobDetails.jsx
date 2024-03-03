@@ -64,6 +64,10 @@ const JobDetails = (props) => {
     }
   };
 
+  const handleEasy = () => {
+    router.push(`easyApply?jobId=${props.id}`);
+  };
+
   console.log(job);
 
   // fetch data by props.activeId
@@ -83,7 +87,12 @@ const JobDetails = (props) => {
             <CiBookmark className="cursor-pointer" onClick={handleSaved} />
             <div className="flex items-center text-lime-600">
               <AiFillThunderbolt />
-              <p>Easy Apply</p>
+              <p
+                className="cursor-pointer text-sm text-lime-700"
+                onClick={handleEasy}
+              >
+                Easy Appily
+              </p>
             </div>
           </div>
         </div>

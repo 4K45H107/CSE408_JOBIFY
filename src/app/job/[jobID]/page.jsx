@@ -39,13 +39,13 @@ const job = (props) => {
               <p className="text-xl">{job?.company}</p>
               <p className="text-xs">4.8</p>
             </div>
-            <div className="flex items-center gap-x-1">
+            {/* <div className="flex items-center gap-x-1">
               <CiBookmark />
               <div className="flex items-center text-lime-600">
                 <AiFillThunderbolt />
                 <p>Easy Apply</p>
               </div>
-            </div>
+            </div> */}
           </div>
           <h3 className="text-3xl font-semibold">{job?.title}</h3>
           <p className="text-xs color-gray-500">Remote</p>
@@ -74,15 +74,6 @@ const job = (props) => {
             <p className="flex text-lg font-bold">
               <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
               {job?.salary?.maximum}
-            </p>
-            <p className="font-bold text-red-600 pr-2 text-xl">Age: </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">Minimum: </p>{" "}
-              {job?.age?.minimum}
-            </p>
-            <p className="flex text-lg font-bold">
-              <p className="text-green-800 pr-2 text-lg">Maximum: </p>{" "}
-              {job?.age?.maximum}
             </p>
           </div>
           <div>

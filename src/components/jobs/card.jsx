@@ -4,33 +4,40 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Card = (props) => {
   console.log(props.id);
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
 
+  
   const [bookmark, setBookmark] = useState(false);
-
+  
   const handleSaved = async (e) => {
     setBookmark((prev) => !prev);
     e.preventDefault();
-
+    
     const savedData = {
       id: props.id,
     };
     console.log(props.id);
-
+    
     try {
       const res = await axios.post(
         `/api/user/activities/saved?userId=${userId}`,
         savedData
-      );
-      const data = res.data;
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+        );
+        const data = res.data;
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
+  const router = useRouter();
+  const handleEasy = () => {
+    router.push(`easyApply?jobId=${props.id}`);
   };
 
   return (
@@ -58,7 +65,9 @@ const Card = (props) => {
           <span className="text-lime-700 w-4">
             <AiFillThunderbolt />
           </span>
-          <span className="text-sm text-lime-700">Easy Appily</span>
+          <span className="text-sm text-lime-700" onClick={handleEasy}>
+            Easy Appily
+          </span>
         </div>
         <p className="text-xs">3d</p>
       </div>

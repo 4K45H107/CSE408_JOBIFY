@@ -11,7 +11,6 @@ const CardSearch = (props) => {
   const { role, userId } = useContext(AuthContext);
   const [activeId, setActiveId] = useState("");
   const router = useRouter();
-  
 
   const handleRecent = async (e) => {
     e.preventDefault();
@@ -55,6 +54,10 @@ const CardSearch = (props) => {
     }
   };
 
+  const handleEasy = () => {
+    router.push(`easyApply?jobId=${props.id}`);
+  };
+
   useEffect(() => {
     if (activeId !== "") {
       router.push(`/job/${props.id}`);
@@ -81,13 +84,15 @@ const CardSearch = (props) => {
           <span className="text-lime-700 w-4">
             <AiFillThunderbolt />
           </span>
-          <span className="text-sm text-lime-700">Easy Appily</span>
+          <span className="text-sm text-lime-700" onClick={handleEasy}>
+            Easy Appily
+          </span>
         </div>
         <div className="flex justify-center my-4 w-auto bg-gray-800 rounded">
           <button
             type="submit"
             onClick={handleRecent}
-            className="w-full text-white w-100 px-4 py-3 active:bg-slate-600 mx-auto"
+            className="w-full text-white w-100 px-4 py-2 active:bg-slate-600 mx-auto"
           >
             View
           </button>

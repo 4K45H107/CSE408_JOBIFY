@@ -54,7 +54,7 @@ const CompanySearch = () => {
               name={job.name}
               type={job.designation}
               description={job.description}
-              numOfEmployees={jobs.numOfEmployees}
+              numOfEmployees={job.numOfEmployees}
               employerNumberInJobify={job.employerNumberInJobify}
               id={job._id}
               setActiveId={setActiveId}

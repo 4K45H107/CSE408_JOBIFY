@@ -18,6 +18,8 @@ const CardSearchCompany = (props) => {
     setActiveId(props.name);
   };
 
+  console.log(props)
+
   useEffect(() => {
     if (activeId !== "") {
       router.push(`/company/${props.name}`);
@@ -37,8 +39,8 @@ const CardSearchCompany = (props) => {
       </div>
       <h3 className="text-lg font-semibold">{props.type}</h3>
       <p className="">{props.description}</p>
-      <p className="">{props.numOfEmployees}</p>
-      <p className="">{props.employerNumberInJobify}</p>
+      <p className="">Number of Employees - {props.numOfEmployees}</p>
+      <p className="">Employees in JOBIFY - {props.employerNumberInJobify}</p>
       <div className="flex justify-between ">
         <div className="flex justify-center my-4 w-auto bg-gray-800 rounded">
           <button

@@ -60,6 +60,10 @@ const CardSaved = (props) => {
     setActiveId(props.id);
   };
 
+  const handleEasy = () => {
+    router.push(`easyApply?jobId=${props.id}`);
+  };
+
   useEffect(() => {
     if (activeId !== "") {
       router.push(`/job/${props.id}`);
@@ -91,7 +95,9 @@ const CardSaved = (props) => {
           <span className="text-lime-700 w-4">
             <AiFillThunderbolt />
           </span>
-          <span className="text-sm text-lime-700">Easy Appily</span>
+          <span className="text-sm text-lime-700" onClick={handleEasy}>
+            Easy Appily
+          </span>
         </div>
         <p className="text-xs">3d</p>
       </div>
