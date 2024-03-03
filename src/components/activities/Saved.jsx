@@ -15,7 +15,7 @@ const Saved = () => {
 
   const { data: jobs, isLoading } = useSWR(
     `/api/user/activities/saved?userId=${userId}`,
-    fetcher
+    fetcher, {refreshInterval: 100}
   );
 
   const [jobList, setJobList] = useState([]);

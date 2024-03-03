@@ -14,7 +14,7 @@ const Notification = () => {
 
   const { data: notifications, isLoading } = useSWR(
     `/api/notification/getNotification/employer?employerId=${userId}`,
-    fetcher
+    fetcher, {refreshInterval: 100}
   );
   console.log(notifications);
   const [notList, setNotList] = useState([]);

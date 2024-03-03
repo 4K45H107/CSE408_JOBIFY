@@ -119,6 +119,15 @@ const EmployerProfile = () => {
               <p className="text-3xl font-semibold">{profile?.fullname}</p>
               <p className="text-l text-gray-600">@{profile?.username}</p>
             </div>
+            <div className="flex flex-col items-end">
+              <button
+                className="rounded px-3 py-2"
+                onClick={() => setType("cv")}
+              >
+                CV
+              </button>
+              <Link href={"/employer/notification"}>Notifications</Link>
+            </div>
           </div>
         </div>
 
