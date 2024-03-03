@@ -63,7 +63,7 @@ export const GET = async (request) => {
     //const data = await request.json();
     const question = await Questions.findOne({ job_id: id });
 
-    console.log(question);
+    console.log(question)
 
     return NextResponse.json(question, { status: 200 });
   } catch (error) {

@@ -3,6 +3,8 @@ import UploadFile from "@/components/common/UploadFile";
 import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
 import axios from "axios";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -10,6 +12,14 @@ const easyApply = () => {
   const [uploadShowCv, setUploadShowCv] = useState(false);
   const [pdf, setPdf] = useState("");
   const { role, userId } = useContext(AuthContext);
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const jobId = searchParams.get("jobId");
+
+  console.log(jobId);
+
   const { data: profile, isLoading } = useSWR(
     `/api/user/profile?userId=${userId}`,
     fetcher,
@@ -48,6 +58,28 @@ const easyApply = () => {
   console.log(profile);
   console.log(pdf);
 
+  const handleNext = async () => {
+    if (!jobId) {
+      return;
+    }
+
+    const datam = {
+      user_id: userId,
+      job_id: jobId,
+    };
+
+    console.log(datam);
+
+    try {
+      const res = await axios.post(`/api/easyApply`, datam);
+      const data = res.data;
+      console.log(data);
+      router.push("/user/explore");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!isLoading) {
     return (
       <div className="flex justify-center items-start h-screen">
@@ -66,7 +98,7 @@ const easyApply = () => {
               <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
                 <button
                   type="submit"
-                  //onClick={() => setUploadShowCv(true)}
+                  onClick={handleNext}
                   className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
                 >
                   Next

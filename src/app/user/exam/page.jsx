@@ -13,9 +13,12 @@ import useSWR from "swr";
 const exam = () => {
   const [answers, setAnswers] = useState({});
 
-  //const jobId = useSearchParams().get("jobId");
-  const jobId = "65c0a368f4f8de9c61919dc5";
+  const searchParams = useSearchParams();
+  const jobId = searchParams.get("jobId");
+
   const { userId } = useContext(AuthContext);
+
+  console.log(jobId);
 
   const router = useRouter();
 
@@ -28,8 +31,12 @@ const exam = () => {
 
   const handleDone = async () => {
     console.log(answers);
+    if (questions === null) {
+      router.push(`activities`);
+      return;
+    }
     const req = [];
-    questions.questions?.forEach((q) => {
+    questions?.questions?.forEach((q) => {
       //   console.log(q);
       req.push({ question_id: q._id, answer: answers[q._id] || "" });
     });
@@ -42,6 +49,7 @@ const exam = () => {
         answers: req,
       });
       console.log(res.data.result);
+      router.push(`activities`);
     } catch (error) {
       console.log(error);
     }
@@ -50,14 +58,14 @@ const exam = () => {
 
   // setMCQArray([...mcqArray, newMCQ]);
   if (!isLoading) {
-    const Q_id = questions._id;
+    const Q_id = questions?._id;
 
     return (
       <div className="flex flex-col">
         {/* show previous mcqs */}
         <div>
           <>
-            {questions.questions?.map((mcq, i) => (
+            {questions?.questions?.map((mcq, i) => (
               <>
                 {i + 1}.
                 <MCQExam

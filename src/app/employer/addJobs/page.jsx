@@ -204,7 +204,7 @@ const addJobs = () => {
         maximum: agemax,
       },
       location: { country, city },
-      skillTest,
+      skill_test: skillTest,
     };
     console.log("Job data submitted:", jobData);
     // Replace the console.log with actual backend integration.

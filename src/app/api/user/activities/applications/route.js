@@ -7,7 +7,7 @@ export const POST = async (request) => {
         connetToDb();
         const url = new URL(request.url);
         const id = url.searchParams.get("userId");
-        // const id = "65b538ecd0e12007bfa7fe73";
+        //const id = "65b538ecd0e12007bfa7fe73";
         //console.log("id",id);
 
         if(id == null){

@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { CiBookmark } from "react-icons/ci";
 import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
-import job from "@/app/job/[jobID]/page";
+import axios from "axios";
+import { AuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 
-const CardEmployer = (props) => {
+const CardApplication = (props) => {
   console.log(props.id);
+
+  if (!props.id) {
+    return <></>;
+  }
+
+  const { role, userId } = useContext(AuthContext);
+  console.log(userId); 
+
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push(`/employer/addJobs/editMCQ?jobId=${props.id}`);
+  const handleExam = () => {
+    router.push(`exam?jobId=${props.id}`);
   };
-
-  console.log(props);
 
   return (
     <div
@@ -35,32 +42,20 @@ const CardEmployer = (props) => {
       <p className="">
         {props.salaryMin}-{props.salaryMax}
       </p>
-      <div className="flex justify-end">
-        {/* <div className="flex items-center">
-          <span className="text-lime-700 w-4">
-            <AiFillThunderbolt />
-          </span>
-          <span className="text-sm text-lime-700">Easy Appily</span>
-        </div> */}
-        <p className="text-xs">3d</p>
-      </div>
-      <div className="bg-black rounded w-20">
-        {props.skill_test && (
+
+      {props.skillTest && (
+        <div className="flex justify-center my-4 w-40 bg-gray-800 rounded">
           <button
             type="submit"
-            onClick={handleClick}
-            className="text-white w-20 px-4 py-3 active:bg-slate-600 mx-auto"
+            onClick={handleExam}
+            className="w-40 text-white px-4 py-3 active:bg-slate-600 mx-auto"
           >
-            View
+            Give Exam
           </button>
-        )}
-      </div>
-
-      {/* <div className="absolute top-2 right-4">
-        <CiBookmark />
-      </div> */}
+        </div>
+      )}
     </div>
   );
 };
 
-export default CardEmployer;
+export default CardApplication;

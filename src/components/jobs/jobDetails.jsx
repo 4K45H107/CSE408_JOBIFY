@@ -65,7 +65,8 @@ const JobDetails = (props) => {
   };
 
   const handleEasy = () => {
-    router.push(`easyApply?jobId=${props.id}`);
+    console.log(props.activeId)
+    router.push(`easyApply?jobId=${props.activeId}`);
   };
 
   console.log(job);
