@@ -13,7 +13,7 @@ export const GET = async (request) =>{
             return NextResponse.json({message: "user not found"}, {status: 404});
         }
         let userIds;
-        await Applications.find({"job_id": id})
+        await Applications.find({"job_id": id,"status":"ongoing"})
         .then((applications) => {
             userIds = applications.map((application) => application.user_id);
             // Array containing only "name" values
@@ -26,6 +26,23 @@ export const GET = async (request) =>{
         console.log(users);
 
         return NextResponse.json(users, {status: 200});
+    }catch(error){
+        console.log('Error', error);
+        return NextResponse.error(error, {status: 500});
+    }
+}
+
+export const PATCH = async (request) =>{
+    try{
+        connetToDb();
+        const data=request.json();
+        
+        const application=Applications.findOne({job_id:data.job_id,user_id:data.user_id});
+        application.status=data.status;
+        await application.save();
+        
+        
+        return NextResponse.json(application, {status: 200});
     }catch(error){
         console.log('Error', error);
         return NextResponse.error(error, {status: 500});
