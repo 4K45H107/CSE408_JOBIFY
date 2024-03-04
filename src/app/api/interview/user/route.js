@@ -1,25 +1,19 @@
 import { NextResponse } from "next/server";
 import { connetToDb } from "../../../../../lib/utils";
+import { Interviews } from "../../../../../lib/models";
 
-export const POST = async (request) => {
+
+export const GET = async (request) => {
   try {
     connetToDb();
 
     // Extract the ID from the request parameters
-
-    const data = await request.json();
+    const url = new URL(request.url);
+    const id = url.searchParams.get("userId");
     // Find the user by ID
-
-    const id = data.companyId;
-
-    const companies = await Companies.findByIdAndUpdate(id, data, {"admin":data.admin}, { new: true });
-    
-    return NextResponse.json(companies, { status: 200 });
-
-    // console.log(job_preferences);
-    // Return a response if needed
-    // return NextResponse.json(user, { status: 200 });
-  } catch (error) {
+    const interviews=await Interviews.find({user_id:id});
+    return NextResponse.json(interviews,{status:200});
+  } catch(error) {
     console.log("Error:", error);
     return NextResponse.error(error, { status: 500 });
   }
