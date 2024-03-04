@@ -5,8 +5,8 @@
 // }
 
 import { NextResponse } from "next/server";
-import { connetToDb } from "../../../../../lib/utils";
 import { Interviews, Jobs, Notification } from "../../../../../lib/models";
+import { connetToDb } from "../../../../../lib/utils";
 
 export const POST = async (request) => {
   try {
@@ -53,17 +53,17 @@ export const GET = async (request) => {
 
     // Extract the ID from the request parameters
     const url = new URL(request.url);
-    const id = url.searchParams.get("employerId");
-    // Find the user by ID
-    let variables = [[]];
-    const jobs=await Jobs.find({provider:id})
-    jobs.map(async(job)=>{
-      const interview = await Interviews.find({job_id:job._id});
-      variables.push(interview);
-    })
-    console.log(variables);
-    return NextResponse.json(variables,{status:200});
-  } catch(error) {
+    const id = url.searchParams.get("jobId");
+
+    const interview = await Interviews.find({ job_id: id });
+
+    // jobs.map(async(job)=>{
+    //
+    //   variables.push(interview);
+    // })
+    // console.log(variables);
+    return NextResponse.json(interview, { status: 200 });
+  } catch (error) {
     console.log("Error:", error);
     return NextResponse.error(error, { status: 500 });
   }
