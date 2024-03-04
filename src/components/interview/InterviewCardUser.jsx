@@ -28,7 +28,7 @@ const InterviewCardUser = (props) => {
     setInterviewList(interviews);
   }, [interviews]);
 
-  console. log(interviews);
+  console.log(interviews);
   console.log(interviewList);
 
   if (!isLoading) {

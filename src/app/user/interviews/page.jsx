@@ -10,20 +10,19 @@ const interviewUser = () => {
   const { role, userId } = useContext(AuthContext);
   const [activeId, setActiveId] = useState("");
 
-  const { data: jobs, isLoading } = useSWR(
-    `/api/employer/addJobs?userId=${userId}`,
+  const [interviewList, setInterviewList] = useState([]);
+
+  const { data: interviews, isLoading } = useSWR(
+    `/api/interview/user?userId=${userId}`,
     fetcher,
     { refreshInterval: 100 }
   );
 
-  const [jobList, setJobList] = useState([]);
-
   useEffect(() => {
-    setJobList(jobs);
-  }, [jobs]);
+    setInterviewList(interviews);
+  }, [interviews]);
 
-  console.log(jobs);
-  console.log(jobList);
+  console.log(interviews);
 
   if (!isLoading) {
     return (
@@ -31,17 +30,12 @@ const interviewUser = () => {
         <div className="flex gap-x-4 mt-16">
           <div className="w-full h-[600px] overflow-auto px-4 ">
             <div className="flex flex-col">
-              {jobList?.map((job, i) => (
+              {interviewList?.map((interview, i) => (
                 <>
                   <p className="text-lg text-red-400 ">
                     {" "}
-                    {i + 1}. {job.title}{" "}
+                    {i + 1}. Interview ID: {interview._id}{" "}
                   </p>
-                  <InterviewCard
-                    key={job._id}
-                    id={job._id}
-                    setActiveId={setActiveId}
-                  />
                 </>
               ))}
             </div>
