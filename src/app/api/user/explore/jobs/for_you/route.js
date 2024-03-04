@@ -31,7 +31,7 @@ export const GET = async (request) => {
     const title = user.job_preferences.job_type;
     const salary = user.job_preferences.salary_range;
     const birthdate= user.birthdate;
-    console.log(birthdate);
+    //console.log(birthdate);
 
 
     function calculateAge(birthDate) {
@@ -57,8 +57,8 @@ export const GET = async (request) => {
     
     // Example usage:
      // Year, Month (0-indexed), Day
-    const age = calculateAge(birthdate);
-    console.log("Age:", age); // Output: 34 (as of today, 2024-02-27)
+    // const age = calculateAge(birthdate);
+    // console.log("Age:", age); // Output: 34 (as of today, 2024-02-27)
     
 
     // const locations = "India";
@@ -68,8 +68,7 @@ export const GET = async (request) => {
         { "location.city": location },
         { title: { $in: title } },
         { "salary.minimum": { $lte: salary } },
-        { "age.minimum": { $lte: age } },
-        { "age.maximum": { $gte: age } },
+        
       ],
     }).sort({ "salary.maximum": -1 });
     if (jobs.length === 0) {
