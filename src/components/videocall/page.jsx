@@ -1,8 +1,10 @@
 "use client";
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useContext, useState } from "react";
 import AgoraUIKit, { layout } from "agora-react-uikit";
 import "agora-react-uikit/dist/index.css";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { AuthContext } from "@/contexts/AuthContext";
+import axios from "axios";
 
 const VideoUi = (props) => {
   const [videocall, setVideocall] = useState(false);
@@ -10,6 +12,31 @@ const VideoUi = (props) => {
   const [isPinned, setPinned] = useState(false);
   const [username, setUsername] = useState("");
   const [channel, setChannel] = useState(props.id);
+  const { role } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleEnd = async () => {
+    console.log("ending call");
+    setVideocall(false);
+
+    if (role === "employer") {
+      const savedData = {
+        id: props.id,
+      };
+      console.log(savedData);
+
+      try {
+        const res = await axios.delete(`/api/interview?id=${props.id}`, {});
+        const data = res.data;
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+      router.push("/employer/interviewSchedule");
+    } else {
+      router.push("/user/interviews");
+    }
+  };
 
   //console.log(process.env.PUBLIC_AGORA_APP_ID);
   return (
@@ -40,7 +67,7 @@ const VideoUi = (props) => {
               }}
               rtmProps={{ username: username || "user", displayUsername: true }}
               callbacks={{
-                EndCall: () => setVideocall(false),
+                EndCall: () => handleEnd(),
               }}
             />
           </>
