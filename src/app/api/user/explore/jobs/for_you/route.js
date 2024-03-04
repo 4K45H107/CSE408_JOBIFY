@@ -115,25 +115,32 @@ export const GET = async (request) => {
 
     console.log("----------------", subcategories, "-----------------------------")
 
-    subcategories= titles;
-
-    const preferredJobs = j.filter(job => {
-      for (let i = 0; i < subcategories.length; i++) {
-        let b = job.title.toLowerCase().includes(subcategories[i].toLowerCase())
-        if (b) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    })
+    // subcategories= titles;
 
     const arr = []
+    for (let i = 0; i < subcategories.length; i++) {
+    const preferredJobs = j.filter(job => {
+      console.log(subcategories.length)
+        console.log(i);
+        console.log(subcategories[i]);
+        let b = job.title.toLowerCase().includes(subcategories[i].toLowerCase())
+        // i++;
+        if (b) {
+          return true;
+        }
+         else {
+          return false;
+        }
+        
+      // }
+    })
+
     for(let i = 0; i < preferredJobs.length; i++) {
       if (typeof preferredJobs[i] !== undefined) {
         arr.push(preferredJobs[i])
       }
     }
+  }
 
     console.log("-----------------------", arr, "-----------------------------")
 
