@@ -4,18 +4,29 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
 import axios from "axios";
 import { AuthContext } from "@/contexts/AuthContext";
+import useSWR from "swr";
+import { fetcher } from "@/utils/conn";
 
 const NotificationCard = (props) => {
+  //console.log(props.data.employer);
+
   if (!props) {
-    return <div className=""></div>;
+    return <></>;
   }
 
-  const [type, setType] = useState(props.type); // company, regular, applied, interview
+  //console.log(props.data.employer);
+  console.log(props.type);
+  const [type, setType] = useState(props?.type); // company, regular, applied, interview
   const { role, userId } = useContext(AuthContext);
   const [change, setChange] = useState("");
 
   console.log(props);
   console.log(props.data);
+
+  // const { data: profile, isLoading } = useSWR(
+  //   `/api/employer/profile?userId=${props?.data?.employer}`,
+  //   fetcher
+  // );
 
   const handleApproval = async () => {
     const data = {
@@ -76,7 +87,12 @@ const NotificationCard = (props) => {
       {type === "company" && (
         <div className="">
           <h3 className="text-lg font-semibold">Company Notification</h3>
-          <div className="flex items-center">Name: {props.message.name}</div>
+          <Link
+            href={`/profilePage/employer/${props?.data?.employer}`}
+            className="flex items-center"
+          >
+            Name: {props.message.name}
+          </Link>
           <div className="flex items-center">
             Designation: {props.message.designation}
           </div>

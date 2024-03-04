@@ -35,6 +35,7 @@ const MyCompanyJobs = () => {
                 salaryMin={job.salary.minimum}
                 salaryMax={job.salary.maximum}
                 id={job._id}
+                provider={job.provider}
                 setActiveId={setActiveId}
               />
             ))}

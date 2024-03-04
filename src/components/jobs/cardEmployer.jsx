@@ -4,8 +4,14 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import Link from "next/link";
 import job from "@/app/job/[jobID]/page";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+import { fetcher } from "@/utils/conn";
 
 const CardEmployer = (props) => {
+  if (!props.id) {
+    return <></>;
+  }
+
   console.log(props.id);
   const router = useRouter();
 
@@ -13,6 +19,12 @@ const CardEmployer = (props) => {
     router.push(`/employer/addJobs/editMCQ?jobId=${props.id}`);
   };
 
+  const { data: profile, isLoading } = useSWR(
+    `/api/employer/profile?userId=${props?.provider}`,
+    fetcher
+  );
+
+  console.log(profile);
   console.log(props);
 
   return (
@@ -35,6 +47,12 @@ const CardEmployer = (props) => {
       <p className="">
         {props.salaryMin}-{props.salaryMax}
       </p>
+      <Link
+        href={`/profilePage/employer/${profile?._id}`}
+        className="flex items-center"
+      >
+        {profile?.username}
+      </Link>
       <div className="flex justify-end">
         {/* <div className="flex items-center">
           <span className="text-lime-700 w-4">
