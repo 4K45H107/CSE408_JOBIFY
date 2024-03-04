@@ -42,22 +42,26 @@ const Notification = () => {
     }
   };
 
+  console.log(notList);
+
   if (!isLoading) {
     return (
       <div className="flex flex-col gap-x-4 mt-16">
         <label className="text-red-500 px-6 mt-8">Notifications</label>
         <div className="w-full h-[600px] overflow-auto px-4 mt-2">
-          {notList?.map((notification) => (
-            <NotificationCard
-              key={notification._id}
-              id={notification._id}
-              message={notification.message}
-              type={notification.type}
-              read={notification.read}
-              data={notification.data}
-              setRead={setRead}
-              setActiveId={setActiveId}
-            />
+          {notifications?.map((notification) => (
+            <div>
+              <NotificationCard
+                key={notification._id}
+                id={notification._id}
+                message={notification.message}
+                type={notification.type}
+                read={notification.read}
+                data={notification.data}
+                setRead={setRead}
+                setActiveId={setActiveId}
+              />
+            </div>
           ))}
         </div>
       </div>
