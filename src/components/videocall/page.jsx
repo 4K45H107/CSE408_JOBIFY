@@ -4,14 +4,12 @@ import AgoraUIKit, { layout } from "agora-react-uikit";
 import "agora-react-uikit/dist/index.css";
 import { useParams } from "next/navigation";
 
-const videocall = () => {
-  const { videoID } = useParams();
-
-  const [videocall, setVideocall] = useState(true);
+const VideoUi = () => {
+  const [videocall, setVideocall] = useState(false);
   const [isHost, setHost] = useState(true);
   const [isPinned, setPinned] = useState(false);
   const [username, setUsername] = useState("");
-  const [channel, setChannel] = useState("rayan");
+  const [channel, setChannel] = useState("akash");
 
   //console.log(process.env.PUBLIC_AGORA_APP_ID);
   return (
@@ -29,9 +27,6 @@ const videocall = () => {
               </p>
               <p style={styles.btn} onClick={() => setPinned(!isPinned)}>
                 Change Layout
-              </p>
-              <p style={styles.btn} onClick={() => setChannel("akash")}>
-                Change channel
               </p>
             </div>
             <AgoraUIKit
@@ -96,4 +91,4 @@ const styles = {
   input: { display: "flex", height: 24, alignSelf: "center" },
 };
 
-export default videocall;
+export default VideoUi;
