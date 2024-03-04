@@ -9,6 +9,7 @@ export const GET = async (request) => {
         // Extract the ID from the request parameters
         const url = new URL(request.url);
         const id = url.searchParams.get("jobId");
+        console.log(id)
         let job;
         if(id==null){ 
             console.log("Job Id not found............");  
