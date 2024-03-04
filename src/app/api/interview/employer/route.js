@@ -55,6 +55,16 @@ export const GET = async (request) => {
     const url = new URL(request.url);
     const id = url.searchParams.get("employerId");
     // Find the user by ID
-    let interviews = [];
-  } catch {}
+    let variables = [[]];
+    const jobs=await Jobs.find({provider:id})
+    jobs.map(async(job)=>{
+      const interview = await Interviews.find({job_id:job._id});
+      variables.push(interview);
+    })
+    console.log(variables);
+    return NextResponse.json(variables,{status:200});
+  } catch(error) {
+    console.log("Error:", error);
+    return NextResponse.error(error, { status: 500 });
+  }
 };
