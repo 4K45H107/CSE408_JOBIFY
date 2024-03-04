@@ -18,9 +18,7 @@ export const GET = async (request) =>{
             userIds = applications.map((application) => application.user_id);
             // Array containing only "name" values
           }
-
         );
-
         
         const users = await User.find({_id:{$in:userIds}});
         console.log(users);
@@ -35,10 +33,13 @@ export const GET = async (request) =>{
 export const PATCH = async (request) =>{
     try{
         connetToDb();
-        const data=request.json();
+        const data= await request.json();
+
+        console.log(data)
         
-        const application=Applications.findOne({job_id:data.job_id,user_id:data.user_id});
+        const application= await Applications.findOne({job_id:data.job_id,user_id:data.user_id});
         application.status=data.status;
+        console.log(application)
         await application.save();
         
         

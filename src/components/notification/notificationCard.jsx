@@ -10,7 +10,7 @@ const NotificationCard = (props) => {
     return <div className=""></div>;
   }
 
-  const [type, setType] = useState(props.type); // company, regular, applied
+  const [type, setType] = useState(props.type); // company, regular, applied, interview
   const { role, userId } = useContext(AuthContext);
   const [change, setChange] = useState("");
 
@@ -120,6 +120,16 @@ const NotificationCard = (props) => {
       {type === "applied" && (
         <div className="">
           <h3 className="text-lg font-semibold">Applied Notification</h3>
+          <div className="flex flex-col">
+            <h2 className="text-xl">{props.message.name}</h2>
+            <p className="">{props.message.description}</p>
+          </div>
+        </div>
+      )}
+
+      {type === "interview" && (
+        <div className="">
+          <h3 className="text-lg font-semibold">Interview Notification</h3>
           <div className="flex flex-col">
             <h2 className="text-xl">{props.message.name}</h2>
             <p className="">{props.message.description}</p>

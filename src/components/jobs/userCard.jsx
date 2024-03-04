@@ -29,9 +29,39 @@ const UserCard = (props) => {
     } catch (error) {
       console.log(error);
     }
+
+    const obj2 = {
+      job_id: props.jobId,
+      user_id: props.id,
+      status: "interview",
+    };
+
+    console.log(obj2);
+
+    try {
+      const res = await axios.patch(`/api/employer/applied`, obj2);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleReject = () => {};
+  const handleReject = async () => {
+    const obj = {
+      job_id: props.jobId,
+      user_id: props.id,
+      status: "rejected",
+    };
+
+    try {
+      const res = await axios.patch(`/api/employer/applied`, obj);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col">

@@ -19,6 +19,7 @@ const NotificationUser = () => {
     { refreshInterval: 100 }
   );
   console.log(notifications);
+
   const [notList, setNotList] = useState([]);
 
   useEffect(() => {
