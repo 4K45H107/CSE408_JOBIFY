@@ -3,6 +3,7 @@ import { connetToDb } from "../../../../../../../lib/utils";
 import { User } from "../../../../../../../lib/models";
 import { Jobs } from "../../../../../../../lib/models";
 
+
 export const GET = async (request) => {
   try {
     connetToDb();
@@ -27,12 +28,59 @@ export const GET = async (request) => {
     //console.log(user);
     // Log the user data to the console
     //console.log('User Data:', user.job_preferences.locations);
+    const jobCategories ={
+      software: ["Software Engineer", "SWE", "Software Engineer","developer", "developer", "developer", "developer","front end developer", "front end developer","Developer ","Software Developer"],
+      chef: ["Chef", "chef"],
+      drive: ["Driver", "Driver"],
+      "ml engineer": ["Data Scientist","ML Engineer", "ML Engineer", "Crypto Miner"],
+      "creative": ["Content Creator","Singer","Designer","Guitarist"],
+      teaching: ["Teacher"],
+      worker: ["Police", "Police", "Volunteer"],
+      sports: ["Cricketer","Footballer"],
+      
+    }
+    // console.log(titles);
+
+    function findCategoryName(inputs) {
+      const matchingCategories = new Set();
+
+      inputs.forEach(input => {
+        for (const category in jobCategories) {
+          // console.log(input);
+          const lowercaseCategory = category.toLowerCase();
+          const lowercaseInput = input.toLowerCase();
+          if (lowercaseCategory.includes(lowercaseInput)) {
+            matchingCategories.add(category);
+            console.log(matchingCategories);
+          } else {
+            const subcategories = jobCategories[category];
+            subcategories.forEach(subcategory => {
+              if (subcategory.toLowerCase().includes(lowercaseInput)) {
+                matchingCategories.add(category);
+              }
+            });
+          }
+        }
+      });
+    
+      return Array.from(matchingCategories);
+    }
+    
+    function getSubcategories(categoryName) {
+      return jobCategories[categoryName] || [];
+    }
+
     const location = user.job_preferences.locations;
-    const title = user.job_preferences.job_type;
+    const titles = user.job_preferences.job_type;
     const salary = user.job_preferences.salary_range;
     const birthdate= user.birthdate;
     //console.log(birthdate);
-
+    // const subcategory = "Frontend Developer";
+    console.log(titles);
+    const categoryName = findCategoryName(titles);
+    console.log(categoryName);
+    let subcategories = getSubcategories(categoryName);
+    console.log("subcategories of ${categoryName}: ",subcategories);
 
     function calculateAge(birthDate) {
       // Check if birthDate is a valid date object
@@ -63,21 +111,34 @@ export const GET = async (request) => {
 
     // const locations = "India";
     // const city = "dhaka";
-    const jobs = await Jobs.find({
-      $or: [
-        { "location.city": location },
-        { title: { $in: title } },
-        { "salary.minimum": { $lte: salary } },
-        
-      ],
-    }).sort({ "salary.maximum": -1 });
-    if (jobs.length === 0) {
-      console.log("no jobs");
-      return NextResponse.json({ message: "no jobs for you" }, { status: 404 });
-    } else {
-      //console.log("jobs:",jobs);
-      return NextResponse.json(jobs, { status: 200 });
+    let j = await Jobs.find({}).sort({ "salary.maximum": -1 });
+
+    console.log("----------------", subcategories, "-----------------------------")
+
+    subcategories= titles;
+
+    const preferredJobs = j.filter(job => {
+      for (let i = 0; i < subcategories.length; i++) {
+        let b = job.title.toLowerCase().includes(subcategories[i].toLowerCase())
+        if (b) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    })
+
+    const arr = []
+    for(let i = 0; i < preferredJobs.length; i++) {
+      if (typeof preferredJobs[i] !== undefined) {
+        arr.push(preferredJobs[i])
+      }
     }
+
+    console.log("-----------------------", arr, "-----------------------------")
+
+      return NextResponse.json(arr, { status: 200 });
+    
     // console.log(job_preferences);
     // Return a response if needed
     // return NextResponse.json(user, { status: 200 });

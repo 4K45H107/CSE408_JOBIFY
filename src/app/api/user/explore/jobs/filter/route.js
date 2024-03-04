@@ -30,16 +30,6 @@ export const POST = async (request) => {
       }
     }
 
-    // location, type-title, salary-min,max, company
-
-    // const jobs = await Jobs.find(
-    //   location?{ "location.city": location }:type?{ "title": type }: salary?{
-    //       $and: [
-    //         { "salary.minimum": { $lte: salary } },
-    //         { "salary.maximum": { $gte: salary } },
-    //       ],
-    //     }:company?{ company: company }:{}
-    // ).sort({ "salary.maximum": -1 });
 
     let jobs = await Jobs.find({}).sort({ "salary.maximum": -1 });
 

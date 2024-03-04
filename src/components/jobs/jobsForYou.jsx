@@ -14,11 +14,14 @@ const JobsForYou = () => {
     `/api/user/explore/jobs/for_you?userId=${userId}`,
     fetcher
   );
-
-  const [activeId, setActiveId] = useState(jobs?.at(0)._id);
+    if(!jobs){
+      return <></>
+    }
+  const [activeId, setActiveId] = useState(jobs?.at(0)?._id);
 
   useEffect(() => {
-    setActiveId(jobs?.at(0)._id);
+    setActiveId(jobs?.at(0)
+    ?._id);
   }, [jobs]);
 
   if (!isLoading) {
