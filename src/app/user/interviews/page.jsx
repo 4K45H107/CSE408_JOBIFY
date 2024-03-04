@@ -1,6 +1,5 @@
 "use client";
 
-import InterviewCard from "@/components/interview/InterviewCardUser";
 import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
 import React, { useContext, useEffect, useState } from "react";

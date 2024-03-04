@@ -29,11 +29,11 @@ const interviewSchedule = () => {
     return (
       <div>
         <div className="flex gap-x-4 mt-16">
-          <div className="w-full h-[600px] overflow-auto px-4 ">
-            <div className="flex flex-col">
+          <div className="flex gap-y-6 w-full h-[600px] overflow-auto px-4 ">
+            <div className="flex flex-col gap-y-6">
               {jobList?.map((job, i) => (
-                <>
-                  <p className="text-lg text-red-400 ">
+                <div className=" border border-gray-200 rounded">
+                  <p className="text-xl semi-bold text-Black ">
                     {" "}
                     {i + 1}. {job.title}{" "}
                   </p>
@@ -42,7 +42,7 @@ const interviewSchedule = () => {
                     id={job._id}
                     setActiveId={setActiveId}
                   />
-                </>
+                </div>
               ))}
             </div>
           </div>

@@ -4,6 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { fetcher } from "@/utils/conn";
 import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
+import IV from "./IV";
 
 const InterviewCard = (props) => {
   console.log(props.id);
@@ -36,12 +37,14 @@ const InterviewCard = (props) => {
       <div>
         <div className="flex gap-x-4 mt-2 ">
           <div className="w-full overflow-auto px-4">
-            <div className="">
+            <div className="flex flex-col gap-y-3 my-3">
               {interviews?.map((int) => (
-                <div className="">
-                  <h3 className="text-slate-400">Job ID: {int?.job_id}</h3>
-                  <h3 className="text-red-200">Interview ID: {int?._id}</h3>
-                </div>
+                <IV
+                  key={int._id}
+                  user_id={int.user_id}
+                  job_id={int.job_id}
+                  id={int._id}
+                />
               ))}
             </div>
           </div>
