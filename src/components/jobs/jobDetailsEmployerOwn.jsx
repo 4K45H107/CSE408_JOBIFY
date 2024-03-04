@@ -26,26 +26,7 @@ const JobDetailsEmployerOwn = (props) => {
     }
   }, [activeId]);
 
-  const handleRecent = async (e) => {
-    e.preventDefault();
 
-    const recentData = {
-      id: props.activeId,
-    };
-
-    try {
-      const res = await axios.post(
-        `/api/user/activities/recent?userId=${userId}`,
-        recentData
-      );
-      const data = res.data;
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-
-    setActiveId(props.activeId);
-  };
 
   console.log(job);
 
@@ -139,6 +120,7 @@ const JobDetailsEmployerOwn = (props) => {
                 phone={user.phone}
                 email={user.email}
                 id={user._id}
+                jobId={props.activeId}
                 setActiveId2={setActiveId2}
               />
             </div>

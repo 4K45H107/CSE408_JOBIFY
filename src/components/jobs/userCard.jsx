@@ -10,11 +10,26 @@ const UserCard = (props) => {
   if (!props.id) {
     return <></>;
   }
+
   console.log(props.id);
   const { role, userId } = useContext(AuthContext);
   console.log(userId);
 
-  const handleAccept = () => {};
+  const handleAccept = async () => {
+    const obj = {
+      job_id: props.jobId,
+      user_id: props.id,
+      employer_id: userId,
+    };
+
+    try {
+      const res = await axios.post(`/api/interview/employer`, obj);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleReject = () => {};
 
