@@ -10,6 +10,8 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/conn";
 
 const IV = (props) => {
+  const router = useRouter();
+
   if (!props.user_id) {
     return <></>;
   }
@@ -26,9 +28,10 @@ const IV = (props) => {
 
   console.log(profile);
 
-  const handleJoin = () => {};
+  const handleJoin = () => {
+    router.push(`/videocall?videoId=${props.id}`);
+  };
 
-  const router = useRouter();
   if (!isLoading) {
     return (
       <div className="border rounded">

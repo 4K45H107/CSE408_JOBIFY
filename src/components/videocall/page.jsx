@@ -4,18 +4,18 @@ import AgoraUIKit, { layout } from "agora-react-uikit";
 import "agora-react-uikit/dist/index.css";
 import { useParams } from "next/navigation";
 
-const VideoUi = () => {
+const VideoUi = (props) => {
   const [videocall, setVideocall] = useState(false);
   const [isHost, setHost] = useState(true);
   const [isPinned, setPinned] = useState(false);
   const [username, setUsername] = useState("");
-  const [channel, setChannel] = useState("akash");
+  const [channel, setChannel] = useState(props.id);
 
   //console.log(process.env.PUBLIC_AGORA_APP_ID);
   return (
     <div style={styles.container}>
       <div style={styles.videoContainer}>
-        <h1 style={styles.heading}>Agora React Web UI Kit</h1>
+        <h1 style={styles.heading}>Jobify VideoCall</h1>
         {videocall ? (
           <>
             <div style={styles.nav}>
